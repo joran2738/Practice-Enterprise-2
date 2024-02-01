@@ -1,8 +1,8 @@
 # To-Do List
 
 ## February 14 Project proposal
-- [ ] **Task 1:** Team members (Names)
-- [ ] **Task 2:** Title
+- [X] **Task 1:** Team members (Names)
+- [X] **Task 2:** Title
 - [ ] **Task 3:** Brief description
 - [ ] **Task 4:** Block diagram
 - [ ] **Task 5:** In detail description of the blocks
