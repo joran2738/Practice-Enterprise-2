@@ -1,0 +1,1 @@
+TFT: https://components101.com/sensors/mpu6050-module
