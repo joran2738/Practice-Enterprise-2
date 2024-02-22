@@ -1,3 +1,6 @@
 TFT: 
 https://components101.com/sensors/mpu6050-module
 https://www.youtube.com/watch?v=beyDkTBhpgs
+
+Gyroscope (module):
+https://components101.com/sensors/mpu6050-module
