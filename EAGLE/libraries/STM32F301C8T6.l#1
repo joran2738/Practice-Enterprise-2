@@ -228,6 +228,62 @@
 <text x="0" y="-2.54" size="1.778" layer="95">&gt;NAME</text>
 <text x="0" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
+<symbol name="STM32F301C8T6_V3">
+<pin name="VSS_2" x="-5.08" y="12.7" length="middle"/>
+<pin name="VDD_1" x="-5.08" y="27.94" length="middle"/>
+<pin name="VSSA" x="25.4" y="2.54" length="middle" rot="R180"/>
+<pin name="VDDA" x="25.4" y="7.62" length="middle" rot="R180"/>
+<pin name="VBAT" x="25.4" y="15.24" length="middle" rot="R180"/>
+<pin name="VSS_1" x="-5.08" y="22.86" length="middle"/>
+<pin name="VDD_2" x="-5.08" y="17.78" length="middle"/>
+<pin name="VSS_3" x="-5.08" y="2.54" length="middle"/>
+<pin name="VDD_3" x="-5.08" y="7.62" length="middle"/>
+<pin name="PC13" x="25.4" y="27.94" length="middle" rot="R180"/>
+<pin name="PC14" x="25.4" y="33.02" length="middle" rot="R180"/>
+<pin name="PC15" x="25.4" y="38.1" length="middle" rot="R180"/>
+<pin name="PF0" x="-5.08" y="81.28" length="middle"/>
+<pin name="PF1" x="-5.08" y="86.36" length="middle"/>
+<pin name="NRST" x="-5.08" y="114.3" length="middle"/>
+<pin name="PA0" x="25.4" y="45.72" length="middle" rot="R180"/>
+<pin name="PA1" x="25.4" y="50.8" length="middle" rot="R180"/>
+<pin name="PA2" x="-5.08" y="91.44" length="middle"/>
+<pin name="PA3" x="-5.08" y="96.52" length="middle"/>
+<pin name="PA4" x="25.4" y="55.88" length="middle" rot="R180"/>
+<pin name="PA5" x="25.4" y="60.96" length="middle" rot="R180"/>
+<pin name="PA6" x="25.4" y="66.04" length="middle" rot="R180"/>
+<pin name="PA7" x="25.4" y="71.12" length="middle" rot="R180"/>
+<pin name="PA8" x="25.4" y="83.82" length="middle" rot="R180"/>
+<pin name="PA9" x="25.4" y="88.9" length="middle" rot="R180"/>
+<pin name="PA10" x="25.4" y="93.98" length="middle" rot="R180"/>
+<pin name="PA11" x="25.4" y="99.06" length="middle" rot="R180"/>
+<pin name="PA12" x="25.4" y="104.14" length="middle" rot="R180"/>
+<pin name="PA13" x="-5.08" y="129.54" length="middle"/>
+<pin name="PB0" x="-5.08" y="35.56" length="middle"/>
+<pin name="PB10" x="-5.08" y="109.22" length="middle"/>
+<pin name="PB2" x="-5.08" y="45.72" length="middle"/>
+<pin name="PB1" x="-5.08" y="40.64" length="middle"/>
+<pin name="PB11" x="-5.08" y="104.14" length="middle"/>
+<pin name="PB12" x="25.4" y="114.3" length="middle" rot="R180"/>
+<pin name="PB13" x="25.4" y="119.38" length="middle" rot="R180"/>
+<pin name="PB14" x="25.4" y="124.46" length="middle" rot="R180"/>
+<pin name="PB15" x="25.4" y="129.54" length="middle" rot="R180"/>
+<pin name="PA14" x="-5.08" y="124.46" length="middle"/>
+<pin name="PA15" x="25.4" y="109.22" length="middle" rot="R180"/>
+<pin name="PB3" x="-5.08" y="119.38" length="middle"/>
+<pin name="PB4" x="-5.08" y="50.8" length="middle"/>
+<pin name="PB5" x="-5.08" y="55.88" length="middle"/>
+<pin name="PB6" x="-5.08" y="60.96" length="middle"/>
+<pin name="PB7" x="-5.08" y="66.04" length="middle"/>
+<pin name="PB8" x="-5.08" y="71.12" length="middle"/>
+<pin name="PB9" x="-5.08" y="76.2" length="middle"/>
+<pin name="BOOT0" x="25.4" y="20.32" length="middle" rot="R180"/>
+<wire x1="0" y1="132.08" x2="20.32" y2="132.08" width="0.254" layer="97"/>
+<wire x1="20.32" y1="132.08" x2="20.32" y2="0" width="0.254" layer="97"/>
+<wire x1="20.32" y1="0" x2="0" y2="0" width="0.254" layer="97"/>
+<wire x1="0" y1="0" x2="0" y2="132.08" width="0.254" layer="97"/>
+<text x="0" y="-2.54" size="1.778" layer="95">&gt;NAME</text>
+<text x="0" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="STM32F301C8T6">
@@ -297,7 +353,119 @@
 <gate name="G$1" symbol="STM32F301C8T6_V2" x="-5.08" y="-58.42"/>
 </gates>
 <devices>
-<device name="">
+<device name="" package="STM32F301C8T6">
+<connects>
+<connect gate="G$1" pin="BOOT0" pad="P$44"/>
+<connect gate="G$1" pin="NRST" pad="P$7"/>
+<connect gate="G$1" pin="PA0" pad="P$10"/>
+<connect gate="G$1" pin="PA1" pad="P$11"/>
+<connect gate="G$1" pin="PA10" pad="P$31"/>
+<connect gate="G$1" pin="PA11" pad="P$32"/>
+<connect gate="G$1" pin="PA12" pad="P$33"/>
+<connect gate="G$1" pin="PA13" pad="P$34"/>
+<connect gate="G$1" pin="PA14" pad="P$37"/>
+<connect gate="G$1" pin="PA15" pad="P$38"/>
+<connect gate="G$1" pin="PA2" pad="P$12"/>
+<connect gate="G$1" pin="PA3" pad="P$13"/>
+<connect gate="G$1" pin="PA4" pad="P$14"/>
+<connect gate="G$1" pin="PA5" pad="P$15"/>
+<connect gate="G$1" pin="PA6" pad="P$16"/>
+<connect gate="G$1" pin="PA7" pad="P$17"/>
+<connect gate="G$1" pin="PA8" pad="P$29"/>
+<connect gate="G$1" pin="PA9" pad="P$30"/>
+<connect gate="G$1" pin="PB0" pad="P$18"/>
+<connect gate="G$1" pin="PB1" pad="P$19"/>
+<connect gate="G$1" pin="PB10" pad="P$21"/>
+<connect gate="G$1" pin="PB11" pad="P$22"/>
+<connect gate="G$1" pin="PB12" pad="P$25"/>
+<connect gate="G$1" pin="PB13" pad="P$26"/>
+<connect gate="G$1" pin="PB14" pad="P$27"/>
+<connect gate="G$1" pin="PB15" pad="P$28"/>
+<connect gate="G$1" pin="PB2" pad="P$20"/>
+<connect gate="G$1" pin="PB3" pad="P$39"/>
+<connect gate="G$1" pin="PB4" pad="P$40"/>
+<connect gate="G$1" pin="PB5" pad="P$41"/>
+<connect gate="G$1" pin="PB6" pad="P$42"/>
+<connect gate="G$1" pin="PB7" pad="P$43"/>
+<connect gate="G$1" pin="PB8" pad="P$45"/>
+<connect gate="G$1" pin="PB9" pad="P$46"/>
+<connect gate="G$1" pin="PC13" pad="P$2"/>
+<connect gate="G$1" pin="PC14" pad="P$3"/>
+<connect gate="G$1" pin="PC15" pad="P$4"/>
+<connect gate="G$1" pin="PF0" pad="P$5"/>
+<connect gate="G$1" pin="PF1" pad="P$6"/>
+<connect gate="G$1" pin="VBAT" pad="P$1"/>
+<connect gate="G$1" pin="VDDA" pad="P$9"/>
+<connect gate="G$1" pin="VDD_1" pad="P$24"/>
+<connect gate="G$1" pin="VDD_2" pad="P$36"/>
+<connect gate="G$1" pin="VDD_3" pad="P$48"/>
+<connect gate="G$1" pin="VSSA" pad="P$8"/>
+<connect gate="G$1" pin="VSS_1" pad="P$23"/>
+<connect gate="G$1" pin="VSS_2" pad="P$35"/>
+<connect gate="G$1" pin="VSS_3" pad="P$47"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="STM32F301C8T6_V3">
+<gates>
+<gate name="G$1" symbol="STM32F301C8T6_V3" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="STM32F301C8T6">
+<connects>
+<connect gate="G$1" pin="BOOT0" pad="P$44"/>
+<connect gate="G$1" pin="NRST" pad="P$7"/>
+<connect gate="G$1" pin="PA0" pad="P$10"/>
+<connect gate="G$1" pin="PA1" pad="P$11"/>
+<connect gate="G$1" pin="PA10" pad="P$31"/>
+<connect gate="G$1" pin="PA11" pad="P$32"/>
+<connect gate="G$1" pin="PA12" pad="P$33"/>
+<connect gate="G$1" pin="PA13" pad="P$34"/>
+<connect gate="G$1" pin="PA14" pad="P$37"/>
+<connect gate="G$1" pin="PA15" pad="P$38"/>
+<connect gate="G$1" pin="PA2" pad="P$12"/>
+<connect gate="G$1" pin="PA3" pad="P$13"/>
+<connect gate="G$1" pin="PA4" pad="P$14"/>
+<connect gate="G$1" pin="PA5" pad="P$15"/>
+<connect gate="G$1" pin="PA6" pad="P$16"/>
+<connect gate="G$1" pin="PA7" pad="P$17"/>
+<connect gate="G$1" pin="PA8" pad="P$29"/>
+<connect gate="G$1" pin="PA9" pad="P$30"/>
+<connect gate="G$1" pin="PB0" pad="P$18"/>
+<connect gate="G$1" pin="PB1" pad="P$19"/>
+<connect gate="G$1" pin="PB10" pad="P$21"/>
+<connect gate="G$1" pin="PB11" pad="P$22"/>
+<connect gate="G$1" pin="PB12" pad="P$25"/>
+<connect gate="G$1" pin="PB13" pad="P$26"/>
+<connect gate="G$1" pin="PB14" pad="P$27"/>
+<connect gate="G$1" pin="PB15" pad="P$28"/>
+<connect gate="G$1" pin="PB2" pad="P$20"/>
+<connect gate="G$1" pin="PB3" pad="P$39"/>
+<connect gate="G$1" pin="PB4" pad="P$40"/>
+<connect gate="G$1" pin="PB5" pad="P$41"/>
+<connect gate="G$1" pin="PB6" pad="P$42"/>
+<connect gate="G$1" pin="PB7" pad="P$43"/>
+<connect gate="G$1" pin="PB8" pad="P$45"/>
+<connect gate="G$1" pin="PB9" pad="P$46"/>
+<connect gate="G$1" pin="PC13" pad="P$2"/>
+<connect gate="G$1" pin="PC14" pad="P$3"/>
+<connect gate="G$1" pin="PC15" pad="P$4"/>
+<connect gate="G$1" pin="PF0" pad="P$5"/>
+<connect gate="G$1" pin="PF1" pad="P$6"/>
+<connect gate="G$1" pin="VBAT" pad="P$1"/>
+<connect gate="G$1" pin="VDDA" pad="P$9"/>
+<connect gate="G$1" pin="VDD_1" pad="P$24"/>
+<connect gate="G$1" pin="VDD_2" pad="P$36"/>
+<connect gate="G$1" pin="VDD_3" pad="P$48"/>
+<connect gate="G$1" pin="VSSA" pad="P$8"/>
+<connect gate="G$1" pin="VSS_1" pad="P$23"/>
+<connect gate="G$1" pin="VSS_2" pad="P$35"/>
+<connect gate="G$1" pin="VSS_3" pad="P$47"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>

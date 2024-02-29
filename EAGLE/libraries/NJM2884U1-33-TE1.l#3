@@ -270,14 +270,33 @@
 <wire x1="7.62" y1="15.24" x2="7.62" y2="0" width="0.254" layer="94"/>
 <wire x1="7.62" y1="0" x2="-27.94" y2="0" width="0.254" layer="94"/>
 <wire x1="-27.94" y1="0" x2="-27.94" y2="15.24" width="0.254" layer="94"/>
-<pin name="VFB" x="-22.86" y="2.54" length="middle" rot="R270"/>
-<pin name="GND" x="-10.16" y="2.54" length="middle" rot="R270"/>
-<pin name="CE" x="2.54" y="2.54" length="middle" rot="R270"/>
-<pin name="VDD" x="2.54" y="12.7" length="middle" rot="R90"/>
-<pin name="VOUT" x="-22.86" y="12.7" length="middle" rot="R90"/>
+<pin name="VFB" x="-22.86" y="0" length="middle" rot="R270"/>
+<pin name="GND" x="-10.16" y="0" length="middle" rot="R270"/>
+<pin name="CE" x="2.54" y="0" length="middle" rot="R270"/>
+<pin name="VDD" x="2.54" y="15.24" length="middle" rot="R90"/>
+<pin name="VOUT" x="-22.86" y="15.24" length="middle" rot="R90"/>
 </symbol>
 </symbols>
 <devicesets>
+<deviceset name="SOT-89-5">
+<gates>
+<gate name="G$1" symbol="SOT-89-5" x="0" y="2.54"/>
+</gates>
+<devices>
+<device name="" package="SOT-89-5_TOR">
+<connects>
+<connect gate="G$1" pin="CE" pad="3"/>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="VDD" pad="4"/>
+<connect gate="G$1" pin="VFB" pad="1"/>
+<connect gate="G$1" pin="VOUT" pad="5"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </drawing>

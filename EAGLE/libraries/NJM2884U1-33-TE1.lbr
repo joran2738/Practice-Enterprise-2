@@ -266,15 +266,15 @@
 </packages>
 <symbols>
 <symbol name="SOT-89-5">
-<wire x1="-27.94" y1="15.24" x2="7.62" y2="15.24" width="0.254" layer="94"/>
-<wire x1="7.62" y1="15.24" x2="7.62" y2="0" width="0.254" layer="94"/>
-<wire x1="7.62" y1="0" x2="-27.94" y2="0" width="0.254" layer="94"/>
-<wire x1="-27.94" y1="0" x2="-27.94" y2="15.24" width="0.254" layer="94"/>
-<pin name="VFB" x="-22.86" y="-5.08" length="middle" rot="R90"/>
-<pin name="GND" x="-10.16" y="-5.08" length="middle" rot="R90"/>
-<pin name="CE" x="2.54" y="-5.08" length="middle" rot="R90"/>
-<pin name="VDD" x="2.54" y="20.32" length="middle" rot="R270"/>
-<pin name="VOUT" x="-22.86" y="20.32" length="middle" rot="R270"/>
+<wire x1="0" y1="17.78" x2="15.24" y2="17.78" width="0.254" layer="94"/>
+<wire x1="15.24" y1="17.78" x2="15.24" y2="0" width="0.254" layer="94"/>
+<wire x1="15.24" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="17.78" width="0.254" layer="94"/>
+<pin name="VFB" x="2.54" y="-5.08" length="middle" rot="R90"/>
+<pin name="GND" x="7.62" y="-5.08" length="middle" rot="R90"/>
+<pin name="CE" x="12.7" y="-5.08" length="middle" rot="R90"/>
+<pin name="VDD" x="12.7" y="22.86" length="middle" rot="R270"/>
+<pin name="VOUT" x="2.54" y="22.86" length="middle" rot="R270"/>
 </symbol>
 </symbols>
 <devicesets>

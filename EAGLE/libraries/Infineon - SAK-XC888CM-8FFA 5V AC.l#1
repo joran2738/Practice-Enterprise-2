@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="9.6.2">
+<drawing>
+<settings>
+<setting alwaysvectorfont="no"/>
+<setting keepoldvectorfont="yes"/>
+<setting verticaltext="up"/>
+</settings>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<layers>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="0" fill="1" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="0" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="94" name="Symbols" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+</layers>
+<library>
+<description>Upverter Parts Library
+
+Created by Upverter.com</description>
+<packages>
+<package name="INFINEON_SAK-XC888CM-8FFA_5V_AC_0">
+<description>INF-SAx-XC888x-PG-LQFP-64</description>
+<wire x1="-4.25" y1="-4.25" x2="-4.25" y2="4.25" width="0.15" layer="21"/>
+<wire x1="4.25" y1="-4.25" x2="4.25" y2="4.25" width="0.15" layer="21"/>
+<wire x1="-4.25" y1="4.25" x2="4.25" y2="4.25" width="0.15" layer="21"/>
+<wire x1="-4.25" y1="-4.25" x2="4.25" y2="-4.25" width="0.15" layer="21"/>
+<wire x1="-5" y1="-5" x2="-5" y2="5" width="0.1" layer="51"/>
+<wire x1="5" y1="-5" x2="5" y2="5" width="0.1" layer="51"/>
+<wire x1="-5" y1="5" x2="5" y2="5" width="0.1" layer="51"/>
+<wire x1="-5" y1="-5" x2="5" y2="-5" width="0.1" layer="51"/>
+<wire x1="-6.7" y1="-6.7" x2="-6.7" y2="6.7" width="0.1" layer="39"/>
+<wire x1="-6.7" y1="6.7" x2="6.7" y2="6.7" width="0.1" layer="39"/>
+<wire x1="6.7" y1="6.7" x2="6.7" y2="-6.7" width="0.1" layer="39"/>
+<wire x1="6.7" y1="-6.7" x2="-6.7" y2="-6.7" width="0.1" layer="39"/>
+<text x="-7.7" y="6.7" size="1" layer="25">&gt;NAME</text>
+<circle x="-5.625" y="4.45" radius="0.125" width="0.25" layer="21"/>
+<circle x="-3.25" y="3.25" radius="0.3" width="0.6" layer="21"/>
+<circle x="-4.1" y="4.1" radius="0.5" width="0.1" layer="51"/>
+<smd name="1" x="-5.625" y="3.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="2" x="-5.625" y="3.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="3" x="-5.625" y="2.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="4" x="-5.625" y="2.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="5" x="-5.625" y="1.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="6" x="-5.625" y="1.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="7" x="-5.625" y="0.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="8" x="-5.625" y="0.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="9" x="-5.625" y="-0.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="10" x="-5.625" y="-0.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="11" x="-5.625" y="-1.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="12" x="-5.625" y="-1.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="13" x="-5.625" y="-2.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="14" x="-5.625" y="-2.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="15" x="-5.625" y="-3.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="16" x="-5.625" y="-3.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="17" x="-3.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="18" x="-3.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="19" x="-2.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="20" x="-2.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="21" x="-1.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="22" x="-1.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="23" x="-0.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="24" x="-0.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="25" x="0.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="26" x="0.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="27" x="1.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="28" x="1.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="29" x="2.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="30" x="2.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="31" x="3.25" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="32" x="3.75" y="-5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="33" x="5.625" y="-3.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="34" x="5.625" y="-3.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="35" x="5.625" y="-2.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="36" x="5.625" y="-2.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="37" x="5.625" y="-1.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="38" x="5.625" y="-1.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="39" x="5.625" y="-0.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="40" x="5.625" y="-0.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="41" x="5.625" y="0.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="42" x="5.625" y="0.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="43" x="5.625" y="1.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="44" x="5.625" y="1.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="45" x="5.625" y="2.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="46" x="5.625" y="2.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="47" x="5.625" y="3.25" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="48" x="5.625" y="3.75" dx="0.3" dy="1.95" layer="1" roundness="100" rot="R90"/>
+<smd name="49" x="3.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="50" x="3.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="51" x="2.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="52" x="2.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="53" x="1.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="54" x="1.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="55" x="0.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="56" x="0.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="57" x="-0.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="58" x="-0.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="59" x="-1.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="60" x="-1.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="61" x="-2.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="62" x="-2.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="63" x="-3.25" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+<smd name="64" x="-3.75" y="5.625" dx="0.3" dy="1.95" layer="1" roundness="100"/>
+</package>
+<package name="INFINEON_SAK-XC888CM-8FFA_5V_AC_1">
+<description>INF-SAx-XC888x-PG-LQFP-64</description>
+<wire x1="-4.45" y1="-4.45" x2="-4.45" y2="4.45" width="0.15" layer="21"/>
+<wire x1="4.45" y1="-4.45" x2="4.45" y2="4.45" width="0.15" layer="21"/>
+<wire x1="-4.45" y1="4.45" x2="4.45" y2="4.45" width="0.15" layer="21"/>
+<wire x1="-4.45" y1="-4.45" x2="4.45" y2="-4.45" width="0.15" layer="21"/>
+<wire x1="-5" y1="-5" x2="-5" y2="5" width="0.1" layer="51"/>
+<wire x1="5" y1="-5" x2="5" y2="5" width="0.1" layer="51"/>
+<wire x1="-5" y1="5" x2="5" y2="5" width="0.1" layer="51"/>
+<wire x1="-5" y1="-5" x2="5" y2="-5" width="0.1" layer="51"/>
+<wire x1="-6.525" y1="-6.525" x2="-6.525" y2="6.525" width="0.1" layer="39"/>
+<wire x1="-6.525" y1="6.525" x2="6.525" y2="6.525" width="0.1" layer="39"/>
+<wire x1="6.525" y1="6.525" x2="6.525" y2="-6.525" width="0.1" layer="39"/>
+<wire x1="6.525" y1="-6.525" x2="-6.525" y2="-6.525" width="0.1" layer="39"/>
+<text x="-7.525" y="6.525" size="1" layer="25">&gt;NAME</text>
+<circle x="-5.575" y="4.425" radius="0.125" width="0.25" layer="21"/>
+<circle x="-3.45" y="3.45" radius="0.3" width="0.6" layer="21"/>
+<circle x="-4.1" y="4.1" radius="0.5" width="0.1" layer="51"/>
+<smd name="1" x="-5.575" y="3.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="2" x="-5.575" y="3.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="3" x="-5.575" y="2.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="4" x="-5.575" y="2.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="5" x="-5.575" y="1.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="6" x="-5.575" y="1.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="7" x="-5.575" y="0.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="8" x="-5.575" y="0.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="9" x="-5.575" y="-0.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="10" x="-5.575" y="-0.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="11" x="-5.575" y="-1.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="12" x="-5.575" y="-1.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="13" x="-5.575" y="-2.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="14" x="-5.575" y="-2.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="15" x="-5.575" y="-3.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="16" x="-5.575" y="-3.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="17" x="-3.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="18" x="-3.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="19" x="-2.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="20" x="-2.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="21" x="-1.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="22" x="-1.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="23" x="-0.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="24" x="-0.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="25" x="0.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="26" x="0.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="27" x="1.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="28" x="1.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="29" x="2.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="30" x="2.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="31" x="3.25" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="32" x="3.75" y="-5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="33" x="5.575" y="-3.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="34" x="5.575" y="-3.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="35" x="5.575" y="-2.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="36" x="5.575" y="-2.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="37" x="5.575" y="-1.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="38" x="5.575" y="-1.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="39" x="5.575" y="-0.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="40" x="5.575" y="-0.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="41" x="5.575" y="0.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="42" x="5.575" y="0.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="43" x="5.575" y="1.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="44" x="5.575" y="1.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="45" x="5.575" y="2.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="46" x="5.575" y="2.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="47" x="5.575" y="3.25" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="48" x="5.575" y="3.75" dx="0.25" dy="1.45" layer="1" roundness="100" rot="R90"/>
+<smd name="49" x="3.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="50" x="3.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="51" x="2.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="52" x="2.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="53" x="1.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="54" x="1.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="55" x="0.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="56" x="0.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="57" x="-0.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="58" x="-0.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="59" x="-1.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="60" x="-1.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="61" x="-2.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="62" x="-2.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="63" x="-3.25" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+<smd name="64" x="-3.75" y="5.575" dx="0.25" dy="1.45" layer="1" roundness="100"/>
+</package>
+<package name="INFINEON_SAK-XC888CM-8FFA_5V_AC_2">
+<description>INF-SAx-XC888x-PG-LQFP-64</description>
+<wire x1="-4.35" y1="-4.35" x2="-4.35" y2="4.35" width="0.15" layer="21"/>
+<wire x1="4.35" y1="-4.35" x2="4.35" y2="4.35" width="0.15" layer="21"/>
+<wire x1="-4.35" y1="4.35" x2="4.35" y2="4.35" width="0.15" layer="21"/>
+<wire x1="-4.35" y1="-4.35" x2="4.35" y2="-4.35" width="0.15" layer="21"/>
+<wire x1="-5" y1="-5" x2="-5" y2="5" width="0.1" layer="51"/>
+<wire x1="5" y1="-5" x2="5" y2="5" width="0.1" layer="51"/>
+<wire x1="-5" y1="5" x2="5" y2="5" width="0.1" layer="51"/>
+<wire x1="-5" y1="-5" x2="5" y2="-5" width="0.1" layer="51"/>
+<wire x1="-6.9" y1="-6.9" x2="-6.9" y2="6.9" width="0.1" layer="39"/>
+<wire x1="-6.9" y1="6.9" x2="6.9" y2="6.9" width="0.1" layer="39"/>
+<wire x1="6.9" y1="6.9" x2="6.9" y2="-6.9" width="0.1" layer="39"/>
+<wire x1="6.9" y1="-6.9" x2="-6.9" y2="-6.9" width="0.1" layer="39"/>
+<text x="-7.9" y="6.9" size="1" layer="25">&gt;NAME</text>
+<circle x="-5.575" y="4.45" radius="0.125" width="0.25" layer="21"/>
+<circle x="-3.35" y="3.35" radius="0.3" width="0.6" layer="21"/>
+<circle x="-4.1" y="4.1" radius="0.5" width="0.1" layer="51"/>
+<smd name="1" x="-5.575" y="3.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="2" x="-5.575" y="3.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="3" x="-5.575" y="2.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="4" x="-5.575" y="2.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="5" x="-5.575" y="1.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="6" x="-5.575" y="1.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="7" x="-5.575" y="0.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="8" x="-5.575" y="0.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="9" x="-5.575" y="-0.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="10" x="-5.575" y="-0.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="11" x="-5.575" y="-1.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="12" x="-5.575" y="-1.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="13" x="-5.575" y="-2.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="14" x="-5.575" y="-2.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="15" x="-5.575" y="-3.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="16" x="-5.575" y="-3.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="17" x="-3.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="18" x="-3.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="19" x="-2.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="20" x="-2.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="21" x="-1.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="22" x="-1.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="23" x="-0.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="24" x="-0.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="25" x="0.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="26" x="0.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="27" x="1.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="28" x="1.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="29" x="2.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="30" x="2.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="31" x="3.25" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="32" x="3.75" y="-5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="33" x="5.575" y="-3.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="34" x="5.575" y="-3.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="35" x="5.575" y="-2.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="36" x="5.575" y="-2.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="37" x="5.575" y="-1.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="38" x="5.575" y="-1.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="39" x="5.575" y="-0.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="40" x="5.575" y="-0.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="41" x="5.575" y="0.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="42" x="5.575" y="0.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="43" x="5.575" y="1.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="44" x="5.575" y="1.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="45" x="5.575" y="2.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="46" x="5.575" y="2.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="47" x="5.575" y="3.25" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="48" x="5.575" y="3.75" dx="0.3" dy="1.65" layer="1" roundness="100" rot="R90"/>
+<smd name="49" x="3.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="50" x="3.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="51" x="2.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="52" x="2.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="53" x="1.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="54" x="1.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="55" x="0.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="56" x="0.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="57" x="-0.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="58" x="-0.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="59" x="-1.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="60" x="-1.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="61" x="-2.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="62" x="-2.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="63" x="-3.25" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+<smd name="64" x="-3.75" y="5.575" dx="0.3" dy="1.65" layer="1" roundness="100"/>
+</package>
+<package name="QFP50P1200X1200X160-64N" urn="urn:adsk.eagle:footprint:39345037/1">
+<description>64-QFP, 0.50 mm pitch, 12.00 mm span, 10.00 X 10.00 X 1.60 mm body
+&lt;p&gt;64-pin QFP package with 0.50 mm pitch, 12.00 mm lead span1 X 12.00 mm lead span2 with body size 10.00 X 10.00 X 1.60 mm&lt;/p&gt;</description>
+<circle x="-5.7788" y="4.3916" radius="0.25" width="0" layer="21"/>
+<wire x1="-5.1" y1="4.1416" x2="-5.1" y2="5.1" width="0.12" layer="21"/>
+<wire x1="-5.1" y1="5.1" x2="-4.1416" y2="5.1" width="0.12" layer="21"/>
+<wire x1="5.1" y1="4.1416" x2="5.1" y2="5.1" width="0.12" layer="21"/>
+<wire x1="5.1" y1="5.1" x2="4.1416" y2="5.1" width="0.12" layer="21"/>
+<wire x1="5.1" y1="-4.1416" x2="5.1" y2="-5.1" width="0.12" layer="21"/>
+<wire x1="5.1" y1="-5.1" x2="4.1416" y2="-5.1" width="0.12" layer="21"/>
+<wire x1="-5.1" y1="-4.1416" x2="-5.1" y2="-5.1" width="0.12" layer="21"/>
+<wire x1="-5.1" y1="-5.1" x2="-4.1416" y2="-5.1" width="0.12" layer="21"/>
+<wire x1="5.1" y1="-5.1" x2="-5.1" y2="-5.1" width="0.12" layer="51"/>
+<wire x1="-5.1" y1="-5.1" x2="-5.1" y2="5.1" width="0.12" layer="51"/>
+<wire x1="-5.1" y1="5.1" x2="5.1" y2="5.1" width="0.12" layer="51"/>
+<wire x1="5.1" y1="5.1" x2="5.1" y2="-5.1" width="0.12" layer="51"/>
+<smd name="1" x="-5.6783" y="3.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="2" x="-5.6783" y="3.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="3" x="-5.6783" y="2.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="4" x="-5.6783" y="2.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="5" x="-5.6783" y="1.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="6" x="-5.6783" y="1.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="7" x="-5.6783" y="0.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="8" x="-5.6783" y="0.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="9" x="-5.6783" y="-0.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="10" x="-5.6783" y="-0.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="11" x="-5.6783" y="-1.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="12" x="-5.6783" y="-1.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="13" x="-5.6783" y="-2.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="14" x="-5.6783" y="-2.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="15" x="-5.6783" y="-3.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="16" x="-5.6783" y="-3.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="17" x="-3.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="18" x="-3.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="19" x="-2.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="20" x="-2.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="21" x="-1.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="22" x="-1.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="23" x="-0.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="24" x="-0.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="25" x="0.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="26" x="0.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="27" x="1.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="28" x="1.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="29" x="2.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="30" x="2.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="31" x="3.25" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="32" x="3.75" y="-5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="33" x="5.6783" y="-3.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="34" x="5.6783" y="-3.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="35" x="5.6783" y="-2.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="36" x="5.6783" y="-2.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="37" x="5.6783" y="-1.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="38" x="5.6783" y="-1.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="39" x="5.6783" y="-0.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="40" x="5.6783" y="-0.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="41" x="5.6783" y="0.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="42" x="5.6783" y="0.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="43" x="5.6783" y="1.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="44" x="5.6783" y="1.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="45" x="5.6783" y="2.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="46" x="5.6783" y="2.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="47" x="5.6783" y="3.25" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="48" x="5.6783" y="3.75" dx="1.5588" dy="0.2752" layer="1"/>
+<smd name="49" x="3.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="50" x="3.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="51" x="2.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="52" x="2.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="53" x="1.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="54" x="1.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="55" x="0.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="56" x="0.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="57" x="-0.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="58" x="-0.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="59" x="-1.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="60" x="-1.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="61" x="-2.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="62" x="-2.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="63" x="-3.25" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<smd name="64" x="-3.75" y="5.6783" dx="1.5588" dy="0.2752" layer="1" rot="R90"/>
+<text x="0" y="7.0927" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-7.0927" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="QFP50P1200X1200X160-64N" urn="urn:adsk.eagle:package:39345029/1" type="model">
+<description>64-QFP, 0.50 mm pitch, 12.00 mm span, 10.00 X 10.00 X 1.60 mm body
+&lt;p&gt;64-pin QFP package with 0.50 mm pitch, 12.00 mm lead span1 X 12.00 mm lead span2 with body size 10.00 X 10.00 X 1.60 mm&lt;/p&gt;</description>
+<packageinstances>
+<packageinstance name="QFP50P1200X1200X160-64N"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_0">
+<description>INF-SAx-XC888x-PG-LQFP-64</description>
+<wire x1="0" y1="-88.9" x2="0" y2="-5.08" width="0.508" layer="94"/>
+<wire x1="0" y1="-5.08" x2="20.32" y2="-5.08" width="0.508" layer="94"/>
+<wire x1="20.32" y1="-5.08" x2="20.32" y2="-88.9" width="0.508" layer="94"/>
+<wire x1="20.32" y1="-88.9" x2="0" y2="-88.9" width="0.508" layer="94"/>
+<text x="0" y="-2.54" size="2.54" layer="95" align="top-left">&gt;NAME</text>
+<text x="-6.604" y="-91.44" size="1.9304" layer="95" align="top-left">SAK-XC888CM-8FFA 5V AC</text>
+<pin name="P0.5" x="-5.08" y="-20.32" length="middle"/>
+<pin name="P0.6" x="-5.08" y="-22.86" length="middle"/>
+<pin name="XTAL2" x="25.4" y="-78.74" length="middle" direction="pas" rot="R180"/>
+<pin name="XTAL1" x="25.4" y="-76.2" length="middle" direction="pas" rot="R180"/>
+<pin name="P5.0" x="25.4" y="-53.34" length="middle" rot="R180"/>
+<pin name="P5.1" x="25.4" y="-55.88" length="middle" rot="R180"/>
+<pin name="P1.6" x="25.4" y="-22.86" length="middle" rot="R180"/>
+<pin name="P1.7" x="25.4" y="-25.4" length="middle" rot="R180"/>
+<pin name="P5.2" x="25.4" y="-58.42" length="middle" rot="R180"/>
+<pin name="P5.3" x="25.4" y="-60.96" length="middle" rot="R180"/>
+<pin name="P5.4" x="25.4" y="-63.5" length="middle" rot="R180"/>
+<pin name="P5.5" x="25.4" y="-66.04" length="middle" rot="R180"/>
+<pin name="TMS" x="-5.08" y="-76.2" length="middle" direction="in"/>
+<pin name="P0.0" x="-5.08" y="-7.62" length="middle"/>
+<pin name="P0.2" x="-5.08" y="-12.7" length="middle"/>
+<pin name="P5.6" x="25.4" y="-68.58" length="middle" rot="R180"/>
+<pin name="P5.7" x="25.4" y="-71.12" length="middle" rot="R180"/>
+<pin name="P0.1" x="-5.08" y="-10.16" length="middle"/>
+<pin name="P2.0" x="-5.08" y="-30.48" length="middle" direction="in"/>
+<pin name="P2.1" x="-5.08" y="-33.02" length="middle" direction="in"/>
+<pin name="P2.2" x="-5.08" y="-35.56" length="middle" direction="in"/>
+<pin name="P2.3" x="-5.08" y="-38.1" length="middle" direction="in"/>
+<pin name="P2.4" x="-5.08" y="-40.64" length="middle" direction="in"/>
+<pin name="P2.5" x="-5.08" y="-43.18" length="middle" direction="in"/>
+<pin name="P2.6" x="-5.08" y="-45.72" length="middle" direction="in"/>
+<pin name="P2.7" x="-5.08" y="-48.26" length="middle" direction="in"/>
+<pin name="P1.0" x="25.4" y="-7.62" length="middle" rot="R180"/>
+<pin name="P1.1" x="25.4" y="-10.16" length="middle" rot="R180"/>
+<pin name="P1.2" x="25.4" y="-12.7" length="middle" rot="R180"/>
+<pin name="P1.3" x="25.4" y="-15.24" length="middle" rot="R180"/>
+<pin name="P1.4" x="25.4" y="-17.78" length="middle" rot="R180"/>
+<pin name="P1.5" x="25.4" y="-20.32" length="middle" rot="R180"/>
+<pin name="P4.3" x="-5.08" y="-60.96" length="middle"/>
+<pin name="P3.6" x="25.4" y="-45.72" length="middle" rot="R180"/>
+<pin name="P3.7" x="25.4" y="-48.26" length="middle" rot="R180"/>
+<pin name="P3.0" x="25.4" y="-30.48" length="middle" rot="R180"/>
+<pin name="P3.1" x="25.4" y="-33.02" length="middle" rot="R180"/>
+<pin name="P4.4" x="-5.08" y="-63.5" length="middle"/>
+<pin name="P4.5" x="-5.08" y="-66.04" length="middle"/>
+<pin name="P4.6" x="-5.08" y="-68.58" length="middle"/>
+<pin name="P4.7" x="-5.08" y="-71.12" length="middle"/>
+<pin name="P3.2" x="25.4" y="-35.56" length="middle" rot="R180"/>
+<pin name="P3.3" x="25.4" y="-38.1" length="middle" rot="R180"/>
+<pin name="P3.4" x="25.4" y="-40.64" length="middle" rot="R180"/>
+<pin name="P3.5" x="25.4" y="-43.18" length="middle" rot="R180"/>
+<pin name="!RESET!" x="-5.08" y="-86.36" length="middle" direction="in"/>
+<pin name="1_NC" x="25.4" y="-83.82" length="middle" direction="pas" rot="R180"/>
+<pin name="2_NC" x="25.4" y="-86.36" length="middle" direction="pas" rot="R180"/>
+<pin name="MBC" x="-5.08" y="-81.28" length="middle" direction="in"/>
+<pin name="P4.0" x="-5.08" y="-53.34" length="middle"/>
+<pin name="P4.1" x="-5.08" y="-55.88" length="middle"/>
+<pin name="P4.2" x="-5.08" y="-58.42" length="middle"/>
+<pin name="P0.7" x="-5.08" y="-25.4" length="middle"/>
+<pin name="P0.3" x="-5.08" y="-15.24" length="middle"/>
+<pin name="P0.4" x="-5.08" y="-17.78" length="middle"/>
+</symbol>
+<symbol name="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_1">
+<description>INF-SAx-XC888x-PG-LQFP-64</description>
+<wire x1="0" y1="-22.86" x2="0" y2="-5.08" width="0.508" layer="94"/>
+<wire x1="0" y1="-5.08" x2="20.32" y2="-5.08" width="0.508" layer="94"/>
+<wire x1="20.32" y1="-5.08" x2="20.32" y2="-22.86" width="0.508" layer="94"/>
+<wire x1="20.32" y1="-22.86" x2="0" y2="-22.86" width="0.508" layer="94"/>
+<wire x1="20.32" y1="-12.7" x2="20.32" y2="-12.7" width="0.15" layer="94"/>
+<wire x1="0" y1="-12.7" x2="0" y2="-12.7" width="0.15" layer="94"/>
+<wire x1="0" y1="-15.24" x2="0" y2="-15.24" width="0.15" layer="94"/>
+<wire x1="0" y1="-17.78" x2="0" y2="-17.78" width="0.15" layer="94"/>
+<wire x1="20.32" y1="-17.78" x2="20.32" y2="-17.78" width="0.15" layer="94"/>
+<wire x1="20.32" y1="-7.62" x2="20.32" y2="-7.62" width="0.15" layer="94"/>
+<wire x1="0" y1="-7.62" x2="0" y2="-7.62" width="0.15" layer="94"/>
+<wire x1="20.32" y1="-20.32" x2="20.32" y2="-20.32" width="0.15" layer="94"/>
+<wire x1="0" y1="-20.32" x2="0" y2="-20.32" width="0.15" layer="94"/>
+<text x="0" y="-2.54" size="2.54" layer="95" align="top-left">&gt;NAME</text>
+<text x="0" y="-27.94" size="2.54" layer="95" align="top-left">SAK-XC888CM-8FFA 5V AC</text>
+<pin name="VSSC" x="25.4" y="-12.7" length="middle" direction="pwr" rot="R180"/>
+<pin name="VDDC" x="-5.08" y="-12.7" length="middle" direction="pwr"/>
+<pin name="3_VDDP" x="-5.08" y="-15.24" length="middle" direction="pwr"/>
+<pin name="1_VDDP" x="-5.08" y="-17.78" length="middle" direction="pwr"/>
+<pin name="1_VSSP" x="25.4" y="-17.78" length="middle" direction="pwr" rot="R180"/>
+<pin name="VAGND" x="25.4" y="-7.62" length="middle" direction="pwr" rot="R180"/>
+<pin name="VAREF" x="-5.08" y="-7.62" length="middle" direction="pwr"/>
+<pin name="2_VSSP" x="25.4" y="-20.32" length="middle" direction="pwr" rot="R180"/>
+<pin name="2_VDDP" x="-5.08" y="-20.32" length="middle" direction="pwr"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="INFINEON_SAK-XC888CM-8FFA_5V_AC" prefix="U">
+<description>INF-SAx-XC888x-PG-LQFP-64</description>
+<gates>
+<gate name="A" symbol="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_0" x="0" y="0"/>
+<gate name="B" symbol="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_1" x="40.32" y="0"/>
+</gates>
+<devices>
+<device name="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_0" package="INFINEON_SAK-XC888CM-8FFA_5V_AC_0">
+<connects>
+<connect gate="A" pin="!RESET!" pad="53"/>
+<connect gate="A" pin="1_NC" pad="56"/>
+<connect gate="A" pin="2_NC" pad="57"/>
+<connect gate="A" pin="MBC" pad="58"/>
+<connect gate="A" pin="P0.0" pad="17"/>
+<connect gate="A" pin="P0.1" pad="21"/>
+<connect gate="A" pin="P0.2" pad="18"/>
+<connect gate="A" pin="P0.3" pad="63"/>
+<connect gate="A" pin="P0.4" pad="64"/>
+<connect gate="A" pin="P0.5" pad="1"/>
+<connect gate="A" pin="P0.6" pad="2"/>
+<connect gate="A" pin="P0.7" pad="62"/>
+<connect gate="A" pin="P1.0" pad="34"/>
+<connect gate="A" pin="P1.1" pad="35"/>
+<connect gate="A" pin="P1.2" pad="36"/>
+<connect gate="A" pin="P1.3" pad="37"/>
+<connect gate="A" pin="P1.4" pad="38"/>
+<connect gate="A" pin="P1.5" pad="39"/>
+<connect gate="A" pin="P1.6" pad="10"/>
+<connect gate="A" pin="P1.7" pad="11"/>
+<connect gate="A" pin="P2.0" pad="22"/>
+<connect gate="A" pin="P2.1" pad="23"/>
+<connect gate="A" pin="P2.2" pad="24"/>
+<connect gate="A" pin="P2.3" pad="27"/>
+<connect gate="A" pin="P2.4" pad="28"/>
+<connect gate="A" pin="P2.5" pad="29"/>
+<connect gate="A" pin="P2.6" pad="30"/>
+<connect gate="A" pin="P2.7" pad="33"/>
+<connect gate="A" pin="P3.0" pad="43"/>
+<connect gate="A" pin="P3.1" pad="44"/>
+<connect gate="A" pin="P3.2" pad="49"/>
+<connect gate="A" pin="P3.3" pad="50"/>
+<connect gate="A" pin="P3.4" pad="51"/>
+<connect gate="A" pin="P3.5" pad="52"/>
+<connect gate="A" pin="P3.6" pad="41"/>
+<connect gate="A" pin="P3.7" pad="42"/>
+<connect gate="A" pin="P4.0" pad="59"/>
+<connect gate="A" pin="P4.1" pad="60"/>
+<connect gate="A" pin="P4.2" pad="61"/>
+<connect gate="A" pin="P4.3" pad="40"/>
+<connect gate="A" pin="P4.4" pad="45"/>
+<connect gate="A" pin="P4.5" pad="46"/>
+<connect gate="A" pin="P4.6" pad="47"/>
+<connect gate="A" pin="P4.7" pad="48"/>
+<connect gate="A" pin="P5.0" pad="8"/>
+<connect gate="A" pin="P5.1" pad="9"/>
+<connect gate="A" pin="P5.2" pad="12"/>
+<connect gate="A" pin="P5.3" pad="13"/>
+<connect gate="A" pin="P5.4" pad="14"/>
+<connect gate="A" pin="P5.5" pad="15"/>
+<connect gate="A" pin="P5.6" pad="19"/>
+<connect gate="A" pin="P5.7" pad="20"/>
+<connect gate="A" pin="TMS" pad="16"/>
+<connect gate="A" pin="XTAL1" pad="4"/>
+<connect gate="A" pin="XTAL2" pad="3"/>
+<connect gate="B" pin="1_VDDP" pad="25"/>
+<connect gate="B" pin="1_VSSP" pad="26"/>
+<connect gate="B" pin="2_VDDP" pad="55"/>
+<connect gate="B" pin="2_VSSP" pad="54"/>
+<connect gate="B" pin="3_VDDP" pad="7"/>
+<connect gate="B" pin="VAGND" pad="31"/>
+<connect gate="B" pin="VAREF" pad="32"/>
+<connect gate="B" pin="VDDC" pad="6"/>
+<connect gate="B" pin="VSSC" pad="5"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="A__D_INPUT_LINES_INCL_FADC" value="8"/>
+<attribute name="CAN_NODES" value="2"/>
+<attribute name="CIIVA_IDS" value="3249765"/>
+<attribute name="COMPONENT_LINK_1_DESCRIPTION" value="Manufacturer URL"/>
+<attribute name="COMPONENT_LINK_1_URL" value="http://www.infineon.com/"/>
+<attribute name="COMPONENT_LINK_3_DESCRIPTION" value="Package Specification"/>
+<attribute name="COMPONENT_LINK_3_URL" value="http://www.infineon.com/dgdl/xc164lm_ds_v1.2_2007_03.pdf?folderId=db3a304412b407950112b408e8c90004&amp;fileId=db3a304412b407950112b40c22200a81&amp;sId=db3a30433d956bc3013d9e7060dd2801"/>
+<attribute name="DATASHEET" value="http://www.infineon.com/dgdl/XC88xCLM_ds_V1_2.pdf?folderId=db3a304412b407950112b408e8c90004&amp;fileId=db3a304412b407950112b40c4a9e0afb"/>
+<attribute name="DATASHEET_VERSION" value="Rev. 1.2"/>
+<attribute name="DIGITAL_IO_LINES" value="48"/>
+<attribute name="DMA_CHANNELS" value="0"/>
+<attribute name="DSP_FUNCTIONALITY_EG_MDUMAC" value="true"/>
+<attribute name="E2PROM_EMULATION_DATA_FLASH" value="true"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_0" value="Level C"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_1" value="Level B"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_2" value="Level A"/>
+<attribute name="GREEN" value="true"/>
+<attribute name="HALOGEN_FREE" value="available"/>
+<attribute name="IMPORTED" value="yes"/>
+<attribute name="IMPORTED_FROM" value="vault"/>
+<attribute name="IMPORT_TS" value="1521842998"/>
+<attribute name="INSTRUCTION_WIDTH_BITS" value="8"/>
+<attribute name="IO_OPERATION_VOLTAGES" value="5Â V"/>
+<attribute name="LIN_BSL_LOADER_FOR_FAST_FLASH_PROGRAMMING" value="false"/>
+<attribute name="MAX_CLOCK_FREQUENCY" value="24Â MHz"/>
+<attribute name="MF" value="Infineon"/>
+<attribute name="MOUNTING_TECHNOLOGY" value="Surface Mount"/>
+<attribute name="MPN" value="SAK-XC888CM-8FFA 5V AC"/>
+<attribute name="NUMBER_OF_ADC_MODULES" value="1"/>
+<attribute name="ON_CHIP_CLOCK_GENERATION" value="true"/>
+<attribute name="ON_CHIP_VOLTAGE_REGULATOR" value="true"/>
+<attribute name="OSCILLATOR_WATCHDOG" value="true"/>
+<attribute name="PACKAGE" value="PG-TQFP-64-8"/>
+<attribute name="PACKAGE_DESCRIPTION" value="64-Pin Plastic Thin Quad Flat Package, Body 10 x 10 mm, Pitch 0.5 mm"/>
+<attribute name="PACKAGE_VERSION" value="V1.2, 03/2007"/>
+<attribute name="PACKING" value="Reel"/>
+<attribute name="POWER_MODES" value="4"/>
+<attribute name="PREFIX" value="U"/>
+<attribute name="PROGRAM_MEMORY" value="32Â KByte"/>
+<attribute name="REAL_TIME_CLOCK_RTC" value="false"/>
+<attribute name="RELEASE_DATE" value="1409237057"/>
+<attribute name="SERIAL_IO_INTERFACES" value="3"/>
+<attribute name="SRAM_INCL_CACHE" value="1.75Â KByte"/>
+<attribute name="TIMED_IO_PINS_PWM_CHCAPCOM" value="4"/>
+<attribute name="TIMER__COUNTER" value="4"/>
+<attribute name="TYPE_OF_MEMORY" value="Flash"/>
+<attribute name="TYPE_OF_SERIAL_IO_INTERFACES" value="UART(2), SSC(1)"/>
+<attribute name="VAULT_GUID" value="DDD3CFE9-AAB1-4101-845A-068EB9079D78"/>
+<attribute name="VAULT_REVISION" value="90401252-7871-45A6-ACB2-8C15CAEF397A"/>
+<attribute name="WATCHDOG_TIMER" value="true"/>
+</technology>
+</technologies>
+</device>
+<device name="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_1" package="INFINEON_SAK-XC888CM-8FFA_5V_AC_1">
+<connects>
+<connect gate="A" pin="!RESET!" pad="53"/>
+<connect gate="A" pin="1_NC" pad="56"/>
+<connect gate="A" pin="2_NC" pad="57"/>
+<connect gate="A" pin="MBC" pad="58"/>
+<connect gate="A" pin="P0.0" pad="17"/>
+<connect gate="A" pin="P0.1" pad="21"/>
+<connect gate="A" pin="P0.2" pad="18"/>
+<connect gate="A" pin="P0.3" pad="63"/>
+<connect gate="A" pin="P0.4" pad="64"/>
+<connect gate="A" pin="P0.5" pad="1"/>
+<connect gate="A" pin="P0.6" pad="2"/>
+<connect gate="A" pin="P0.7" pad="62"/>
+<connect gate="A" pin="P1.0" pad="34"/>
+<connect gate="A" pin="P1.1" pad="35"/>
+<connect gate="A" pin="P1.2" pad="36"/>
+<connect gate="A" pin="P1.3" pad="37"/>
+<connect gate="A" pin="P1.4" pad="38"/>
+<connect gate="A" pin="P1.5" pad="39"/>
+<connect gate="A" pin="P1.6" pad="10"/>
+<connect gate="A" pin="P1.7" pad="11"/>
+<connect gate="A" pin="P2.0" pad="22"/>
+<connect gate="A" pin="P2.1" pad="23"/>
+<connect gate="A" pin="P2.2" pad="24"/>
+<connect gate="A" pin="P2.3" pad="27"/>
+<connect gate="A" pin="P2.4" pad="28"/>
+<connect gate="A" pin="P2.5" pad="29"/>
+<connect gate="A" pin="P2.6" pad="30"/>
+<connect gate="A" pin="P2.7" pad="33"/>
+<connect gate="A" pin="P3.0" pad="43"/>
+<connect gate="A" pin="P3.1" pad="44"/>
+<connect gate="A" pin="P3.2" pad="49"/>
+<connect gate="A" pin="P3.3" pad="50"/>
+<connect gate="A" pin="P3.4" pad="51"/>
+<connect gate="A" pin="P3.5" pad="52"/>
+<connect gate="A" pin="P3.6" pad="41"/>
+<connect gate="A" pin="P3.7" pad="42"/>
+<connect gate="A" pin="P4.0" pad="59"/>
+<connect gate="A" pin="P4.1" pad="60"/>
+<connect gate="A" pin="P4.2" pad="61"/>
+<connect gate="A" pin="P4.3" pad="40"/>
+<connect gate="A" pin="P4.4" pad="45"/>
+<connect gate="A" pin="P4.5" pad="46"/>
+<connect gate="A" pin="P4.6" pad="47"/>
+<connect gate="A" pin="P4.7" pad="48"/>
+<connect gate="A" pin="P5.0" pad="8"/>
+<connect gate="A" pin="P5.1" pad="9"/>
+<connect gate="A" pin="P5.2" pad="12"/>
+<connect gate="A" pin="P5.3" pad="13"/>
+<connect gate="A" pin="P5.4" pad="14"/>
+<connect gate="A" pin="P5.5" pad="15"/>
+<connect gate="A" pin="P5.6" pad="19"/>
+<connect gate="A" pin="P5.7" pad="20"/>
+<connect gate="A" pin="TMS" pad="16"/>
+<connect gate="A" pin="XTAL1" pad="4"/>
+<connect gate="A" pin="XTAL2" pad="3"/>
+<connect gate="B" pin="1_VDDP" pad="25"/>
+<connect gate="B" pin="1_VSSP" pad="26"/>
+<connect gate="B" pin="2_VDDP" pad="55"/>
+<connect gate="B" pin="2_VSSP" pad="54"/>
+<connect gate="B" pin="3_VDDP" pad="7"/>
+<connect gate="B" pin="VAGND" pad="31"/>
+<connect gate="B" pin="VAREF" pad="32"/>
+<connect gate="B" pin="VDDC" pad="6"/>
+<connect gate="B" pin="VSSC" pad="5"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="A__D_INPUT_LINES_INCL_FADC" value="8"/>
+<attribute name="CAN_NODES" value="2"/>
+<attribute name="CIIVA_IDS" value="3249765"/>
+<attribute name="COMPONENT_LINK_1_DESCRIPTION" value="Manufacturer URL"/>
+<attribute name="COMPONENT_LINK_1_URL" value="http://www.infineon.com/"/>
+<attribute name="COMPONENT_LINK_3_DESCRIPTION" value="Package Specification"/>
+<attribute name="COMPONENT_LINK_3_URL" value="http://www.infineon.com/dgdl/xc164lm_ds_v1.2_2007_03.pdf?folderId=db3a304412b407950112b408e8c90004&amp;fileId=db3a304412b407950112b40c22200a81&amp;sId=db3a30433d956bc3013d9e7060dd2801"/>
+<attribute name="DATASHEET" value="http://www.infineon.com/dgdl/XC88xCLM_ds_V1_2.pdf?folderId=db3a304412b407950112b408e8c90004&amp;fileId=db3a304412b407950112b40c4a9e0afb"/>
+<attribute name="DATASHEET_VERSION" value="Rev. 1.2"/>
+<attribute name="DIGITAL_IO_LINES" value="48"/>
+<attribute name="DMA_CHANNELS" value="0"/>
+<attribute name="DSP_FUNCTIONALITY_EG_MDUMAC" value="true"/>
+<attribute name="E2PROM_EMULATION_DATA_FLASH" value="true"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_0" value="Level C"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_1" value="Level B"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_2" value="Level A"/>
+<attribute name="GREEN" value="true"/>
+<attribute name="HALOGEN_FREE" value="available"/>
+<attribute name="IMPORTED" value="yes"/>
+<attribute name="IMPORTED_FROM" value="vault"/>
+<attribute name="IMPORT_TS" value="1521842998"/>
+<attribute name="INSTRUCTION_WIDTH_BITS" value="8"/>
+<attribute name="IO_OPERATION_VOLTAGES" value="5Â V"/>
+<attribute name="LIN_BSL_LOADER_FOR_FAST_FLASH_PROGRAMMING" value="false"/>
+<attribute name="MAX_CLOCK_FREQUENCY" value="24Â MHz"/>
+<attribute name="MF" value="Infineon"/>
+<attribute name="MOUNTING_TECHNOLOGY" value="Surface Mount"/>
+<attribute name="MPN" value="SAK-XC888CM-8FFA 5V AC"/>
+<attribute name="NUMBER_OF_ADC_MODULES" value="1"/>
+<attribute name="ON_CHIP_CLOCK_GENERATION" value="true"/>
+<attribute name="ON_CHIP_VOLTAGE_REGULATOR" value="true"/>
+<attribute name="OSCILLATOR_WATCHDOG" value="true"/>
+<attribute name="PACKAGE" value="PG-TQFP-64-8"/>
+<attribute name="PACKAGE_DESCRIPTION" value="64-Pin Plastic Thin Quad Flat Package, Body 10 x 10 mm, Pitch 0.5 mm"/>
+<attribute name="PACKAGE_VERSION" value="V1.2, 03/2007"/>
+<attribute name="PACKING" value="Reel"/>
+<attribute name="POWER_MODES" value="4"/>
+<attribute name="PREFIX" value="U"/>
+<attribute name="PROGRAM_MEMORY" value="32Â KByte"/>
+<attribute name="REAL_TIME_CLOCK_RTC" value="false"/>
+<attribute name="RELEASE_DATE" value="1409237057"/>
+<attribute name="SERIAL_IO_INTERFACES" value="3"/>
+<attribute name="SRAM_INCL_CACHE" value="1.75Â KByte"/>
+<attribute name="TIMED_IO_PINS_PWM_CHCAPCOM" value="4"/>
+<attribute name="TIMER__COUNTER" value="4"/>
+<attribute name="TYPE_OF_MEMORY" value="Flash"/>
+<attribute name="TYPE_OF_SERIAL_IO_INTERFACES" value="UART(2), SSC(1)"/>
+<attribute name="VAULT_GUID" value="DDD3CFE9-AAB1-4101-845A-068EB9079D78"/>
+<attribute name="VAULT_REVISION" value="90401252-7871-45A6-ACB2-8C15CAEF397A"/>
+<attribute name="WATCHDOG_TIMER" value="true"/>
+</technology>
+</technologies>
+</device>
+<device name="INFINEON_SAK-XC888CM-8FFA_5V_AC_0_2" package="INFINEON_SAK-XC888CM-8FFA_5V_AC_2">
+<connects>
+<connect gate="A" pin="!RESET!" pad="53"/>
+<connect gate="A" pin="1_NC" pad="56"/>
+<connect gate="A" pin="2_NC" pad="57"/>
+<connect gate="A" pin="MBC" pad="58"/>
+<connect gate="A" pin="P0.0" pad="17"/>
+<connect gate="A" pin="P0.1" pad="21"/>
+<connect gate="A" pin="P0.2" pad="18"/>
+<connect gate="A" pin="P0.3" pad="63"/>
+<connect gate="A" pin="P0.4" pad="64"/>
+<connect gate="A" pin="P0.5" pad="1"/>
+<connect gate="A" pin="P0.6" pad="2"/>
+<connect gate="A" pin="P0.7" pad="62"/>
+<connect gate="A" pin="P1.0" pad="34"/>
+<connect gate="A" pin="P1.1" pad="35"/>
+<connect gate="A" pin="P1.2" pad="36"/>
+<connect gate="A" pin="P1.3" pad="37"/>
+<connect gate="A" pin="P1.4" pad="38"/>
+<connect gate="A" pin="P1.5" pad="39"/>
+<connect gate="A" pin="P1.6" pad="10"/>
+<connect gate="A" pin="P1.7" pad="11"/>
+<connect gate="A" pin="P2.0" pad="22"/>
+<connect gate="A" pin="P2.1" pad="23"/>
+<connect gate="A" pin="P2.2" pad="24"/>
+<connect gate="A" pin="P2.3" pad="27"/>
+<connect gate="A" pin="P2.4" pad="28"/>
+<connect gate="A" pin="P2.5" pad="29"/>
+<connect gate="A" pin="P2.6" pad="30"/>
+<connect gate="A" pin="P2.7" pad="33"/>
+<connect gate="A" pin="P3.0" pad="43"/>
+<connect gate="A" pin="P3.1" pad="44"/>
+<connect gate="A" pin="P3.2" pad="49"/>
+<connect gate="A" pin="P3.3" pad="50"/>
+<connect gate="A" pin="P3.4" pad="51"/>
+<connect gate="A" pin="P3.5" pad="52"/>
+<connect gate="A" pin="P3.6" pad="41"/>
+<connect gate="A" pin="P3.7" pad="42"/>
+<connect gate="A" pin="P4.0" pad="59"/>
+<connect gate="A" pin="P4.1" pad="60"/>
+<connect gate="A" pin="P4.2" pad="61"/>
+<connect gate="A" pin="P4.3" pad="40"/>
+<connect gate="A" pin="P4.4" pad="45"/>
+<connect gate="A" pin="P4.5" pad="46"/>
+<connect gate="A" pin="P4.6" pad="47"/>
+<connect gate="A" pin="P4.7" pad="48"/>
+<connect gate="A" pin="P5.0" pad="8"/>
+<connect gate="A" pin="P5.1" pad="9"/>
+<connect gate="A" pin="P5.2" pad="12"/>
+<connect gate="A" pin="P5.3" pad="13"/>
+<connect gate="A" pin="P5.4" pad="14"/>
+<connect gate="A" pin="P5.5" pad="15"/>
+<connect gate="A" pin="P5.6" pad="19"/>
+<connect gate="A" pin="P5.7" pad="20"/>
+<connect gate="A" pin="TMS" pad="16"/>
+<connect gate="A" pin="XTAL1" pad="4"/>
+<connect gate="A" pin="XTAL2" pad="3"/>
+<connect gate="B" pin="1_VDDP" pad="25"/>
+<connect gate="B" pin="1_VSSP" pad="26"/>
+<connect gate="B" pin="2_VDDP" pad="55"/>
+<connect gate="B" pin="2_VSSP" pad="54"/>
+<connect gate="B" pin="3_VDDP" pad="7"/>
+<connect gate="B" pin="VAGND" pad="31"/>
+<connect gate="B" pin="VAREF" pad="32"/>
+<connect gate="B" pin="VDDC" pad="6"/>
+<connect gate="B" pin="VSSC" pad="5"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="A__D_INPUT_LINES_INCL_FADC" value="8"/>
+<attribute name="CAN_NODES" value="2"/>
+<attribute name="CIIVA_IDS" value="3249765"/>
+<attribute name="COMPONENT_LINK_1_DESCRIPTION" value="Manufacturer URL"/>
+<attribute name="COMPONENT_LINK_1_URL" value="http://www.infineon.com/"/>
+<attribute name="COMPONENT_LINK_3_DESCRIPTION" value="Package Specification"/>
+<attribute name="COMPONENT_LINK_3_URL" value="http://www.infineon.com/dgdl/xc164lm_ds_v1.2_2007_03.pdf?folderId=db3a304412b407950112b408e8c90004&amp;fileId=db3a304412b407950112b40c22200a81&amp;sId=db3a30433d956bc3013d9e7060dd2801"/>
+<attribute name="DATASHEET" value="http://www.infineon.com/dgdl/XC88xCLM_ds_V1_2.pdf?folderId=db3a304412b407950112b408e8c90004&amp;fileId=db3a304412b407950112b40c4a9e0afb"/>
+<attribute name="DATASHEET_VERSION" value="Rev. 1.2"/>
+<attribute name="DIGITAL_IO_LINES" value="48"/>
+<attribute name="DMA_CHANNELS" value="0"/>
+<attribute name="DSP_FUNCTIONALITY_EG_MDUMAC" value="true"/>
+<attribute name="E2PROM_EMULATION_DATA_FLASH" value="true"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_0" value="Level C"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_1" value="Level B"/>
+<attribute name="FOOTPRINT_VARIANT_NAME_2" value="Level A"/>
+<attribute name="GREEN" value="true"/>
+<attribute name="HALOGEN_FREE" value="available"/>
+<attribute name="IMPORTED" value="yes"/>
+<attribute name="IMPORTED_FROM" value="vault"/>
+<attribute name="IMPORT_TS" value="1521842998"/>
+<attribute name="INSTRUCTION_WIDTH_BITS" value="8"/>
+<attribute name="IO_OPERATION_VOLTAGES" value="5Â V"/>
+<attribute name="LIN_BSL_LOADER_FOR_FAST_FLASH_PROGRAMMING" value="false"/>
+<attribute name="MAX_CLOCK_FREQUENCY" value="24Â MHz"/>
+<attribute name="MF" value="Infineon"/>
+<attribute name="MOUNTING_TECHNOLOGY" value="Surface Mount"/>
+<attribute name="MPN" value="SAK-XC888CM-8FFA 5V AC"/>
+<attribute name="NUMBER_OF_ADC_MODULES" value="1"/>
+<attribute name="ON_CHIP_CLOCK_GENERATION" value="true"/>
+<attribute name="ON_CHIP_VOLTAGE_REGULATOR" value="true"/>
+<attribute name="OSCILLATOR_WATCHDOG" value="true"/>
+<attribute name="PACKAGE" value="PG-TQFP-64-8"/>
+<attribute name="PACKAGE_DESCRIPTION" value="64-Pin Plastic Thin Quad Flat Package, Body 10 x 10 mm, Pitch 0.5 mm"/>
+<attribute name="PACKAGE_VERSION" value="V1.2, 03/2007"/>
+<attribute name="PACKING" value="Reel"/>
+<attribute name="POWER_MODES" value="4"/>
+<attribute name="PREFIX" value="U"/>
+<attribute name="PROGRAM_MEMORY" value="32Â KByte"/>
+<attribute name="REAL_TIME_CLOCK_RTC" value="false"/>
+<attribute name="RELEASE_DATE" value="1409237057"/>
+<attribute name="SERIAL_IO_INTERFACES" value="3"/>
+<attribute name="SRAM_INCL_CACHE" value="1.75Â KByte"/>
+<attribute name="TIMED_IO_PINS_PWM_CHCAPCOM" value="4"/>
+<attribute name="TIMER__COUNTER" value="4"/>
+<attribute name="TYPE_OF_MEMORY" value="Flash"/>
+<attribute name="TYPE_OF_SERIAL_IO_INTERFACES" value="UART(2), SSC(1)"/>
+<attribute name="VAULT_GUID" value="DDD3CFE9-AAB1-4101-845A-068EB9079D78"/>
+<attribute name="VAULT_REVISION" value="90401252-7871-45A6-ACB2-8C15CAEF397A"/>
+<attribute name="WATCHDOG_TIMER" value="true"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+</drawing>
+<compatibility>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports URNs for individual library
+assets (packages, symbols, and devices). The URNs of those assets
+will not be understood (or retained) with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports the association of 3D packages
+with devices in libraries, schematics, and board files. Those 3D
+packages will not be understood (or retained) with this version.
+</note>
+</compatibility>
+</eagle>
