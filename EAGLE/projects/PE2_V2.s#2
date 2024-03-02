@@ -8435,142 +8435,6 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="MPU-6050">
-<description>&lt;IMUs - Inertial Measurement Units 6-Axis MEMS MotionTracking  Device with DMP&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
-<packages>
-<package name="MPU6050">
-<description>&lt;b&gt;MPU-6050-4&lt;/b&gt;&lt;br&gt;
-</description>
-<smd name="1" x="-2" y="1.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="2" x="-2" y="0.75" dx="0.8" dy="0.35" layer="1"/>
-<smd name="3" x="-2" y="0.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="4" x="-2" y="-0.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="5" x="-2" y="-0.75" dx="0.8" dy="0.35" layer="1"/>
-<smd name="6" x="-2" y="-1.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="7" x="-1.25" y="-1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="8" x="-0.75" y="-1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="9" x="-0.25" y="-1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="10" x="0.25" y="-1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="11" x="0.75" y="-1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="12" x="1.25" y="-1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="13" x="2" y="-1.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="14" x="2" y="-0.75" dx="0.8" dy="0.35" layer="1"/>
-<smd name="15" x="2" y="-0.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="16" x="2" y="0.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="17" x="2" y="0.75" dx="0.8" dy="0.35" layer="1"/>
-<smd name="18" x="2" y="1.25" dx="0.8" dy="0.35" layer="1"/>
-<smd name="19" x="1.25" y="1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="20" x="0.75" y="1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="21" x="0.25" y="1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="22" x="-0.25" y="1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="23" x="-0.75" y="1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="24" x="-1.25" y="1.975" dx="0.85" dy="0.35" layer="1" rot="R90"/>
-<smd name="25" x="0" y="0" dx="2.7" dy="2.6" layer="1"/>
-<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
-<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
-<wire x1="-2" y1="2" x2="2" y2="2" width="0.1" layer="51"/>
-<wire x1="2" y1="2" x2="2" y2="-2" width="0.1" layer="51"/>
-<wire x1="2" y1="-2" x2="-2" y2="-2" width="0.1" layer="51"/>
-<wire x1="-2" y1="-2" x2="-2" y2="2" width="0.1" layer="51"/>
-<wire x1="-3.4" y1="3.4" x2="3.4" y2="3.4" width="0.1" layer="51"/>
-<wire x1="3.4" y1="3.4" x2="3.4" y2="-3.4" width="0.1" layer="51"/>
-<wire x1="3.4" y1="-3.4" x2="-3.4" y2="-3.4" width="0.1" layer="51"/>
-<wire x1="-3.4" y1="-3.4" x2="-3.4" y2="3.4" width="0.1" layer="51"/>
-<wire x1="-3" y1="1.25" x2="-3" y2="1.25" width="0.2" layer="21"/>
-<wire x1="-3" y1="1.25" x2="-2.9" y2="1.25" width="0.2" layer="21" curve="180"/>
-<wire x1="-2.9" y1="1.25" x2="-2.9" y2="1.25" width="0.2" layer="21"/>
-<wire x1="-2.9" y1="1.25" x2="-3" y2="1.25" width="0.2" layer="21" curve="180"/>
-<wire x1="-3" y1="1.25" x2="-3" y2="1.25" width="0.2" layer="21"/>
-<wire x1="-3" y1="1.25" x2="-2.9" y2="1.25" width="0.2" layer="21" curve="180"/>
-</package>
-</packages>
-<symbols>
-<symbol name="MPU-6050">
-<wire x1="5.08" y1="12.7" x2="25.4" y2="12.7" width="0.254" layer="94"/>
-<wire x1="25.4" y1="-25.4" x2="25.4" y2="12.7" width="0.254" layer="94"/>
-<wire x1="25.4" y1="-25.4" x2="5.08" y2="-25.4" width="0.254" layer="94"/>
-<wire x1="5.08" y1="12.7" x2="5.08" y2="-25.4" width="0.254" layer="94"/>
-<text x="26.67" y="17.78" size="1.778" layer="95" align="center-left">&gt;NAME</text>
-<text x="26.67" y="15.24" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="CLKIN" x="0" y="0" length="middle"/>
-<pin name="NC_1" x="0" y="-2.54" length="middle" direction="nc"/>
-<pin name="NC_2" x="0" y="-5.08" length="middle" direction="nc"/>
-<pin name="NC_3" x="0" y="-7.62" length="middle" direction="nc"/>
-<pin name="NC_4" x="0" y="-10.16" length="middle" direction="nc"/>
-<pin name="AUX_DA" x="0" y="-12.7" length="middle"/>
-<pin name="AUX_CL" x="7.62" y="-30.48" length="middle" rot="R90"/>
-<pin name="VLOGIC" x="10.16" y="-30.48" length="middle" rot="R90"/>
-<pin name="AD0" x="12.7" y="-30.48" length="middle" rot="R90"/>
-<pin name="REGOUT" x="15.24" y="-30.48" length="middle" rot="R90"/>
-<pin name="FSYNC" x="17.78" y="-30.48" length="middle" rot="R90"/>
-<pin name="INT" x="20.32" y="-30.48" length="middle" rot="R90"/>
-<pin name="VDD" x="30.48" y="-12.7" length="middle" rot="R180"/>
-<pin name="NC_5" x="30.48" y="-10.16" length="middle" direction="nc" rot="R180"/>
-<pin name="NC_6" x="30.48" y="-7.62" length="middle" direction="nc" rot="R180"/>
-<pin name="NC_7" x="30.48" y="-5.08" length="middle" direction="nc" rot="R180"/>
-<pin name="NC_8" x="30.48" y="-2.54" length="middle" direction="nc" rot="R180"/>
-<pin name="GND" x="30.48" y="0" length="middle" rot="R180"/>
-<pin name="RESV_1" x="22.86" y="17.78" length="middle" rot="R270"/>
-<pin name="CPOUT" x="20.32" y="17.78" length="middle" rot="R270"/>
-<pin name="RESV_2" x="17.78" y="17.78" length="middle" rot="R270"/>
-<pin name="RESV_3" x="15.24" y="17.78" length="middle" rot="R270"/>
-<pin name="SCL" x="12.7" y="17.78" length="middle" rot="R270"/>
-<pin name="SDA" x="10.16" y="17.78" length="middle" rot="R270"/>
-<pin name="EP" x="7.62" y="17.78" length="middle" rot="R270"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="MPU-6050" prefix="IC">
-<description>&lt;b&gt;IMUs - Inertial Measurement Units 6-Axis MEMS MotionTracking  Device with DMP&lt;/b&gt;&lt;p&gt;
-Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/mortion-inertial/imu/data_sheet/mpu-6000-datasheet1.pdf"&gt; Datasheet &lt;/a&gt;</description>
-<gates>
-<gate name="G$1" symbol="MPU-6050" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="MPU6050">
-<connects>
-<connect gate="G$1" pin="AD0" pad="9"/>
-<connect gate="G$1" pin="AUX_CL" pad="7"/>
-<connect gate="G$1" pin="AUX_DA" pad="6"/>
-<connect gate="G$1" pin="CLKIN" pad="1"/>
-<connect gate="G$1" pin="CPOUT" pad="20"/>
-<connect gate="G$1" pin="EP" pad="25"/>
-<connect gate="G$1" pin="FSYNC" pad="11"/>
-<connect gate="G$1" pin="GND" pad="18"/>
-<connect gate="G$1" pin="INT" pad="12"/>
-<connect gate="G$1" pin="NC_1" pad="2"/>
-<connect gate="G$1" pin="NC_2" pad="3"/>
-<connect gate="G$1" pin="NC_3" pad="4"/>
-<connect gate="G$1" pin="NC_4" pad="5"/>
-<connect gate="G$1" pin="NC_5" pad="14"/>
-<connect gate="G$1" pin="NC_6" pad="15"/>
-<connect gate="G$1" pin="NC_7" pad="16"/>
-<connect gate="G$1" pin="NC_8" pad="17"/>
-<connect gate="G$1" pin="REGOUT" pad="10"/>
-<connect gate="G$1" pin="RESV_1" pad="19"/>
-<connect gate="G$1" pin="RESV_2" pad="21"/>
-<connect gate="G$1" pin="RESV_3" pad="22"/>
-<connect gate="G$1" pin="SCL" pad="23"/>
-<connect gate="G$1" pin="SDA" pad="24"/>
-<connect gate="G$1" pin="VDD" pad="13"/>
-<connect gate="G$1" pin="VLOGIC" pad="8"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="DESCRIPTION" value="IMUs - Inertial Measurement Units 6-Axis MEMS MotionTracking  Device with DMP" constant="no"/>
-<attribute name="HEIGHT" value="0.95mm" constant="no"/>
-<attribute name="MANUFACTURER_NAME" value="TDK" constant="no"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="MPU-6050" constant="no"/>
-<attribute name="MOUSER_PART_NUMBER" value="410-MPU-6050" constant="no"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/TDK-InvenSense/MPU-6050?qs=u4fy%2FsgLU9O14B5JgyQFvg%3D%3D" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="STM32F301C8T6">
 <packages>
 <package name="STM32F301C8T6">
@@ -8894,6 +8758,167 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 </deviceset>
 </devicesets>
 </library>
+<library name="MPU-6050">
+<description>&lt;IMUs - Inertial Measurement Units 6-Axis MEMS MotionTracking  Device with DMP&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
+<packages>
+<package name="HDRV8W64P254_1X8_2032X508X838B" urn="urn:adsk.eagle:footprint:43466601/1" locally_modified="yes">
+<description>Single-row, 8-pin Pin Header (Male) Straight, 2.54 mm (0.10 in) col pitch, 5.84 mm mating length, 20.32 X 5.08 X 8.38 mm body
+&lt;p&gt;Single-row (1X8), 8-pin Pin Header (Male) Straight package with 2.54 mm (0.10 in) col pitch, 0.64 mm lead width, 3.00 mm tail length and 5.84 mm mating length with overall size 20.32 X 5.08 X 8.38 mm, pin pattern - clockwise from top left&lt;/p&gt;</description>
+<wire x1="19.05" y1="-2.54" x2="-1.27" y2="-2.54" width="0.12" layer="21"/>
+<wire x1="19.05" y1="2.54" x2="19.05" y2="-2.54" width="0.12" layer="21"/>
+<wire x1="19.05" y1="-2.54" x2="-1.27" y2="-2.54" width="0.12" layer="51"/>
+<wire x1="19.05" y1="2.54" x2="19.05" y2="-2.54" width="0.12" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.1051" diameter="1.7051" shape="square"/>
+<pad name="2" x="2.54" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="3" x="5.08" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="4" x="7.62" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="5" x="10.16" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="6" x="12.7" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="7" x="15.24" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="8" x="17.78" y="0" drill="1.1051" diameter="1.7051"/>
+<text x="2.54" y="3.294" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
+<text x="2.54" y="-3.175" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
+<wire x1="-1.27" y1="-2.54" x2="-1.27" y2="1.27" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="0" y2="2.54" width="0.127" layer="21"/>
+<wire x1="0" y1="2.54" x2="19.05" y2="2.54" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-1.27" x2="-5.08" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="1.27" x2="-3.175" y2="0.635" width="0.127" layer="21"/>
+<wire x1="-3.175" y1="0.635" x2="-1.905" y2="0.635" width="0.127" layer="21"/>
+<wire x1="-1.905" y1="0.635" x2="-2.54" y2="1.27" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="-1.27" x2="-4.445" y2="-1.905" width="0.127" layer="21"/>
+<wire x1="-4.445" y1="-1.905" x2="-4.445" y2="-0.635" width="0.127" layer="21"/>
+<wire x1="-4.445" y1="-0.635" x2="-5.08" y2="-1.27" width="0.127" layer="21"/>
+<text x="-3.302" y="-0.127" size="0.6096" layer="21">X</text>
+<text x="-4.318" y="-1.143" size="0.6096" layer="21">Y</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="HDRV8W64P254_1X8_2032X508X838B" urn="urn:adsk.eagle:package:43466589/1" type="model">
+<description>Single-row, 8-pin Pin Header (Male) Straight, 2.54 mm (0.10 in) col pitch, 5.84 mm mating length, 20.32 X 5.08 X 8.38 mm body
+&lt;p&gt;Single-row (1X8), 8-pin Pin Header (Male) Straight package with 2.54 mm (0.10 in) col pitch, 0.64 mm lead width, 3.00 mm tail length and 5.84 mm mating length with overall size 20.32 X 5.08 X 8.38 mm, pin pattern - clockwise from top left&lt;/p&gt;</description>
+<packageinstances>
+<packageinstance name="HDRV8W64P254_1X8_2032X508X838B"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="MPU-6050_MODULE">
+<pin name="INT" x="12.7" y="7.62" length="middle" rot="R180"/>
+<pin name="AD0" x="12.7" y="2.54" length="middle" rot="R180"/>
+<pin name="NC" x="12.7" y="12.7" length="middle" direction="nc" rot="R180"/>
+<pin name="SDA" x="12.7" y="33.02" length="middle" rot="R180"/>
+<pin name="SCL" x="12.7" y="27.94" length="middle" rot="R180"/>
+<pin name="GND" x="12.7" y="17.78" length="middle" rot="R180"/>
+<pin name="VCC" x="12.7" y="22.86" length="middle" rot="R180"/>
+<wire x1="7.62" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="35.56" width="0.254" layer="94"/>
+<wire x1="0" y1="35.56" x2="7.62" y2="35.56" width="0.254" layer="94"/>
+<wire x1="7.62" y1="35.56" x2="7.62" y2="0" width="0.254" layer="94"/>
+<text x="0" y="36.322" size="1.778" layer="95">&gt;NAME</text>
+<text x="0" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="MPU-6050_MODULE">
+<gates>
+<gate name="G$1" symbol="MPU-6050_MODULE" x="12.7" y="0"/>
+</gates>
+<devices>
+<device name="" package="HDRV8W64P254_1X8_2032X508X838B">
+<connects>
+<connect gate="G$1" pin="AD0" pad="7"/>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="INT" pad="8"/>
+<connect gate="G$1" pin="NC" pad="5 6"/>
+<connect gate="G$1" pin="SCL" pad="3"/>
+<connect gate="G$1" pin="SDA" pad="4"/>
+<connect gate="G$1" pin="VCC" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43466589/1"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="4PIN_CON">
+<packages>
+<package name="HDRRA4W64P254_1X4_1016X254X278B" urn="urn:adsk.eagle:footprint:43493747/1" locally_modified="yes">
+<description>Single-row, 4-pin Pin Header (Male) Right Angle, 2.54 mm (0.10 in) col pitch, 5.84 mm mating length, 10.16 X 2.54 X 2.78 mm body
+&lt;p&gt;Single-row (1X4), 4-pin Pin Header (Male) Right Angle package with 2.54 mm (0.10 in) col pitch, 0.64 mm lead width, 3.00 mm tail length and 5.84 mm mating length with body size 10.16 X 2.54 X 2.78 mm, pin pattern - clockwise from top left&lt;/p&gt;</description>
+<wire x1="8.89" y1="-4.06" x2="-1.27" y2="-4.06" width="0.12" layer="21"/>
+<wire x1="-1.27" y1="-4.06" x2="-1.27" y2="-1.52" width="0.12" layer="21"/>
+<wire x1="-1.27" y1="-1.52" x2="8.89" y2="-1.52" width="0.12" layer="21"/>
+<wire x1="8.89" y1="-1.52" x2="8.89" y2="-4.06" width="0.12" layer="21"/>
+<wire x1="8.89" y1="-4.06" x2="-1.27" y2="-4.06" width="0.12" layer="51"/>
+<wire x1="-1.27" y1="-4.06" x2="-1.27" y2="-1.52" width="0.12" layer="51"/>
+<wire x1="-1.27" y1="-1.52" x2="8.89" y2="-1.52" width="0.12" layer="51"/>
+<wire x1="8.89" y1="-1.52" x2="8.89" y2="-4.06" width="0.12" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="2" x="2.54" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="3" x="5.08" y="0" drill="1.1051" diameter="1.7051"/>
+<pad name="4" x="7.62" y="0" drill="1.1051" diameter="1.7051"/>
+<text x="1.778" y="3.0115" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
+<text x="2.032" y="2.486" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
+<wire x1="0" y1="-3.81" x2="0" y2="-4.064" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-3.81" x2="2.54" y2="-4.064" width="0.127" layer="21"/>
+<wire x1="5.08" y1="-3.81" x2="5.08" y2="-4.064" width="0.127" layer="21"/>
+<wire x1="7.62" y1="-3.81" x2="7.62" y2="-4.064" width="0.127" layer="21"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="HDRRA4W64P254_1X4_1016X254X278B" urn="urn:adsk.eagle:package:43493736/1" type="model">
+<description>Single-row, 4-pin Pin Header (Male) Right Angle, 2.54 mm (0.10 in) col pitch, 5.84 mm mating length, 10.16 X 2.54 X 2.78 mm body
+&lt;p&gt;Single-row (1X4), 4-pin Pin Header (Male) Right Angle package with 2.54 mm (0.10 in) col pitch, 0.64 mm lead width, 3.00 mm tail length and 5.84 mm mating length with body size 10.16 X 2.54 X 2.78 mm, pin pattern - clockwise from top left&lt;/p&gt;</description>
+<packageinstances>
+<packageinstance name="HDRRA4W64P254_1X4_1016X254X278B"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="4PIN_CON">
+<pin name="1" x="10.16" y="2.54" length="middle" rot="R180"/>
+<pin name="2" x="10.16" y="7.62" length="middle" rot="R180"/>
+<pin name="3" x="10.16" y="12.7" length="middle" rot="R180"/>
+<pin name="4" x="10.16" y="17.78" length="middle" rot="R180"/>
+<wire x1="0" y1="0" x2="0" y2="20.32" width="0.254" layer="94"/>
+<wire x1="0" y1="20.32" x2="5.08" y2="20.32" width="0.254" layer="94"/>
+<wire x1="5.08" y1="20.32" x2="5.08" y2="0" width="0.254" layer="94"/>
+<wire x1="5.08" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<text x="0" y="21.082" size="1.27" layer="95">&gt;NAME</text>
+<text x="0" y="-2.54" size="1.27" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="4PIN_CON">
+<gates>
+<gate name="G$1" symbol="4PIN_CON" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="HDRRA4W64P254_1X4_1016X254X278B">
+<connects>
+<connect gate="G$1" pin="1" pad="4"/>
+<connect gate="G$1" pin="2" pad="3"/>
+<connect gate="G$1" pin="3" pad="2"/>
+<connect gate="G$1" pin="4" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43493736/1"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -8905,7 +8930,6 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 </classes>
 <groups>
 <schematic_group name="POWER_SUPPLY"/>
-<schematic_group name="GYRO/ACCEL"/>
 <schematic_group name="MULTIPLAYER_CON"/>
 <schematic_group name="VLINK"/>
 </groups>
@@ -8922,22 +8946,7 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <part name="GND20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U$7" library="10118194-0001LF" deviceset="10118194-0001LF" device=""/>
 <part name="GND24" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="IC2" library="MPU-6050" deviceset="MPU-6050" device=""/>
 <part name="U$1" library="STM32F301C8T6" deviceset="STM32F301C8T6_V3" device=""/>
-<part name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="2.2nF"/>
-<part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="100nF"/>
-<part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k"/>
-<part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k"/>
-<part name="+3V3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="+3V4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="10nF"/>
-<part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="100nF"/>
 <part name="U$2" library="SP3071EEN-L" deviceset="SP3071EEN-L" device="" package3d_urn="urn:adsk.eagle:package:43137206/1"/>
 <part name="+3V5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="100nF"/>
@@ -8967,6 +8976,11 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <part name="+3V9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="U$4" library="MPU-6050" deviceset="MPU-6050_MODULE" device="" package3d_urn="urn:adsk.eagle:package:43466589/1"/>
+<part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="U$8" library="4PIN_CON" deviceset="4PIN_CON" device="" package3d_urn="urn:adsk.eagle:package:43493736/1"/>
+<part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="120"/>
 </parts>
 <sheets>
 <sheet>
@@ -9011,61 +9025,9 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <instance part="GND24" gate="1" x="-50.8" y="-17.78" smashed="yes" grouprefs="POWER_SUPPLY">
 <attribute name="VALUE" x="-53.34" y="-20.32" size="1.778" layer="96"/>
 </instance>
-<instance part="IC2" gate="G$1" x="-78.74" y="73.66" smashed="yes" rot="R270" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-73.66" y="44.45" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="-73.66" y="46.99" size="1.778" layer="96" align="center-left"/>
-</instance>
 <instance part="U$1" gate="G$1" x="0" y="0" smashed="yes">
 <attribute name="NAME" x="0" y="-2.54" size="1.778" layer="95"/>
 <attribute name="VALUE" x="0" y="-5.08" size="1.778" layer="96"/>
-</instance>
-<instance part="C1" gate="G$1" x="-58.42" y="50.8" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-56.896" y="51.181" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-56.896" y="46.101" size="1.778" layer="96"/>
-</instance>
-<instance part="GND2" gate="1" x="-58.42" y="43.18" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-60.96" y="40.64" size="1.778" layer="96"/>
-</instance>
-<instance part="GND3" gate="1" x="-78.74" y="35.56" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-81.28" y="33.02" size="1.778" layer="96"/>
-</instance>
-<instance part="+3V2" gate="G$1" x="-99.06" y="43.18" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-101.6" y="43.942" size="1.778" layer="96"/>
-</instance>
-<instance part="C2" gate="G$1" x="-86.36" y="38.1" smashed="yes" rot="R270" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-85.979" y="36.576" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="-91.059" y="36.576" size="1.778" layer="96" rot="R270"/>
-</instance>
-<instance part="R3" gate="G$1" x="-53.34" y="71.12" smashed="yes" rot="R90" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-54.8386" y="67.31" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-50.038" y="67.31" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="R4" gate="G$1" x="-45.72" y="71.12" smashed="yes" rot="R90" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-47.2186" y="67.31" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-42.418" y="67.31" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="+3V3" gate="G$1" x="-48.26" y="78.74" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-50.8" y="79.502" size="1.778" layer="96"/>
-</instance>
-<instance part="GND5" gate="1" x="-58.42" y="66.04" smashed="yes" rot="R90" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-55.88" y="63.5" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="GND6" gate="1" x="-73.66" y="73.66" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-76.2" y="71.12" size="1.778" layer="96"/>
-</instance>
-<instance part="+3V4" gate="G$1" x="-124.46" y="71.12" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-127" y="71.882" size="1.778" layer="96"/>
-</instance>
-<instance part="C3" gate="G$1" x="-124.46" y="60.96" smashed="yes" rot="R180" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-125.984" y="60.579" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-125.984" y="65.659" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="GND7" gate="1" x="-124.46" y="55.88" smashed="yes" grouprefs="GYRO/ACCEL">
-<attribute name="VALUE" x="-127" y="53.34" size="1.778" layer="96"/>
-</instance>
-<instance part="C4" gate="G$1" x="-111.76" y="58.42" smashed="yes" rot="R270" grouprefs="GYRO/ACCEL">
-<attribute name="NAME" x="-111.379" y="56.896" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="-116.459" y="56.896" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="U$2" gate="G$1" x="-137.16" y="106.68" smashed="yes" rot="MR0" grouprefs="MULTIPLAYER_CON">
 <attribute name="NAME" x="-129.54" y="117.348" size="1.778" layer="95" rot="MR0"/>
@@ -9163,6 +9125,24 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <instance part="+3V11" gate="G$1" x="109.22" y="109.22" smashed="yes" rot="R90">
 <attribute name="VALUE" x="108.458" y="109.22" size="1.778" layer="96" rot="R180"/>
 </instance>
+<instance part="U$4" gate="G$1" x="-114.3" y="53.34" smashed="yes">
+<attribute name="NAME" x="-114.3" y="89.662" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-114.3" y="50.8" size="1.778" layer="96"/>
+</instance>
+<instance part="+3V2" gate="G$1" x="-96.52" y="78.74" smashed="yes">
+<attribute name="VALUE" x="-99.06" y="79.502" size="1.778" layer="96"/>
+</instance>
+<instance part="GND2" gate="1" x="-96.52" y="68.58" smashed="yes">
+<attribute name="VALUE" x="-99.06" y="66.04" size="1.778" layer="96"/>
+</instance>
+<instance part="U$8" gate="G$1" x="-175.26" y="96.52" smashed="yes" grouprefs="MULTIPLAYER_CON">
+<attribute name="NAME" x="-175.26" y="117.602" size="1.27" layer="95"/>
+<attribute name="VALUE" x="-175.26" y="93.98" size="1.27" layer="96"/>
+</instance>
+<instance part="R2" gate="G$1" x="-157.48" y="114.3" smashed="yes" rot="R270">
+<attribute name="NAME" x="-155.9814" y="118.11" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="-160.782" y="118.11" size="1.778" layer="96" rot="R270"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -9247,33 +9227,6 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <junction x="-93.98" y="2.54" grouprefs="POWER_SUPPLY"/>
 </segment>
 <segment>
-<pinref part="R4" gate="G$1" pin="2"/>
-<pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="-45.72" y1="76.2" x2="-48.26" y2="76.2" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<pinref part="+3V3" gate="G$1" pin="+3V3"/>
-<wire x1="-48.26" y1="76.2" x2="-53.34" y2="76.2" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<junction x="-48.26" y="76.2" grouprefs="GYRO/ACCEL"/>
-</segment>
-<segment>
-<pinref part="+3V4" gate="G$1" pin="+3V3"/>
-<pinref part="C3" gate="G$1" pin="2"/>
-<wire x1="-124.46" y1="68.58" x2="-124.46" y2="66.04" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<wire x1="-124.46" y1="66.04" x2="-116.84" y2="66.04" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<junction x="-124.46" y="66.04" grouprefs="GYRO/ACCEL"/>
-<wire x1="-116.84" y1="66.04" x2="-116.84" y2="63.5" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<pinref part="IC2" gate="G$1" pin="VLOGIC"/>
-<wire x1="-116.84" y1="63.5" x2="-109.22" y2="63.5" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-</segment>
-<segment>
-<pinref part="C2" gate="G$1" pin="2"/>
-<pinref part="IC2" gate="G$1" pin="VDD"/>
-<wire x1="-91.44" y1="38.1" x2="-91.44" y2="43.18" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<wire x1="-91.44" y1="38.1" x2="-99.06" y2="38.1" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<junction x="-91.44" y="38.1" grouprefs="GYRO/ACCEL"/>
-<pinref part="+3V2" gate="G$1" pin="+3V3"/>
-<wire x1="-99.06" y1="38.1" x2="-99.06" y2="40.64" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-</segment>
-<segment>
 <pinref part="C5" gate="G$1" pin="1"/>
 <pinref part="GND4" gate="1" pin="GND"/>
 <pinref part="C5" gate="G$1" pin="2"/>
@@ -9325,6 +9278,11 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <pinref part="U$6" gate="G$1" pin="LED"/>
 <pinref part="+3V11" gate="G$1" pin="+3V3"/>
 </segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="VCC"/>
+<pinref part="+3V2" gate="G$1" pin="+3V3"/>
+<wire x1="-96.52" y1="76.2" x2="-101.6" y2="76.2" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="GND" class="0">
 <segment>
@@ -9352,41 +9310,6 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <pinref part="U$7" gate="G$1" pin="GND"/>
 <pinref part="GND24" gate="1" pin="GND"/>
 <wire x1="-50.8" y1="-15.24" x2="-50.8" y2="2.54" width="0.1524" layer="91" grouprefs="POWER_SUPPLY"/>
-</segment>
-<segment>
-<pinref part="C1" gate="G$1" pin="2"/>
-<pinref part="GND2" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="IC2" gate="G$1" pin="GND"/>
-<pinref part="GND3" gate="1" pin="GND"/>
-<wire x1="-78.74" y1="38.1" x2="-78.74" y2="43.18" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<pinref part="C2" gate="G$1" pin="1"/>
-<wire x1="-83.82" y1="38.1" x2="-78.74" y2="38.1" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<junction x="-78.74" y="38.1" grouprefs="GYRO/ACCEL"/>
-</segment>
-<segment>
-<pinref part="IC2" gate="G$1" pin="EP"/>
-<pinref part="GND5" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="IC2" gate="G$1" pin="CLKIN"/>
-<wire x1="-78.74" y1="73.66" x2="-78.74" y2="76.2" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<pinref part="GND6" gate="1" pin="GND"/>
-<wire x1="-78.74" y1="76.2" x2="-73.66" y2="76.2" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-</segment>
-<segment>
-<pinref part="C3" gate="G$1" pin="1"/>
-<pinref part="GND7" gate="1" pin="GND"/>
-<pinref part="IC2" gate="G$1" pin="REGOUT"/>
-<pinref part="C4" gate="G$1" pin="2"/>
-<pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="-116.84" y1="58.42" x2="-124.46" y2="58.42" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<junction x="-124.46" y="58.42" grouprefs="GYRO/ACCEL"/>
-<pinref part="IC2" gate="G$1" pin="AD0"/>
-<wire x1="-109.22" y1="60.96" x2="-116.84" y2="60.96" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<wire x1="-116.84" y1="60.96" x2="-116.84" y2="58.42" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<junction x="-116.84" y="58.42" grouprefs="GYRO/ACCEL"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="GND"/>
@@ -9450,6 +9373,11 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <pinref part="U$6" gate="G$1" pin="GND"/>
 <pinref part="GND15" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="GND"/>
+<pinref part="GND2" gate="1" pin="GND"/>
+<wire x1="-96.52" y1="71.12" x2="-101.6" y2="71.12" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$14" class="0">
 <segment>
@@ -9465,39 +9393,6 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <pinref part="U$7" gate="G$1" pin="VCC"/>
 <wire x1="-55.88" y1="2.54" x2="-63.5" y2="2.54" width="0.1524" layer="91" grouprefs="POWER_SUPPLY"/>
 <junction x="-63.5" y="2.54" grouprefs="POWER_SUPPLY"/>
-</segment>
-</net>
-<net name="N$8" class="0">
-<segment>
-<pinref part="C1" gate="G$1" pin="1"/>
-<pinref part="IC2" gate="G$1" pin="CPOUT"/>
-<wire x1="-58.42" y1="53.34" x2="-60.96" y2="53.34" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-</segment>
-</net>
-<net name="N$16" class="0">
-<segment>
-<pinref part="IC2" gate="G$1" pin="SDA"/>
-<wire x1="-60.96" y1="63.5" x2="-45.72" y2="63.5" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<pinref part="R4" gate="G$1" pin="1"/>
-<wire x1="-45.72" y1="66.04" x2="-45.72" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="-45.72" y1="63.5" x2="-12.7" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="-12.7" y1="63.5" x2="-12.7" y2="86.36" width="0.1524" layer="91"/>
-<junction x="-45.72" y="63.5"/>
-<pinref part="U$1" gate="G$1" pin="PF0"/>
-<wire x1="-12.7" y1="86.36" x2="-5.08" y2="86.36" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$17" class="0">
-<segment>
-<pinref part="IC2" gate="G$1" pin="SCL"/>
-<wire x1="-60.96" y1="60.96" x2="-53.34" y2="60.96" width="0.1524" layer="91" grouprefs="GYRO/ACCEL"/>
-<pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="-53.34" y1="66.04" x2="-53.34" y2="60.96" width="0.1524" layer="91"/>
-<junction x="-53.34" y="60.96"/>
-<wire x1="-53.34" y1="60.96" x2="-10.16" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="-10.16" y1="60.96" x2="-10.16" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="PF1"/>
-<wire x1="-10.16" y1="81.28" x2="-5.08" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -9577,6 +9472,56 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <segment>
 <pinref part="U$6" gate="G$1" pin="T_CS"/>
 <wire x1="111.76" y1="124.46" x2="93.98" y2="124.46" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="PF0"/>
+<pinref part="U$4" gate="G$1" pin="SDA"/>
+<wire x1="-5.08" y1="86.36" x2="-101.6" y2="86.36" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$13" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="PF1"/>
+<pinref part="U$4" gate="G$1" pin="SCL"/>
+<wire x1="-5.08" y1="81.28" x2="-101.6" y2="81.28" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$16" class="0">
+<segment>
+<pinref part="U$8" gate="G$1" pin="3"/>
+<pinref part="U$2" gate="G$1" pin="B"/>
+<wire x1="-165.1" y1="109.22" x2="-157.48" y2="109.22" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="-157.48" y1="109.22" x2="-149.86" y2="109.22" width="0.1524" layer="91"/>
+<junction x="-157.48" y="109.22"/>
+</segment>
+</net>
+<net name="N$17" class="0">
+<segment>
+<pinref part="U$8" gate="G$1" pin="2"/>
+<pinref part="U$2" gate="G$1" pin="Z"/>
+<wire x1="-165.1" y1="104.14" x2="-149.86" y2="104.14" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$18" class="0">
+<segment>
+<pinref part="U$8" gate="G$1" pin="1"/>
+<pinref part="U$2" gate="G$1" pin="Y"/>
+<wire x1="-165.1" y1="99.06" x2="-149.86" y2="99.06" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="A"/>
+<wire x1="-149.86" y1="114.3" x2="-149.86" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="-149.86" y1="119.38" x2="-157.48" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="U$8" gate="G$1" pin="4"/>
+<wire x1="-157.48" y1="119.38" x2="-165.1" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-165.1" y1="119.38" x2="-165.1" y2="114.3" width="0.1524" layer="91"/>
+<junction x="-157.48" y="119.38"/>
 </segment>
 </net>
 </nets>
