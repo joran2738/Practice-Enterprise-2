@@ -13,6 +13,8 @@
     int readInput(void);
     void updateScreen(void);
     void playBall(void);
+    void moveBall(void);
+    void changeDirection(directions);
 //Enums
     enum keys { left=1, up, right, down, action};
     enum directions {N, NE, E, SE, S, SW, W, NW, pause};

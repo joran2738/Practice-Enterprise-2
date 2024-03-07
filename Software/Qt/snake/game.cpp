@@ -71,11 +71,12 @@ void updateScreen()
 {
     if (start == 0) {
         for(int i = 0; i < 10; i++) {
-            bricks[i].x = i*5;
+            bricks[i].x = i * 5;
             bricks[i].y = 2;
             bricks[i].visible = 1;
         }
     }
+
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
             game_screen[x][y] = 0xFF00FF00; //Green
@@ -166,14 +167,33 @@ void playBall() {
         }
     }
 
-    if (ball.y == 5) {
+    if (ball.y == 3) {
         for (int i = 0; i < 10; i++) {
             if (bricks[ball.x/5].visible == 1) {
                 bricks[ball.x/5].visible = 0;
+                switch (ball.dir) {
+                    case N:
+                        ball.dir = S;
+                        bricks[ball.x/5].visible = 0;
+                        break;
+                    case NW:
+                        ball.dir = SW;
+                        bricks[ball.x/5].visible = 0;
+                        break;
+                    case NE:
+                        ball.dir = SE;
+                        bricks[ball.x/5].visible = 0;
+                        break;
+                    default:
+                        QD << "You shouldn't be here!";
+                }
             }
         }
     }
+    moveBall();
+}
 
+void moveBall() {
     switch (ball.dir) {
         case N:
             ball.y -= 1;
@@ -203,5 +223,73 @@ void playBall() {
             break;
         default:
             QD << "You shouldn't be here!";
+    }
+}
+
+void changeDirections(directions inDir) {
+    if (inDir == N) {
+        switch (ball.dir) {
+            case N:
+                ball.dir = S;
+                break;
+            case NW:
+                ball.dir = SW;
+                break;
+            case NE:
+                ball.dir = SE;
+                break;
+            case pause:
+                break;
+            default:
+                QD << "You shouldn't be here!";
+        }
+    }
+
+    if (inDir == E) {
+        switch (ball.dir) {
+            case NE:
+                ball.dir = NW;
+                break;
+            case SE:
+                ball.dir = SW;
+                break;
+            case pause:
+                break;
+            default:
+                QD << "You shouldn't be here!";
+        }
+    }
+
+    if (inDir == S) {
+        switch (ball.dir) {
+            case S:
+                ball.dir = N;
+                break;
+            case SE:
+                ball.dir = NE;
+                break;
+            case SW:
+                ball.dir = NW;
+                break;
+            case pause:
+                break;
+            default:
+                QD << "You shouldn't be here!";
+        }
+    }
+
+    if (inDir == W) {
+        switch (ball.dir) {
+            case NW:
+                ball.dir = NE;
+                break;
+            case SW:
+                ball.dir = SE;
+                break;
+            case pause:
+                break;
+            default:
+                QD << "You shouldn't be here!";
+        }
     }
 }
