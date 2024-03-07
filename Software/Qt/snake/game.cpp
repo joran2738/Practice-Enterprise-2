@@ -9,6 +9,9 @@ uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
+static brick bricks[10];
+uint8_t start = 0;
+
 
 void init (void){
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -25,16 +28,24 @@ void loop (void){
         if(person.x < BAR_SIZE/2) {
             person.x = (BAR_SIZE/2);
         }
+        if (ball.dir == pause) {
+            ball.x--;
+        }
     }
     if(key == right){
         person.x++;
         if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
             person.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
         }
+        if (ball.dir == pause) {
+            ball.x++;
+        }
     }
     if(key == action) {
         if (ball.dir == pause) {
             ball.dir = NW;
+            start = 1;
+
         }
     }
     playBall();
@@ -58,6 +69,13 @@ int readInput()
 
 void updateScreen()
 {
+    if (start == 0) {
+        for(int i = 0; i < 10; i++) {
+            bricks[i].x = i*5;
+            bricks[i].y = 2;
+            bricks[i].visible = 1;
+        }
+    }
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
             game_screen[x][y] = 0xFF00FF00; //Green
@@ -68,11 +86,19 @@ void updateScreen()
         for(int y = 0; y < SCREEN_HEIGHT; y++){
             if(x == person.x && y == person.y){
                 for(int i = x - BAR_SIZE/2; i <= x + BAR_SIZE/2; i++) {
-                    game_screen[i][y] = 0xFFFF0000; //red;
+                    game_screen[i][y] = 0xFFFF0000; //red
                 }
             }
             if(x == ball.x && y == ball.y) {
-                game_screen[x][y] = 0xFF0000FF;
+                game_screen[x][y] = 0xFF0000FF; //blue
+            }
+        }
+    }
+
+    for(int i = 0; i < 10; i++) {
+        if(bricks[i].visible == 1) {
+            for(int l = 0; l < 5; l++) {
+                game_screen[bricks[i].x + l][bricks[i].y] = 0xFF000000; //black
             }
         }
     }
@@ -95,7 +121,7 @@ void playBall() {
                 QD << "You shouldn't be here!";
         }
     }
-    if (ball.y == SCREEN_HEIGHT - 5) {
+    if (ball.y == SCREEN_HEIGHT - 6) {
         if (ball.x >= person.x - (BAR_SIZE/2) && ball.x <= person.x + (BAR_SIZE/2)) {
             switch (ball.dir) {
                 case S:
@@ -112,6 +138,7 @@ void playBall() {
             }
         } else {
             ball = {(person.x), SCREEN_HEIGHT - 6, pause};
+            start = 0;
         }
     }
     if (ball.x == 0) {
@@ -136,6 +163,14 @@ void playBall() {
                 break;
             default:
                 QD << "You shouldn't be here!";
+        }
+    }
+
+    if (ball.y == 5) {
+        for (int i = 0; i < 10; i++) {
+            if (bricks[ball.x/5].visible == 1) {
+                bricks[ball.x/5].visible = 0;
+            }
         }
     }
 

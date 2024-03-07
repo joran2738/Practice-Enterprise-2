@@ -3,7 +3,7 @@
 
 //Configs
 #define EVENTSIZE 100
-#define SCREEN_WIDTH 30
+#define SCREEN_WIDTH 50
 #define SCREEN_HEIGHT 40
 #define BAR_SIZE 13
 
@@ -27,4 +27,10 @@
         int y;
         directions dir;
     } ballPoint;
+
+    typedef struct {
+        int x;
+        int y;
+        int visible;
+    } brick;
 #endif // GAME_H
