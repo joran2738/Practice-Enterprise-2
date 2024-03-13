@@ -13,6 +13,7 @@ static brick bricks[5][10];
 uint8_t start = 0;
 
 void changeDirection(directions);
+void baka(void);
 
 void init (void) {
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -23,6 +24,7 @@ void init (void) {
 }
 
 void loop (void) {
+    baka();
     int key = readInput();
     if(key == left) {
         person.x--;
@@ -131,29 +133,34 @@ void playBall() {
         changeDirection(E);
     }
 
-    if (ball.y == 3) {
-        for (int i = 0; i < 10; i++) {
-            if (bricks[3][ball.x/5].visible == 1) {
-                bricks[3][ball.x/5].visible = 0;
-                switch (ball.dir) {
-                    case N:
-                        ball.dir = S;
-                        bricks[3][ball.x/5].visible = 0;
-                        break;
-                    case NW:
-                        ball.dir = SW;
-                        bricks[3][ball.x/5].visible = 0;
-                        break;
-                    case NE:
-                        ball.dir = SE;
-                        bricks[3][ball.x/5].visible = 0;
-                        break;
-                    default:
-                        QD << "You shouldn't be here!";
+
+
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (bricks[i][j].y = 3)
+                if (bricks[3][ball.x/5].visible == 1) {
+                    bricks[3][ball.x/5].visible = 0;
+                    switch (ball.dir) {
+                        case N:
+                            ball.dir = S;
+                            bricks[3][ball.x/5].visible = 0;
+                            break;
+                        case NW:
+                            ball.dir = SW;
+                            bricks[3][ball.x/5].visible = 0;
+                            break;
+                        case NE:
+                            ball.dir = SE;
+                            bricks[3][ball.x/5].visible = 0;
+                            break;
+                        default:
+                            QD << "You shouldn't be here!";
+                    }
                 }
-            }
         }
     }
+
     moveBall();
 }
 
@@ -254,4 +261,8 @@ void changeDirection(directions inDir) {
                 QD << "You shouldn't be here!";
         }
     }
+}
+
+void baka() {
+    QD << "Joran is een baka";
 }
