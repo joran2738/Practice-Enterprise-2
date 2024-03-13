@@ -1,0 +1,4 @@
+Bonus: meerdere balletjes
+Moeilijkheidsgraad increase: kleiner balletje, sneller naar beneden, eventueel balletje sneller
+Special brick
+multiplayer : oftewel pong ma dan echt pong; oftewel rij bij 1 speler weg => rij extra bij tegenspeler.
