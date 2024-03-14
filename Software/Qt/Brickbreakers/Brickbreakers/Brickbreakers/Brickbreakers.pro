@@ -20,6 +20,7 @@ HEADERS += \
     eventfilter.h \
     game.h \
     gamefield.h \
+    ledFont5x8.h \
     mainwindow.h
 
 FORMS += \

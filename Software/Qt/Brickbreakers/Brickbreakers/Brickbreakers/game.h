@@ -6,7 +6,8 @@
 #define SCREEN_WIDTH 50
 #define SCREEN_HEIGHT 40
 #define BAR_SIZE 49
-#define BRICK_LINES 5
+#define BRICK_LINES 10
+#define MAX_BRICK_LINES 33
 
 //Function declaration
 void init (void);

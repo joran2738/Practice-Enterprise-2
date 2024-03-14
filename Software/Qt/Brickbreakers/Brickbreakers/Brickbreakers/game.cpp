@@ -13,9 +13,12 @@ static brick bricks[BRICK_LINES][10];
 uint8_t start = 0;
 uint8_t points = 0;
 uint8_t lives = 3;
+uint8_t delay = 5;
 
 void changeDirection(directions);
 void gameEnd(void);
+void lowerBricks(void);
+void checkGameOver(void);
 
 void init (void) {
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -53,9 +56,20 @@ void loop (void) {
         }
     }
     if (points == BRICK_LINES * 10) {
+        lives = 0;
         gameEnd();
     }
     playBall();
+
+    if (start == 1) {
+        if (delay <= 0) {
+            lowerBricks();
+            delay = 5;
+        } else {
+            delay--;
+        }
+        checkGameOver();
+    }
 
     updateScreen();
 }
@@ -76,11 +90,18 @@ int readInput()
 
 void updateScreen()
 {
+
     if (start == 0) {
-        for (int i = 0; i < BRICK_LINES; i++) {
+        for (int i = 0; i < MAX_BRICK_LINES; i++) {
             for(int j = 0; j < 10; j++) {
                 bricks[i][j].x = j * 5;
                 bricks[i][j].y = i + 2;
+                bricks[i][j].visible = 0;
+            }
+        }
+
+        for (int i = 0; i < BRICK_LINES; i++) {
+            for(int j = 0; j < 10; j++) {
                 bricks[i][j].visible = 1;
             }
         }
@@ -103,13 +124,12 @@ void updateScreen()
                     game_screen[i][y] = 0xFFFF0000; //red
                 }
             }
-            if(x == ball.x && y == ball.y) {
-                game_screen[x][y] = 0xFF0000FF; //blue
-            }
         }
     }
 
-    for (int i = 0; i < BRICK_LINES; i++) {
+    game_screen[ball.x][ball.y] = 0xFF0000FF; //blue
+
+    for (int i = 0; i < MAX_BRICK_LINES; i++) {
         for(int j = 0; j < 10; j++) {
             if(bricks[i][j].visible == 1) {
                 for(int l = 0; l < 5; l++) {
@@ -129,6 +149,7 @@ void playBall() {
         if (ball.x >= person.x - (BAR_SIZE/2) && ball.x <= person.x + (BAR_SIZE/2)) {
             changeDirection(S);
         } else {
+            lives--;
             gameEnd();
         }
     }
@@ -139,9 +160,9 @@ void playBall() {
         changeDirection(E);
     }
 
-    for (int i = 0; i < BRICK_LINES; i++) {
+    for (int i = 0; i < MAX_BRICK_LINES; i++) {
         for (int j = 0; j < 10; j++) {
-            if (ball.y - 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 5) {
+            if (ball.y - 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 4) {
                 if (bricks[i][ball.x/5].visible == 1) {
                     bricks[i][ball.x/5].visible = 0;
                     points += 1;
@@ -150,7 +171,7 @@ void playBall() {
                 }
                 break;
             }
-            if (ball.y + 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 5) {
+            if (ball.y + 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 4) {
                 if (bricks[i][ball.x/5].visible == 1) {
                     bricks[i][ball.x/5].visible = 0;
                     points += 1;
@@ -287,11 +308,28 @@ void changeDirection(directions inDir) {
 void gameEnd() {
     person.x = (SCREEN_WIDTH)/2;
     ball = {(person.x), SCREEN_HEIGHT - 6, pause};
-    lives--;
 
     if (lives <= 0) {
         start = 0;
         points = 0;
         lives = 3;
+    }
+}
+
+void lowerBricks() {
+    for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
+        for (int j = 0; j < 10; j++) {
+            bricks[i + 1][j].visible = bricks[i][j].visible;
+        }
+    }
+}
+
+void checkGameOver() {
+    for (int j = 0; j < 10; j++) {
+        if (bricks[32][j].visible == 1) {
+            lives = 0;
+            gameEnd();
+            QD << "Game Over, noob";
+        }
     }
 }
