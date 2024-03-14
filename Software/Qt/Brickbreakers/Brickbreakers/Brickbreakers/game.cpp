@@ -12,8 +12,10 @@ static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
 static brick bricks[BRICK_LINES][10];
 uint8_t start = 0;
 uint8_t points = 0;
+uint8_t lives = 3;
 
 void changeDirection(directions);
+void gameEnd(void);
 
 void init (void) {
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -51,10 +53,7 @@ void loop (void) {
         }
     }
     if (points == BRICK_LINES * 10) {
-        person.x = (SCREEN_WIDTH)/2;
-        ball = {(person.x), SCREEN_HEIGHT - 6, pause};
-        start = 0;
-        points = 0;
+        gameEnd();
     }
     playBall();
 
@@ -93,6 +92,10 @@ void updateScreen()
         }
     }
 
+    for (int i = 0; i < lives; i++) {
+        game_screen[2 + (i*2)][0] = 0xFF0000FF; //blue
+    }
+
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
             if(x == person.x && y == person.y){
@@ -126,9 +129,7 @@ void playBall() {
         if (ball.x >= person.x - (BAR_SIZE/2) && ball.x <= person.x + (BAR_SIZE/2)) {
             changeDirection(S);
         } else {
-            person.x = (SCREEN_WIDTH)/2;
-            ball = {(person.x), SCREEN_HEIGHT - 6, pause};
-            start = 0;
+            gameEnd();
         }
     }
     if (ball.x == 0) {
@@ -280,5 +281,17 @@ void changeDirection(directions inDir) {
         default:
             QD << "You shouldn't be here!";
         }
+    }
+}
+
+void gameEnd() {
+    person.x = (SCREEN_WIDTH)/2;
+    ball = {(person.x), SCREEN_HEIGHT - 6, pause};
+    lives--;
+
+    if (lives <= 0) {
+        start = 0;
+        points = 0;
+        lives = 3;
     }
 }
