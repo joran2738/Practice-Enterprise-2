@@ -5,7 +5,8 @@
 #define EVENTSIZE 100
 #define SCREEN_WIDTH 50
 #define SCREEN_HEIGHT 40
-#define BAR_SIZE 13
+#define BAR_SIZE 49
+#define BRICK_LINES 5
 
 //Function declaration
 void init (void);

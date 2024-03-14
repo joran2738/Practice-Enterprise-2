@@ -9,11 +9,11 @@ uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
-static brick bricks[5][10];
+static brick bricks[BRICK_LINES][10];
 uint8_t start = 0;
+uint8_t points = 0;
 
 void changeDirection(directions);
-void baka(void);
 
 void init (void) {
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -24,7 +24,6 @@ void init (void) {
 }
 
 void loop (void) {
-    baka();
     int key = readInput();
     if(key == left) {
         person.x--;
@@ -51,6 +50,12 @@ void loop (void) {
 
         }
     }
+    if (points == BRICK_LINES * 10) {
+        person.x = (SCREEN_WIDTH)/2;
+        ball = {(person.x), SCREEN_HEIGHT - 6, pause};
+        start = 0;
+        points = 0;
+    }
     playBall();
 
     updateScreen();
@@ -73,7 +78,7 @@ int readInput()
 void updateScreen()
 {
     if (start == 0) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < BRICK_LINES; i++) {
             for(int j = 0; j < 10; j++) {
                 bricks[i][j].x = j * 5;
                 bricks[i][j].y = i + 2;
@@ -101,7 +106,7 @@ void updateScreen()
         }
     }
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < BRICK_LINES; i++) {
         for(int j = 0; j < 10; j++) {
             if(bricks[i][j].visible == 1) {
                 for(int l = 0; l < 5; l++) {
@@ -133,31 +138,46 @@ void playBall() {
         changeDirection(E);
     }
 
-
-
-
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < BRICK_LINES; i++) {
         for (int j = 0; j < 10; j++) {
-            if (bricks[i][j].y == 3)
-                if (bricks[3][ball.x/5].visible == 1) {
-                    bricks[3][ball.x/5].visible = 0;
-                    switch (ball.dir) {
-                    case N:
-                        ball.dir = S;
-                        bricks[3][ball.x/5].visible = 0;
-                        break;
-                    case NW:
-                        ball.dir = SW;
-                        bricks[3][ball.x/5].visible = 0;
-                        break;
-                    case NE:
-                        ball.dir = SE;
-                        bricks[3][ball.x/5].visible = 0;
-                        break;
-                    default:
-                        QD << "You shouldn't be here!";
-                    }
+            if (ball.y - 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 5) {
+                if (bricks[i][ball.x/5].visible == 1) {
+                    bricks[i][ball.x/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+                    changeDirection(N);
                 }
+                break;
+            }
+            if (ball.y + 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 5) {
+                if (bricks[i][ball.x/5].visible == 1) {
+                    bricks[i][ball.x/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+                    changeDirection(S);
+                }
+                break;
+            }
+
+            if (ball.x == bricks[i][j].x - 1 && ball.y == bricks[i][j].y) {
+                if (bricks[i][ball.x/5].visible == 1) {
+                    bricks[i][ball.x/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+                    changeDirection(E);
+                }
+                break;
+            }
+
+            if (ball.x == bricks[i][j].x + 5 && ball.y == bricks[i][j].y) {
+                if (bricks[i][ball.x/5].visible == 1) {
+                    bricks[i][ball.x/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+                    changeDirection(W);
+                }
+                break;
+            }
         }
     }
 
@@ -261,8 +281,4 @@ void changeDirection(directions inDir) {
             QD << "You shouldn't be here!";
         }
     }
-}
-
-void baka() {
-    QD << "Joran is een baka";
 }
