@@ -1,5 +1,3 @@
-//This code is meant to be plain c code so it can be used on an STM32 microcontroller.
-
 #include <stdint.h>
 #include "debug.h"
 #include "game.h"
@@ -322,11 +320,11 @@ void gameEnd() {
 }
 
 void lowerBricks() {
-    for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
-        for (int j = 0; j < 10; j++) {
-            bricks[i + 1][j].visible = bricks[i][j].visible;
-        }
-    }
+    // for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
+    //     for (int j = 0; j < 10; j++) {
+    //         bricks[i + 1][j].visible = bricks[i][j].visible;
+    //     }
+    // }
 }
 
 void checkGameOver() {
@@ -342,9 +340,10 @@ void checkGameOver() {
 
 void displayScore() {
     char str[12];
-    snprintf(str, 12, "%u", points);
     unsigned char buffer;
     int bit;
+
+    snprintf(str, 12, "%u", points);
     uint8_t textCursor = 1;
 
     for (int i = 0; str[i] != '\0'; i++) {
@@ -365,28 +364,5 @@ void displayScore() {
             textCursor++;
         }
         textCursor++;
-
     }
-
 }
-
-// void TextImage::convertToPixels()
-// {
-//     qreal rotation = m_rotation<0 ? 360.0+m_rotation : m_rotation;
-
-//     int startbar = 200.0 / 360.0 * rotation;
-
-//     m_textbuffer.clear();
-//     m_textbuffer.resize(200,0); //(200 led bars) Change this if the #bars changes in the gui
-//     for(int j=0; j<m_text.length(); j++){
-//         //foreach (QChar wc, m_text) {
-//         //unsigned char c = wc.toLatin1();
-//         unsigned char c = m_text.at(j).toLatin1();
-//         c = c - ' ';
-//         for(int i = 0; i < 5; i++){
-//             m_textbuffer[(startbar++)%200] = ledFont[c][i];
-//         }
-//         m_textbuffer[(startbar++)%200] = 0x00; //spatie tussen de letters.
-//     }
-//     emit textChanged();
-// }
