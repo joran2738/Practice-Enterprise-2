@@ -8,10 +8,12 @@ uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
 static brick bricks[MAX_BRICK_LINES][10];
+static point score = {1, 9};
+static point highScorePoint = {1, 0};
 uint8_t start = 0;
 uint8_t points = 0;
 uint8_t lives = 3;
-uint8_t delay = 5;
+uint8_t delay = BRICK_SPEED;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
 
@@ -23,7 +25,7 @@ void checkGameOver(void);
 void init (void) {
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
-            game_screen[x][y] = 0xFF00FF00; //Green
+            game_screen[x][y] = GREEN;
         }
     }
 }
@@ -61,10 +63,10 @@ void loop (void) {
     }
     playBall();
 
-    if (start == 1) {
+    if (start == 1 && ball.dir != pause) {
         if (delay <= 0) {
             lowerBricks();
-            delay = 5;
+            delay = BRICK_SPEED;
         } else {
             delay--;
         }
@@ -108,31 +110,31 @@ void updateScreen()
 
     for(int x = 0; x < SCREEN_WIDTH; x++) {
         for(int y = 0; y < SCREEN_HEIGHT; y++) {
-            game_screen[x][y] = 0xFF00FF00; //Green
+            game_screen[x][y] = GREEN;
         }
     }
 
     for (int i = 0; i < lives; i++) {
-        game_screen[48 - (i*2)][0] = 0xFF0000FF; //blue
+        game_screen[48 - (i*2)][0] = BLUE;
     }
 
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
             if(x == person.x && y == person.y){
                 for(int i = x - BAR_SIZE/2; i <= x + BAR_SIZE/2; i++) {
-                    game_screen[i][y] = 0xFFFF0000; //red
+                    game_screen[i][y] = RED;
                 }
             }
         }
     }
 
-    game_screen[ball.x][ball.y] = 0xFF0000FF; //blue
+    game_screen[ball.x][ball.y] = BLUE;
 
     for (int i = 0; i < MAX_BRICK_LINES; i++) {
         for(int j = 0; j < 10; j++) {
             if(bricks[i][j].visible == 1) {
                 for(int l = 0; l < 5; l++) {
-                    game_screen[bricks[i][j].x + l][bricks[i][j].y] = 0xFF000000; //black
+                    game_screen[bricks[i][j].x + l][bricks[i][j].y] = BLACK;
                 }
             }
         }
@@ -140,9 +142,9 @@ void updateScreen()
 
     char str[12];
     snprintf(str, 12, "%u", points);
-    displayText(str, 1, 9, 0xFFFFFFFF);
+    displayText(str, score.x, score.y, WHITE);
     snprintf(str, 12, "%u", highScore);
-    displayText(str, 1, 0, 0xFFFFFFFF);
+    displayText(str, highScorePoint.x, highScorePoint.y, WHITE);
 }
 
 void playBall() {
@@ -312,12 +314,13 @@ void changeDirection(directions inDir) {
 void gameEnd() {
     person.x = (SCREEN_WIDTH)/2;
     ball = {(person.x), SCREEN_HEIGHT - 6, pause};
-    if (points > highScore) {
-        highScore = points;
-        QD << highScore;
-    }
 
     if (lives <= 0) {
+        if (points > highScore) {
+            highScore = points;
+            QD << highScore;
+        }
+
         start = 0;
         points = 0;
         lives = 3;
