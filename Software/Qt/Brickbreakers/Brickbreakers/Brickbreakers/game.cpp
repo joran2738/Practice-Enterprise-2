@@ -3,17 +3,20 @@
 #include <stdint.h>
 #include "debug.h"
 #include "game.h"
+#include "ledFont5x8.h"
 
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
-static brick bricks[BRICK_LINES][10];
+static brick bricks[MAX_BRICK_LINES][10];
 uint8_t start = 0;
 uint8_t points = 0;
 uint8_t lives = 3;
 uint8_t delay = 5;
+uint8_t highScore = 0;
+uint8_t loopTester = 0;
 
 void changeDirection(directions);
 void gameEnd(void);
@@ -90,12 +93,11 @@ int readInput()
 
 void updateScreen()
 {
-
     if (start == 0) {
         for (int i = 0; i < MAX_BRICK_LINES; i++) {
             for(int j = 0; j < 10; j++) {
                 bricks[i][j].x = j * 5;
-                bricks[i][j].y = i + 2;
+                bricks[i][j].y = i + 8;
                 bricks[i][j].visible = 0;
             }
         }
@@ -114,7 +116,7 @@ void updateScreen()
     }
 
     for (int i = 0; i < lives; i++) {
-        game_screen[2 + (i*2)][0] = 0xFF0000FF; //blue
+        game_screen[48 - (i*2)][0] = 0xFF0000FF; //blue
     }
 
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -138,7 +140,7 @@ void updateScreen()
             }
         }
     }
-
+    displayScore();
 }
 
 void playBall() {
@@ -313,6 +315,9 @@ void gameEnd() {
         start = 0;
         points = 0;
         lives = 3;
+        if (points > highScore) {
+            highScore = points;
+        }
     }
 }
 
@@ -328,8 +333,60 @@ void checkGameOver() {
     for (int j = 0; j < 10; j++) {
         if (bricks[32][j].visible == 1) {
             lives = 0;
+            ball = {(person.x), SCREEN_HEIGHT - 6, pause};
             gameEnd();
             QD << "Game Over, noob";
         }
     }
 }
+
+void displayScore() {
+    char str[12];
+    snprintf(str, 12, "%u", points);
+    unsigned char buffer;
+    int bit;
+    uint8_t textCursor = 1;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        unsigned char c = str[i];
+        c = c - ' ';
+        QD << c;
+
+        for (int j = 0; j < 5; j++) {
+            buffer = ledFont[c][j];
+
+            for (int k = 0; k < 8; k++) {
+                bit = (buffer >> k) & 1;
+                QD << bit;
+                if (bit == 1) {
+                    game_screen[textCursor][k + 1] = 0xFF000000; //black
+                }
+            }
+            textCursor++;
+        }
+        textCursor++;
+
+    }
+
+}
+
+// void TextImage::convertToPixels()
+// {
+//     qreal rotation = m_rotation<0 ? 360.0+m_rotation : m_rotation;
+
+//     int startbar = 200.0 / 360.0 * rotation;
+
+//     m_textbuffer.clear();
+//     m_textbuffer.resize(200,0); //(200 led bars) Change this if the #bars changes in the gui
+//     for(int j=0; j<m_text.length(); j++){
+//         //foreach (QChar wc, m_text) {
+//         //unsigned char c = wc.toLatin1();
+//         unsigned char c = m_text.at(j).toLatin1();
+//         c = c - ' ';
+//         for(int i = 0; i < 5; i++){
+//             m_textbuffer[(startbar++)%200] = ledFont[c][i];
+//         }
+//         m_textbuffer[(startbar++)%200] = 0x00; //spatie tussen de letters.
+//     }
+//     emit textChanged();
+// }

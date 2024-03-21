@@ -4,7 +4,7 @@
 //Configs
 #define EVENTSIZE 100
 #define SCREEN_WIDTH 50
-#define SCREEN_HEIGHT 40
+#define SCREEN_HEIGHT 50
 #define BAR_SIZE 49
 #define BRICK_LINES 10
 #define MAX_BRICK_LINES 33
@@ -16,6 +16,7 @@ int readInput(void);
 void updateScreen(void);
 void playBall(void);
 void moveBall(void);
+void displayScore(void);
 
 //Enums
 enum keys { left=1, up, right, down, action};
