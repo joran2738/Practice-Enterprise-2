@@ -1,7 +1,6 @@
-#include <stdint.h>
 #include "debug.h"
 #include "game.h"
-#include "ledFont5x8.h"
+#include "displayText.h"
 
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
@@ -138,7 +137,12 @@ void updateScreen()
             }
         }
     }
-    displayScore();
+
+    char str[12];
+    snprintf(str, 12, "%u", points);
+    displayText(str, 1, 9, 0xFFFFFFFF);
+    snprintf(str, 12, "%u", highScore);
+    displayText(str, 1, 0, 0xFFFFFFFF);
 }
 
 void playBall() {
@@ -308,28 +312,29 @@ void changeDirection(directions inDir) {
 void gameEnd() {
     person.x = (SCREEN_WIDTH)/2;
     ball = {(person.x), SCREEN_HEIGHT - 6, pause};
+    if (points > highScore) {
+        highScore = points;
+        QD << highScore;
+    }
 
     if (lives <= 0) {
         start = 0;
         points = 0;
         lives = 3;
-        if (points > highScore) {
-            highScore = points;
-        }
     }
 }
 
 void lowerBricks() {
-    // for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
-    //     for (int j = 0; j < 10; j++) {
-    //         bricks[i + 1][j].visible = bricks[i][j].visible;
-    //     }
-    // }
+    for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
+        for (int j = 0; j < 10; j++) {
+            bricks[i + 1][j].visible = bricks[i][j].visible;
+        }
+    }
 }
 
 void checkGameOver() {
     for (int j = 0; j < 10; j++) {
-        if (bricks[32][j].visible == 1) {
+        if (bricks[MAX_BRICK_LINES - 1][j].visible == 1) {
             lives = 0;
             ball = {(person.x), SCREEN_HEIGHT - 6, pause};
             gameEnd();
@@ -338,27 +343,23 @@ void checkGameOver() {
     }
 }
 
-void displayScore() {
-    char str[12];
+void displayText(char* text, int x, int y, uint32_t color) {
+
     unsigned char buffer;
     int bit;
+    uint8_t textCursor = x;
 
-    snprintf(str, 12, "%u", points);
-    uint8_t textCursor = 1;
-
-    for (int i = 0; str[i] != '\0'; i++) {
-        unsigned char c = str[i];
+    for (int i = 0; text[i] != '\0'; i++) {
+        unsigned char c = text[i];
         c = c - ' ';
-        QD << c;
 
         for (int j = 0; j < 5; j++) {
             buffer = ledFont[c][j];
 
             for (int k = 0; k < 8; k++) {
                 bit = (buffer >> k) & 1;
-                QD << bit;
                 if (bit == 1) {
-                    game_screen[textCursor][k + 1] = 0xFF000000; //black
+                    game_screen[textCursor][y + k + 1] = color; //black
                 }
             }
             textCursor++;
