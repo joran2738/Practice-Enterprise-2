@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "ledFont5x8.h"
+#include "game.h"
 
 #define RED 0xFFFF0000
 #define GREEN 0xFF00FF00
@@ -14,6 +15,6 @@
 #define LIGHT_GREEN 0xFF02FA3C
 #define WHITE 0xFFFFFFFF
 
-void displayText(char*, int, int, uint32_t);
+void displayText(uint32_t[][SCREEN_HEIGHT], char*, int, int, uint32_t);
 
 #endif // DISPLAYTEXT_H
