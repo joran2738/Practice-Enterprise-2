@@ -21,6 +21,7 @@ void changeDirection(directions);
 void gameEnd(void);
 void lowerBricks(void);
 void checkGameOver(void);
+void checkBrickHit(void);
 
 void init (void) {
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -166,49 +167,7 @@ void playBall() {
         changeDirection(E);
     }
 
-    for (int i = 0; i < MAX_BRICK_LINES; i++) {
-        for (int j = 0; j < 10; j++) {
-            if (ball.y - 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 4) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(N);
-                }
-                break;
-            }
-            if (ball.y + 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 4) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(S);
-                }
-                break;
-            }
-
-            if (ball.x == bricks[i][j].x - 1 && ball.y == bricks[i][j].y) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(E);
-                }
-                break;
-            }
-
-            if (ball.x == bricks[i][j].x + 5 && ball.y == bricks[i][j].y) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(W);
-                }
-                break;
-            }
-        }
-    }
-
+    checkBrickHit();
     moveBall();
 }
 
@@ -346,3 +305,95 @@ void checkGameOver() {
     }
 }
 
+void checkBrickHit() {
+switch (ball.dir) {
+    case NW :
+        if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
+            bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            ball.dir = SW;
+        }
+        if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
+            bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            if (ball.dir == NW) {
+                ball.dir = NE;
+            }
+            if (ball.dir == SW) {
+                ball.dir = SE;
+            }
+        }
+        break;
+    case NE:
+        if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
+            bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            ball.dir = SE;
+        }
+        if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
+            bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            if (ball.dir == NE) {
+                ball.dir = NW;
+            }
+            if (ball.dir == SE) {
+                ball.dir = SW;
+            }
+        }
+        break;
+    case SE:
+        if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
+            bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            ball.dir = NE;
+        }
+        if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
+            bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            if (ball.dir == SE) {
+                ball.dir = SW;
+            }
+            if (ball.dir == NE) {
+                ball.dir = NW;
+            }
+        }
+        break;
+    case SW:
+        if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
+            bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            ball.dir = NW;
+        }
+        if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
+            bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
+            points += 1;
+            QD << "score:" << points;
+
+            if (ball.dir == SW) {
+                ball.dir = SE;
+            }
+            if (ball.dir == NW) {
+                ball.dir = NE;
+            }
+        }
+        break;
+    case pause:
+        break;
+    default:
+        QD << "You shouldn't be here";
+    }
+}
