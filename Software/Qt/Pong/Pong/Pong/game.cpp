@@ -6,7 +6,7 @@ uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
-static point bot = {SCREEN_WIDTH/2, 5};
+static point bot = {SCREEN_WIDTH/2, 4};
 static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
 static point score = {1, 9};
 static point highScorePoint = {1, 0};
@@ -15,6 +15,7 @@ uint8_t points = 0;
 uint8_t lives = 3;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
+uint8_t delay = 5;
 
 void changeDirection(directions);
 void gameEnd(void);
@@ -58,6 +59,17 @@ void loop (void) {
     playBall();
 
     if (start == 1 && ball.dir != pause) {
+        if (delay <= 0) {
+            if (ball.x < bot.x) {
+                bot.x--;
+            }
+            if (ball.x > bot.x) {
+                bot.x++;
+            }
+            delay = 5;
+        } else {
+            delay--;
+        }
         checkGameOver();
     }
 
@@ -115,8 +127,13 @@ void updateScreen()
 }
 
 void playBall() {
-    if (ball.y == 0) {
-        changeDirection(N);
+    if (ball.y == 5) {
+        if (ball.x >= bot.x - (BAR_SIZE/2) && ball.x <= bot.x + (BAR_SIZE/2)) {
+            changeDirection(N);
+        } else {
+            lives--;
+            gameEnd();
+        }
     }
     if (ball.y == SCREEN_HEIGHT - 6) {
         if (ball.x >= person.x - (BAR_SIZE/2) && ball.x <= person.x + (BAR_SIZE/2)) {
