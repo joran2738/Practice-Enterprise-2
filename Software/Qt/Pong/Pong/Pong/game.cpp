@@ -15,7 +15,7 @@ uint8_t points = 0;
 uint8_t lives = 3;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
-uint8_t delay = 5;
+uint8_t delay = 1;
 
 void changeDirection(directions);
 void gameEnd(void);
@@ -56,19 +56,30 @@ void loop (void) {
 
         }
     }
-    playBall();
+    if (delay <= 0) {
+        playBall();
+        delay = 1;
+    } else {
+        delay--;
+    }
+
 
     if (start == 1 && ball.dir != pause) {
-        if (delay <= 0) {
-            if (ball.x < bot.x) {
+        if (ball.x < bot.x + BAR_SIZE/4) {
+            if (ball.dir == NW || ball.dir == SW) {
                 bot.x--;
+                if(bot.x < BAR_SIZE/2) {
+                    bot.x = (BAR_SIZE/2);
+                }
             }
-            if (ball.x > bot.x) {
+        }
+        if (ball.x > bot.x - BAR_SIZE/4) {
+            if (ball.dir == NE || ball.dir == SE) {
                 bot.x++;
+                if(bot.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
+                    bot.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
+                }
             }
-            delay = 5;
-        } else {
-            delay--;
         }
         checkGameOver();
     }
@@ -104,12 +115,12 @@ void updateScreen()
 
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
-            if(x == person.x && y == person.y){
+            if(x == bot.x && y == bot.y){
                 for(int i = x - BAR_SIZE/2; i <= x + BAR_SIZE/2; i++) {
                     game_screen[i][y] = RED;
                 }
             }
-            if(x == bot.x && y == bot.y){
+            if(x == person.x && y == person.y){
                 for(int i = x - BAR_SIZE/2; i <= x + BAR_SIZE/2; i++) {
                     game_screen[i][y] = RED;
                 }
