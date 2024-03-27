@@ -8,7 +8,6 @@ uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 static point bot = {SCREEN_WIDTH/2, 5};
 static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
-static brick bricks[MAX_BRICK_LINES][10];
 static point score = {1, 9};
 static point highScorePoint = {1, 0};
 uint8_t start = 0;
@@ -20,7 +19,6 @@ uint8_t loopTester = 0;
 
 void changeDirection(directions);
 void gameEnd(void);
-void lowerBricks(void);
 void checkGameOver(void);
 
 void init (void) {
@@ -65,12 +63,6 @@ void loop (void) {
     playBall();
 
     if (start == 1 && ball.dir != pause) {
-        if (delay <= 0) {
-            lowerBricks();
-            delay = BRICK_SPEED;
-        } else {
-            delay--;
-        }
         checkGameOver();
     }
 
@@ -120,16 +112,6 @@ void updateScreen()
 
     game_screen[ball.x][ball.y] = BLUE;
 
-    for (int i = 0; i < MAX_BRICK_LINES; i++) {
-        for(int j = 0; j < 10; j++) {
-            if(bricks[i][j].visible == 1) {
-                for(int l = 0; l < 5; l++) {
-                    game_screen[bricks[i][j].x + l][bricks[i][j].y] = BLACK;
-                }
-            }
-        }
-    }
-
     char str[12];
     snprintf(str, 12, "%u", points);
     displayText(game_screen, str, score.x, score.y, WHITE);
@@ -154,49 +136,6 @@ void playBall() {
     }
     if (ball.x == SCREEN_WIDTH - 1) {
         changeDirection(E);
-    }
-
-    for (int i = 0; i < MAX_BRICK_LINES; i++) {
-        for (int j = 0; j < 10; j++) {
-            if (ball.y - 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 4) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(N);
-                }
-                break;
-            }
-            if (ball.y + 1 == bricks[i][j].y && ball.x >= bricks[i][j].x && ball.x < bricks[i][j].x + 4) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(S);
-                }
-                break;
-            }
-
-            if (ball.x == bricks[i][j].x - 1 && ball.y == bricks[i][j].y) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(E);
-                }
-                break;
-            }
-
-            if (ball.x == bricks[i][j].x + 5 && ball.y == bricks[i][j].y) {
-                if (bricks[i][ball.x/5].visible == 1) {
-                    bricks[i][ball.x/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
-                    changeDirection(W);
-                }
-                break;
-            }
-        }
     }
 
     moveBall();
@@ -317,22 +256,7 @@ void gameEnd() {
     }
 }
 
-void lowerBricks() {
-    for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
-        for (int j = 0; j < 10; j++) {
-            bricks[i + 1][j].visible = bricks[i][j].visible;
-        }
-    }
-}
-
 void checkGameOver() {
-    for (int j = 0; j < 10; j++) {
-        if (bricks[MAX_BRICK_LINES - 1][j].visible == 1) {
-            lives = 0;
-            ball = {(person.x), SCREEN_HEIGHT - 6, pause};
-            gameEnd();
-            QD << "Game Over, noob";
-        }
-    }
+
 }
 
