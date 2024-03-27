@@ -8,7 +8,7 @@
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
-static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2};
+static snake person = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2, pause};
 
 void init (void){
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -22,19 +22,19 @@ void loop (void){
     int key = readInput();
     if(key == left){
         person.x--;
-        if(person.x < 0) person.x = 0;
+        if(person.x < 0) person.x = SCREEN_WIDTH - 1;
     }
     if(key == up){
         person.y--;
-        if(person.y < 0) person.y = 0;
+        if(person.y < 0) person.y = SCREEN_HEIGHT - 1;
     }
     if(key == right){
         person.x++;
-        if(person.x > 255) person.x = 255;
+        if(person.x >= SCREEN_WIDTH) person.x = 0;
     }
     if(key == down){
         person.y++;
-        if(person.y > 255) person.y = 255;
+        if(person.y >= SCREEN_HEIGHT) person.y = 0;
     }
     updateScreen();
 }
