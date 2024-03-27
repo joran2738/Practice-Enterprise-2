@@ -8,9 +8,6 @@
 #define SCREEN_WIDTH 50
 #define SCREEN_HEIGHT 50
 #define BAR_SIZE 20
-#define BRICK_LINES 10
-#define MAX_BRICK_LINES 38
-#define BRICK_SPEED 50
 
 //Function declaration
 void init (void);
@@ -35,9 +32,4 @@ typedef struct {
     directions dir;
 } ballPoint;
 
-typedef struct {
-    int x;
-    int y;
-    int visible;
-} brick;
 #endif // GAME_H

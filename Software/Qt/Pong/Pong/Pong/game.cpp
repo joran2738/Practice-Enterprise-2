@@ -13,7 +13,6 @@ static point highScorePoint = {1, 0};
 uint8_t start = 0;
 uint8_t points = 0;
 uint8_t lives = 3;
-uint8_t delay = BRICK_SPEED;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
 
@@ -55,10 +54,6 @@ void loop (void) {
             start = 1;
 
         }
-    }
-    if (points == BRICK_LINES * 10) {
-        lives = 0;
-        gameEnd();
     }
     playBall();
 
