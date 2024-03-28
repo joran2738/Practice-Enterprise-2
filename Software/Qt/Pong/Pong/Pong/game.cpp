@@ -67,7 +67,7 @@ void loop (void) {
     if (start == 1 && ball.dir != pause) {
         if (barDelay <= 0) {
             if (ball.dir == NW || ball.dir == NE || ball.dir == N) {
-                if (ball.y <= SCREEN_HEIGHT/3) {
+                if (ball.y <= SCREEN_HEIGHT/2) {
                     if (ball.x < bot.x - BAR_SIZE/4) {
                         bot.x--;
                         if(bot.x < BAR_SIZE/2) {

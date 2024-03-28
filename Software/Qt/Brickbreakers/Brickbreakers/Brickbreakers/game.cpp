@@ -114,7 +114,7 @@ void updateScreen()
         for (int i = 0; i < BRICK_LINES; i++) {
             for(int j = 0; j < 10; j++) {
                 bricks[i][j].visible = 1;
-                bricks[i][j].toughness = rand() % (2) + 1;
+                bricks[i][j].toughness = rand() % (3) + 1;
             }
         }
     }
@@ -344,6 +344,10 @@ void lowerBricks() {
             bricks[i + 1][j].visible = bricks[i][j].visible;
             bricks[i + 1][j].toughness = bricks[i][j].toughness;
         }
+    }
+    for(int j = 0; j < 10; j++) {
+        bricks[0][j].visible = 1;
+        bricks[0][j].toughness = rand() % (2) + 1;
     }
 }
 
