@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include "debug.h"
 #include "game.h"
 #include "displayText.h"
@@ -16,19 +17,21 @@ uint8_t lives = 3;
 uint8_t delay = BRICK_SPEED;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
+uint8_t guardian = 0;
+uint8_t guardianTimer = 100;
 
 void changeDirection(directions);
 void gameEnd(void);
 void lowerBricks(void);
 void checkGameOver(void);
 void checkBrickHit(void);
+void dropPowerUp(int, int);
 
 void init (void) {
-    for(int x = 0; x < SCREEN_WIDTH; x++){
-        for(int y = 0; y < SCREEN_HEIGHT; y++){
-            game_screen[x][y] = GREEN;
-        }
-    }
+    person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
+    ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
+
+    updateScreen();
 }
 
 void loop (void) {
@@ -71,6 +74,14 @@ void loop (void) {
         checkGameOver();
     }
 
+    if (guardian == 1) {
+        if (guardianTimer <= 0) {
+            guardian = 0;
+            guardianTimer = 100;
+        } else {
+            guardianTimer--;
+        }
+    }
     updateScreen();
 }
 
@@ -114,6 +125,12 @@ void updateScreen()
 
     for (int i = 0; i < lives; i++) {
         game_screen[48 - (i*2)][0] = BLUE;
+    }
+
+    if (guardian == 1) {
+        for (int x = 0; x < SCREEN_WIDTH; x++) {
+            game_screen[x][person.y - 1] = GRAY;
+        }
     }
 
     for(int x = 0; x < SCREEN_WIDTH; x++){
@@ -180,6 +197,12 @@ void playBall() {
     }
     if (ball.x == SCREEN_WIDTH - 1) {
         changeDirection(E);
+    }
+
+    if (guardian == 1) {
+        if (ball.y == person.y - 2) {
+            changeDirection(S);
+        }
     }
 
     checkBrickHit();
@@ -330,6 +353,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y - 1 - 8, ball.x/5);
                 ball.dir = SW;
             }
             if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
@@ -338,6 +362,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y - 8, (ball.x - 1)/5);
                 if (ball.dir == NW) {
                     ball.dir = NE;
                 }
@@ -351,6 +376,7 @@ void checkBrickHit() {
                     points += 1;
                     QD << "score:" << points;
 
+                    dropPowerUp(ball.y - 1 - 8, (ball.x - 1)/5);
                     ball.dir = SE;
                 }
             }
@@ -362,6 +388,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y - 1 - 8, ball.x/5);
                 ball.dir = SE;
             }
             if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
@@ -370,6 +397,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y - 8, (ball.x + 1)/5);
                 if (ball.dir == NE) {
                     ball.dir = NW;
                 }
@@ -383,6 +411,7 @@ void checkBrickHit() {
                     points += 1;
                     QD << "score:" << points;
 
+                    dropPowerUp(ball.y - 1 - 8, (ball.x + 1)/5);
                     ball.dir = SW;
                 }
             }
@@ -394,6 +423,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y + 1 - 8, ball.x/5);
                 ball.dir = NE;
             }
             if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
@@ -402,6 +432,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y - 8, (ball.x + 1)/5);
                 if (ball.dir == SE) {
                     ball.dir = SW;
                 }
@@ -415,6 +446,7 @@ void checkBrickHit() {
                     points += 1;
                     QD << "score:" << points;
 
+                    dropPowerUp(ball.y + 1 - 8, (ball.x + 1)/5);
                     ball.dir = NW;
                 }
             }
@@ -426,6 +458,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y + 1 - 8, ball.x/5);
                 ball.dir = NW;
             }
             if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
@@ -434,6 +467,7 @@ void checkBrickHit() {
                 points++;
                 QD << "score:" << points;
 
+                dropPowerUp(ball.y - 8, (ball.x - 1)/5);
                 if (ball.dir == SW) {
                     ball.dir = SE;
                 }
@@ -447,6 +481,7 @@ void checkBrickHit() {
                     points += 1;
                     QD << "score:" << points;
 
+                    dropPowerUp(ball.y + 1 - 8, (ball.x - 1)/5);
                     ball.dir = NE;
                 }
             }
@@ -455,5 +490,18 @@ void checkBrickHit() {
             break;
         default:
             QD << "You shouldn't be here";
-        }
+    }
+}
+
+void dropPowerUp(int x, int y) {
+    uint8_t dropChance = 0;
+    if (guardian == 0) {
+        srand(static_cast<quint64>(QDateTime::currentMSecsSinceEpoch()));
+        dropChance = rand() % 100;
+    }
+
+    if (dropChance <= 10 && dropChance > 0) {
+        guardian = 1;
+        QD << "A power up just dropped from brick at x =" << x << "y =" << y;
+    }
 }
