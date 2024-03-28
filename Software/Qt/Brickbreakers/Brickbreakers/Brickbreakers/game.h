@@ -7,10 +7,10 @@
 #define EVENTSIZE 100
 #define SCREEN_WIDTH 50
 #define SCREEN_HEIGHT 50
-#define BAR_SIZE 49
+#define BAR_SIZE 17
 #define BRICK_LINES 10
 #define MAX_BRICK_LINES 38
-#define BRICK_SPEED 50
+#define BRICK_SPEED 140
 
 //Function declaration
 void init (void);

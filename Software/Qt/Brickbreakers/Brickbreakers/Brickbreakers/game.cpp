@@ -58,10 +58,7 @@ void loop (void) {
 
         }
     }
-    if (points == BRICK_LINES * 10) {
-        lives = 0;
-        gameEnd();
-    }
+
     playBall();
 
     if (start == 1 && ball.dir != pause) {
@@ -156,8 +153,26 @@ void playBall() {
         if (ball.x >= person.x - (BAR_SIZE/2) && ball.x <= person.x + (BAR_SIZE/2)) {
             changeDirection(S);
         } else {
-            lives--;
-            gameEnd();
+            if (ball.x == person.x - (BAR_SIZE/2) - 1) {
+                if (ball.dir == SE) {
+                    ball.dir = NW;
+                } else {
+                    lives--;
+                    gameEnd();
+                }
+            } else {
+                if (ball.x == person.x + (BAR_SIZE/2) + 1) {
+                    if (ball.dir == SW) {
+                        ball.dir = NE;
+                    } else {
+                        lives--;
+                        gameEnd();
+                    }
+                } else {
+                    lives--;
+                    gameEnd();
+                }
+            }
         }
     }
     if (ball.x == 0) {
@@ -306,94 +321,139 @@ void checkGameOver() {
 }
 
 void checkBrickHit() {
-switch (ball.dir) {
-    case NW :
-        if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
-            bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
+    uint8_t bricksHit = 0;
+    switch (ball.dir) {
+        case NW :
+            if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
+                bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
 
-            ball.dir = SW;
-        }
-        if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
-            bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
-
-            if (ball.dir == NW) {
-                ball.dir = NE;
-            }
-            if (ball.dir == SW) {
-                ball.dir = SE;
-            }
-        }
-        break;
-    case NE:
-        if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
-            bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
-
-            ball.dir = SE;
-        }
-        if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
-            bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
-
-            if (ball.dir == NE) {
-                ball.dir = NW;
-            }
-            if (ball.dir == SE) {
                 ball.dir = SW;
             }
-        }
-        break;
-    case SE:
-        if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
-            bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
+            if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
+                bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
 
-            ball.dir = NE;
-        }
-        if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
-            bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
-
-            if (ball.dir == SE) {
-                ball.dir = SW;
+                if (ball.dir == NW) {
+                    ball.dir = NE;
+                }
+                if (ball.dir == SW) {
+                    ball.dir = SE;
+                }
             }
-            if (ball.dir == NE) {
-                ball.dir = NW;
+            if (bricksHit <= 0) {
+                if (bricks[ball.y - 1 - 8][(ball.x - 1)/5].visible == 1) {
+                    bricks[ball.y - 1 - 8][(ball.x - 1)/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+
+                    ball.dir = SE;
+                }
             }
-        }
-        break;
-    case SW:
-        if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
-            bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
+            break;
+        case NE:
+            if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
+                bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
 
-            ball.dir = NW;
-        }
-        if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
-            bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
-            points += 1;
-            QD << "score:" << points;
-
-            if (ball.dir == SW) {
                 ball.dir = SE;
             }
-            if (ball.dir == NW) {
+            if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
+                bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
+
+                if (ball.dir == NE) {
+                    ball.dir = NW;
+                }
+                if (ball.dir == SE) {
+                    ball.dir = SW;
+                }
+            }
+            if (bricksHit <= 0) {
+                if (bricks[ball.y - 1 - 8][(ball.x + 1)/5].visible == 1) {
+                    bricks[ball.y - 1 - 8][(ball.x + 1)/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+
+                    ball.dir = SW;
+                }
+            }
+            break;
+        case SE:
+            if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
+                bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
+
                 ball.dir = NE;
             }
+            if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
+                bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
+
+                if (ball.dir == SE) {
+                    ball.dir = SW;
+                }
+                if (ball.dir == NE) {
+                    ball.dir = NW;
+                }
+            }
+            if (bricksHit <= 0) {
+                if (bricks[ball.y + 1 - 8][(ball.x + 1)/5].visible == 1) {
+                    bricks[ball.y + 1 - 8][(ball.x + 1)/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+
+                    ball.dir = NW;
+                }
+            }
+            break;
+        case SW:
+            if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
+                bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
+
+                ball.dir = NW;
+            }
+            if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
+                bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
+                bricksHit++;
+                points++;
+                QD << "score:" << points;
+
+                if (ball.dir == SW) {
+                    ball.dir = SE;
+                }
+                if (ball.dir == NW) {
+                    ball.dir = NE;
+                }
+            }
+            if (bricksHit <= 0) {
+                if (bricks[ball.y + 1 - 8][(ball.x - 1)/5].visible == 1) {
+                    bricks[ball.y + 1 - 8][(ball.x - 1)/5].visible = 0;
+                    points += 1;
+                    QD << "score:" << points;
+
+                    ball.dir = NE;
+                }
+            }
+            break;
+        case pause:
+            break;
+        default:
+            QD << "You shouldn't be here";
         }
-        break;
-    case pause:
-        break;
-    default:
-        QD << "You shouldn't be here";
-    }
 }

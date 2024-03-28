@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     auto *t = new QTimer(this);
-    t->setInterval(100);
+    t->setInterval(80);
     connect(t, &QTimer::timeout,this,[=]{loop();ui->screen->update();});
     t->start();
 }
