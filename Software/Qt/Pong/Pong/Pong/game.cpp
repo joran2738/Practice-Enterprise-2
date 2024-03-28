@@ -16,6 +16,7 @@ uint8_t lives = 3;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
 uint8_t delay = 1;
+uint8_t barDelay = 1;
 
 void changeDirection(directions);
 void gameEnd(void);
@@ -63,24 +64,29 @@ void loop (void) {
         delay--;
     }
 
-
     if (start == 1 && ball.dir != pause) {
-        if (ball.x < bot.x + BAR_SIZE/4) {
-            if (ball.dir == NW || ball.dir == SW) {
-                bot.x--;
-                if(bot.x < BAR_SIZE/2) {
-                    bot.x = (BAR_SIZE/2);
+        if (barDelay <= 0) {
+            if (ball.dir == NW || ball.dir == NE || ball.dir == N) {
+                if (ball.y <= SCREEN_HEIGHT/3) {
+                    if (ball.x < bot.x - BAR_SIZE/4) {
+                        bot.x--;
+                        if(bot.x < BAR_SIZE/2) {
+                            bot.x = (BAR_SIZE/2);
+                        }
+                    }
+                    if (ball.x > bot.x + BAR_SIZE/4) {
+                        bot.x++;
+                        if(bot.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
+                            bot.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
+                        }
+                    }
                 }
             }
+            barDelay = 1;
+        } else {
+            barDelay--;
         }
-        if (ball.x > bot.x - BAR_SIZE/4) {
-            if (ball.dir == NE || ball.dir == SE) {
-                bot.x++;
-                if(bot.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
-                    bot.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
-                }
-            }
-        }
+
         checkGameOver();
     }
 
@@ -142,7 +148,7 @@ void playBall() {
         if (ball.x >= bot.x - (BAR_SIZE/2) && ball.x <= bot.x + (BAR_SIZE/2)) {
             changeDirection(N);
         } else {
-            lives--;
+            points += 10;
             gameEnd();
         }
     }
@@ -265,6 +271,7 @@ void changeDirection(directions inDir) {
 
 void gameEnd() {
     person.x = (SCREEN_WIDTH)/2;
+    bot.x = SCREEN_WIDTH/2;
     ball = {(person.x), SCREEN_HEIGHT - 6, pause};
 
     if (lives <= 0) {
