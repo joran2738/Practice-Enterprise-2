@@ -39,5 +39,6 @@ typedef struct {
     int x;
     int y;
     int visible;
+    int toughness;
 } brick;
 #endif // GAME_H

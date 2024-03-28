@@ -56,7 +56,7 @@ void loop (void) {
     }
     if(key == action) {
         if (ball.dir == pause) {
-            ball.dir = NW;
+            ball.dir = NE;
             start = 1;
 
         }
@@ -107,12 +107,14 @@ void updateScreen()
                 bricks[i][j].x = j * 5;
                 bricks[i][j].y = i + 8;
                 bricks[i][j].visible = 0;
+                bricks[i][j].toughness = 1;
             }
         }
 
         for (int i = 0; i < BRICK_LINES; i++) {
             for(int j = 0; j < 10; j++) {
                 bricks[i][j].visible = 1;
+                bricks[i][j].toughness = rand() % (2) + 1;
             }
         }
     }
@@ -148,8 +150,20 @@ void updateScreen()
     for (int i = 0; i < MAX_BRICK_LINES; i++) {
         for(int j = 0; j < 10; j++) {
             if(bricks[i][j].visible == 1) {
-                for(int l = 0; l < 5; l++) {
-                    game_screen[bricks[i][j].x + l][bricks[i][j].y] = BLACK;
+                if (bricks[i][j].toughness == 3) {
+                    for(int l = 0; l < 5; l++) {
+                        game_screen[bricks[i][j].x + l][bricks[i][j].y] = BLACK;
+                    }
+                }
+                if (bricks[i][j].toughness == 2) {
+                    for(int l = 0; l < 5; l++) {
+                        game_screen[bricks[i][j].x + l][bricks[i][j].y] = DARK_GRAY;
+                    }
+                }
+                if (bricks[i][j].toughness == 1) {
+                    for(int l = 0; l < 5; l++) {
+                        game_screen[bricks[i][j].x + l][bricks[i][j].y] = GRAY;
+                    }
                 }
             }
         }
@@ -328,6 +342,7 @@ void lowerBricks() {
     for (int i = MAX_BRICK_LINES - 2; i >= 0; i--) {
         for (int j = 0; j < 10; j++) {
             bricks[i + 1][j].visible = bricks[i][j].visible;
+            bricks[i + 1][j].toughness = bricks[i][j].toughness;
         }
     }
 }
@@ -348,21 +363,27 @@ void checkBrickHit() {
     switch (ball.dir) {
         case NW :
             if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
-                bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y - 1 - 8][ball.x/5].toughness--;
+                if (bricks[ball.y - 1 - 8][ball.x/5].toughness <= 0) {
+                    bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y - 1 - 8, ball.x/5);
+                    dropPowerUp(ball.x/5, ball.y - 1 - 8);
+                }
+                bricksHit++;
                 ball.dir = SW;
             }
             if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
-                bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y - 8][(ball.x - 1)/5].toughness--;
+                if (bricks[ball.y - 8][(ball.x - 1)/5].toughness <= 0) {
+                    bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y - 8, (ball.x - 1)/5);
+                    dropPowerUp((ball.x - 1)/5, ball.y - 8);
+                }
+                bricksHit++;
                 if (ball.dir == NW) {
                     ball.dir = NE;
                 }
@@ -372,32 +393,41 @@ void checkBrickHit() {
             }
             if (bricksHit <= 0) {
                 if (bricks[ball.y - 1 - 8][(ball.x - 1)/5].visible == 1) {
-                    bricks[ball.y - 1 - 8][(ball.x - 1)/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
+                    bricks[ball.y - 1 - 8][(ball.x - 1)/5].toughness--;
+                    if (bricks[ball.y - 1 - 8][(ball.x - 1)/5].toughness <= 0) {
+                        bricks[ball.y - 1 - 8][(ball.x - 1)/5].visible = 0;
+                        points++;
+                        QD << "score:" << points;
 
-                    dropPowerUp(ball.y - 1 - 8, (ball.x - 1)/5);
+                        dropPowerUp((ball.x - 1)/5, ball.y - 1 - 8);
+                    }
                     ball.dir = SE;
                 }
             }
             break;
         case NE:
             if (bricks[ball.y - 1 - 8][ball.x/5].visible == 1) {
-                bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y - 1 - 8][ball.x/5].toughness--;
+                if (bricks[ball.y - 1 - 8][ball.x/5].toughness <= 0) {
+                    bricks[ball.y - 1 - 8][ball.x/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y - 1 - 8, ball.x/5);
+                    dropPowerUp(ball.x/5, ball.y - 1 - 8);
+                }
+                bricksHit++;
                 ball.dir = SE;
             }
             if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
-                bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y - 8][(ball.x + 1)/5].toughness--;
+                if (bricks[ball.y - 8][(ball.x + 1)/5].toughness <= 0) {
+                    bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y - 8, (ball.x + 1)/5);
+                    dropPowerUp((ball.x + 1)/5, ball.y - 8);
+                }
+                bricksHit++;
                 if (ball.dir == NE) {
                     ball.dir = NW;
                 }
@@ -407,32 +437,41 @@ void checkBrickHit() {
             }
             if (bricksHit <= 0) {
                 if (bricks[ball.y - 1 - 8][(ball.x + 1)/5].visible == 1) {
-                    bricks[ball.y - 1 - 8][(ball.x + 1)/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
+                    bricks[ball.y - 1 - 8][(ball.x + 1)/5].toughness--;
+                    if (bricks[ball.y - 1 - 8][(ball.x + 1)/5].toughness <= 0) {
+                        bricks[ball.y - 1 - 8][(ball.x + 1)/5].visible = 0;
+                        points++;
+                        QD << "score:" << points;
 
-                    dropPowerUp(ball.y - 1 - 8, (ball.x + 1)/5);
+                        dropPowerUp((ball.x + 1)/5, ball.y - 1 - 8);
+                    }
                     ball.dir = SW;
                 }
             }
             break;
         case SE:
             if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
-                bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y + 1 - 8][ball.x/5].toughness--;
+                if (bricks[ball.y + 1 - 8][ball.x/5].toughness <= 0) {
+                    bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y + 1 - 8, ball.x/5);
+                    dropPowerUp(ball.x/5, ball.y + 1 - 8);
+                }
+                bricksHit++;
                 ball.dir = NE;
             }
             if (bricks[ball.y - 8][(ball.x + 1)/5].visible == 1) {
-                bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y - 8][(ball.x + 1)/5].toughness--;
+                if (bricks[ball.y - 8][(ball.x + 1)/5].toughness <= 0) {
+                    bricks[ball.y - 8][(ball.x + 1)/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y - 8, (ball.x + 1)/5);
+                    dropPowerUp((ball.x + 1)/5, ball.y - 8);
+                }
+                bricksHit++;
                 if (ball.dir == SE) {
                     ball.dir = SW;
                 }
@@ -441,33 +480,42 @@ void checkBrickHit() {
                 }
             }
             if (bricksHit <= 0) {
-                if (bricks[ball.y + 1 - 8][(ball.x + 1)/5].visible == 1) {
-                    bricks[ball.y + 1 - 8][(ball.x + 1)/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
+                if (bricks[ball.y - 8 + 1][(ball.x + 1)/5].visible == 1) {
+                    bricks[ball.y - 8 + 1][(ball.x + 1)/5].toughness--;
+                    if (bricks[ball.y - 8 + 1][(ball.x + 1)/5].toughness <= 0) {
+                        bricks[ball.y - 8 + 1][(ball.x + 1)/5].visible = 0;
+                        points++;
+                        QD << "score:" << points;
 
-                    dropPowerUp(ball.y + 1 - 8, (ball.x + 1)/5);
+                        dropPowerUp((ball.x + 1)/5, ball.y - 8 + 1);
+                    }
                     ball.dir = NW;
                 }
             }
             break;
         case SW:
             if (bricks[ball.y + 1 - 8][ball.x/5].visible == 1) {
-                bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y + 1 - 8][ball.x/5].toughness--;
+                if (bricks[ball.y + 1 - 8][ball.x/5].toughness <= 0) {
+                    bricks[ball.y + 1 - 8][ball.x/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y + 1 - 8, ball.x/5);
+                    dropPowerUp(ball.x/5, ball.y + 1 - 8);
+                }
+                bricksHit++;
                 ball.dir = NW;
             }
             if (bricks[ball.y - 8][(ball.x - 1)/5].visible == 1) {
-                bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
-                bricksHit++;
-                points++;
-                QD << "score:" << points;
+                bricks[ball.y - 8][(ball.x - 1)/5].toughness--;
+                if (bricks[ball.y - 8][(ball.x - 1)/5].toughness <= 0) {
+                    bricks[ball.y - 8][(ball.x - 1)/5].visible = 0;
+                    points++;
+                    QD << "score:" << points;
 
-                dropPowerUp(ball.y - 8, (ball.x - 1)/5);
+                    dropPowerUp((ball.x - 1)/5, ball.y - 8);
+                }
+                bricksHit++;
                 if (ball.dir == SW) {
                     ball.dir = SE;
                 }
@@ -477,11 +525,14 @@ void checkBrickHit() {
             }
             if (bricksHit <= 0) {
                 if (bricks[ball.y + 1 - 8][(ball.x - 1)/5].visible == 1) {
-                    bricks[ball.y + 1 - 8][(ball.x - 1)/5].visible = 0;
-                    points += 1;
-                    QD << "score:" << points;
+                    bricks[ball.y + 1 - 8][(ball.x - 1)/5].toughness--;
+                    if (bricks[ball.y + 1 - 8][(ball.x - 1)/5].toughness <= 0) {
+                        bricks[ball.y + 1 - 8][(ball.x - 1)/5].visible = 0;
+                        points++;
+                        QD << "score:" << points;
 
-                    dropPowerUp(ball.y + 1 - 8, (ball.x - 1)/5);
+                        dropPowerUp((ball.x - 1)/5, ball.y + 1 - 8);
+                    }
                     ball.dir = NE;
                 }
             }
