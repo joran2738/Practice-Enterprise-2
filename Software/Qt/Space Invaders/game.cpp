@@ -1,9 +1,10 @@
 //This code is meant to be plain c code so it can be used on an STM32 microcontroller.
 
-#include <stdint.h>
 #include "debug.h"
 #include "game.h"
 #include <QDateTime>
+#include "ledFont5x8.h"
+#include "menu.h"
 
 #define DEBUG 1
 
@@ -20,9 +21,9 @@ uint8_t comet_delay = 0;
 
 uint8_t star_delay = 0;
 
-uint8_t play = 0;
+
 uint8_t hit = 0;
-uint8_t hit_graph_counter = 80;
+uint8_t hit_graph_counter = 60;
 uint32_t spaceshipColorNormal = 0xFFFF0000;
 uint32_t spaceshipColorHit = 0xf7f7f7;
 uint32_t spaceshipCurrentColor = spaceshipColorNormal;
@@ -30,11 +31,17 @@ uint32_t spaceshipCurrentColor = spaceshipColorNormal;
 uint8_t lives = 3;
 uint8_t money = 0;
 
+uint8_t choice = 2;
+uint8_t play = 0;
+
+char str[12];
+
 
 void init (void) {
     person.x = SCREEN_WIDTH/2;
     money = 0;
     lives = 3;
+    choice = 2;
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
             game_screen[x][y] = 0xFF00FF00; //Green
@@ -68,28 +75,64 @@ void loop (void) {
     int key = readInput();
     updateScreen();
     if(key == left) {
-        person.x--;
-        if(person.x < SPACESHIP_WIDTH/2) {
-            person.x = (SPACESHIP_WIDTH/2);
+        if(play < 2){
+            person.x--;
+            if(person.x < SPACESHIP_WIDTH/2) {
+                person.x = (SPACESHIP_WIDTH/2);
+            }
+        }else{
+            if (choice == 1){
+                choice--;
+            }else if(choice == 0){
+                choice++;
         }
+    }
     }
     if(key == right) {
-        person.x++;
-        if(person.x > SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1) {
-            person.x = SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1;
-        }
-    }
-    if(key == action && play == 1 && hit == 0) {
-
-        if(ammo.in_play < MAX_BULLETS && bullet_delay == 0){
-            ammo.bullet_ar[ammo.in_play].x = person.x;
-            ammo.bullet_ar[ammo.in_play].y = person.y - 3;
-            ammo.in_play++;
-            bullet_delay = MAX_DELAY_BULLETS;
+        if(play < 2){
+            person.x++;
+            if(person.x > SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1) {
+                person.x = SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1;
+            }
+        }else{
+            if (choice == 1){
+                choice--;
+            }else if(choice == 0){
+                choice++;
+            }
         }
     }
     if(key == up){
-        play = 1;
+        QD << rand() % ((20 + 1) - 5) + 5;
+        if (play == 0){
+            play = 1;
+        }else if(play == 2){
+            if(choice == 0){
+                QD << "return";
+                play = 0;
+                init();
+            }
+            else if(choice == 1){
+                QD << "play on";
+                play = 1;
+            }else{
+                displayPauseMenu(game_screen,none);
+            }
+
+        }
+        else if(!hit){
+            if(ammo.in_play < MAX_BULLETS && bullet_delay == 0){
+                ammo.bullet_ar[ammo.in_play].x = person.x;
+                ammo.bullet_ar[ammo.in_play].y = person.y - 3;
+                ammo.in_play++;
+                bullet_delay = MAX_DELAY_BULLETS;
+            }
+        }
+
+    }
+    if(key == down){
+        play = 2;
+        choice = 1;
     }
 
     if(play == 1){
@@ -115,21 +158,23 @@ void loop (void) {
         moveComets();
         moveBullets();
         updateScreen();
-    }
-    if(star_delay < 1){
+    }if(play < 2){
+        if(star_delay < 1){
 
 
-        if(Comet.in_play < MAX_COMETS){
-            Star.star_ar[Star.in_play].x = rand() % ((PLAYABLE_MAX - 1) - PLAYABLE_OFFSET) + PLAYABLE_OFFSET;
-            Star.star_ar[Star.in_play].y = 0;
-            star_delay = rand() % ((20 + 1) - 10) + 5;
-            Star.in_play++;
+            if(Star.in_play < MAX_STARS){
+                Star.star_ar[Star.in_play].x = rand() % ((PLAYABLE_MAX - 1) - PLAYABLE_OFFSET) + PLAYABLE_OFFSET;
+                Star.star_ar[Star.in_play].y = 0;
+                star_delay = rand() % ((20 + 1) - 10) + 5;
+                Star.in_play++;
+            }
+
+        }else{
+            star_delay--;
         }
-
-    }else{
-        star_delay--;
+        moveStars();
     }
-    moveStars();
+
 }
 
 int readInput()
@@ -174,19 +219,6 @@ void updateScreen()
         game_screen[Star.star_ar[i].x][Star.star_ar[i].y] = 0xede609;
     }
 
-    //spaceship
-    for (int i = person.x - SPACESHIP_WIDTH / 2; i <= person.x + SPACESHIP_WIDTH / 2; i++) {
-        for (int j = person.y - SPACESHIP_HEIGHT / 2; j <= person.y + SPACESHIP_HEIGHT / 2; j++) {
-            if (i == person.x && j != person.y + SPACESHIP_HEIGHT / 2){
-                game_screen[i][j] = spaceshipCurrentColor;
-            }else if((i == person.x - SPACESHIP_WIDTH / 2 || i == person.x + SPACESHIP_WIDTH / 2) && j != person.y - SPACESHIP_HEIGHT / 2){
-                game_screen[i][j] = spaceshipCurrentColor;
-            }else if((i == person.x + 1 || person.x - 1 ) && j == person.y - (SPACESHIP_HEIGHT / 2) + 2){
-                game_screen[i][j] = spaceshipCurrentColor;
-            }
-        }
-    }
-
     //bullets
     for(int i = 0; i < ammo.in_play; i++){
         game_screen[ammo.bullet_ar[i].x][ammo.bullet_ar[i].y] = 0xFFFF0000; //RED
@@ -208,10 +240,37 @@ void updateScreen()
         }
     }
 
+    //start
+    if(!play){
+        displayText("START", SCREEN_WIDTH - (SCREEN_WIDTH / 2)-14, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) - 4, 0xf7f7f7);
+    }
+    else if(play == 2){
+        displayPauseMenu(game_screen,in);
+    }
+
+    //spaceship
+    for (int i = person.x - SPACESHIP_WIDTH / 2; i <= person.x + SPACESHIP_WIDTH / 2; i++) {
+        for (int j = person.y - SPACESHIP_HEIGHT / 2; j <= person.y + SPACESHIP_HEIGHT / 2; j++) {
+            if (i == person.x && j != person.y + SPACESHIP_HEIGHT / 2){
+                game_screen[i][j] = spaceshipCurrentColor;
+            }else if((i == person.x - SPACESHIP_WIDTH / 2 || i == person.x + SPACESHIP_WIDTH / 2) && j != person.y - SPACESHIP_HEIGHT / 2){
+                game_screen[i][j] = spaceshipCurrentColor;
+            }else if((i == person.x + 1 || person.x - 1 ) && j == person.y - (SPACESHIP_HEIGHT / 2) + 2){
+                game_screen[i][j] = spaceshipCurrentColor;
+            }
+        }
+    }
+
+
+
     //lives
     for(int i = 0; i < lives; i++){
         game_screen[HEARTS_X+HEARTS_OFFSET*i][HEARTS_Y] = 0x02fa3c;
     }
+
+    // score
+    snprintf(str, 12, "%u", money);
+    displayText(str, SCREEN_WIDTH - 18, 1, 0xf7f7f7);
 }
 
 void moveBullets(){
@@ -251,6 +310,7 @@ void moveComets(){
                         hit = 0;
                         QD << "money: " << money << " coins";
                         init();
+
                     }
                 }
             }
@@ -296,6 +356,32 @@ void hitComet(int bul,int com){
         Comet.comet_ar[j].size = Comet.comet_ar[j+1].size;
     }
     Comet.in_play--;
+}
+
+void displayText(char * text, int x, int y, uint32_t color) {
+
+    unsigned char buffer;
+    int bit;
+
+    for (int i = 0; text[i] != '\0'; i++) {
+        unsigned char c = text[i];
+        c = c - ' ';
+
+
+        for (int j = 0; j < 5; j++) {
+            buffer = ledFont[c][j];
+
+            for (int k = 0; k < 8; k++) {
+                bit = (buffer >> k) & 1;
+
+                if (bit == 1) {
+                    game_screen[x][y + k + 1] = color; //black
+                }
+            }
+            x++;
+        }
+        x++;
+    }
 }
 
 

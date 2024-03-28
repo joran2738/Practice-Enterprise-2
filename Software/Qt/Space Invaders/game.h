@@ -1,12 +1,13 @@
+
 #ifndef GAME_H
 #define GAME_H
-
+#include <stdint.h>
 //Configs
 #define EVENTSIZE 100
-#define SCREEN_WIDTH 50
-#define SCREEN_HEIGHT 40
+#define SCREEN_WIDTH 80
+#define SCREEN_HEIGHT 60
 #define PLAYABLE_OFFSET 5
-#define PLAYABLE_MAX 45
+#define PLAYABLE_MAX 75
 
 
 #define SPACESHIP_WIDTH 5
@@ -25,6 +26,12 @@
 #define HEARTS_X 2
 #define HEARTS_OFFSET 3
 
+
+
+//Enums
+enum keys { left=1, up, right, down, action};
+
+
 //Function declaration
     void init (void);
     void loop (void);
@@ -34,9 +41,9 @@
     void moveComets(void);
     void moveStars(void);
     void hitComet(int,int);
+    void displayText(char *, int, int, uint32_t);
 
-//Enums
-    enum keys { left=1, up, right, down, action};
+
 
 //Typedefs
     typedef struct {

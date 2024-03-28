@@ -13,6 +13,7 @@ SOURCES += \
     game.cpp \
     main.cpp \
     mainwindow.cpp \
+    menu.cpp \
     snakefield.cpp
 
 HEADERS += \
@@ -20,6 +21,7 @@ HEADERS += \
     eventfilter.h \
     game.h \
     mainwindow.h \
+    menu.h \
     snakefield.h
 
 FORMS += \
