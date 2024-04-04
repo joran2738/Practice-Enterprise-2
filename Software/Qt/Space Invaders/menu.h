@@ -8,11 +8,19 @@
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 60
 
-enum menu_State {in,none};
+#define SPACESHIP_WIDTH 5
+#define SPACESHIP_HEIGHT 5
+
+#define ycord_offset ((SCREEN_HEIGHT / 2) - (BUTTON_SIZE / 2) - 2)
+#define xplay_offset ((BUTTON_OFFSET + 2) + ((BUTTON_SIZE + 4) * 1) + BUTTON_SIZE/4)
+#define xback_offset ((BUTTON_OFFSET + 2) + BUTTON_SIZE/4)
+
+enum gameState{notPlay,inPlay,paused,menu};
 
 extern uint8_t choice;
 
-void displayPauseMenu(uint32_t game_screen[][SCREEN_HEIGHT],menu_State);
+void displayPauseMenu(uint32_t game_screen[][SCREEN_HEIGHT]);
+void displayMenu(uint32_t game_screen[][SCREEN_HEIGHT]);
 
 
 #endif // MENU_H
