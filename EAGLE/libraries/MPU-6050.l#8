@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -140,6 +140,31 @@
 <pin name="SDA" x="10.16" y="17.78" length="middle" rot="R270"/>
 <pin name="EP" x="7.62" y="17.78" length="middle" rot="R270"/>
 </symbol>
+<symbol name="MPU-6050_MODULE">
+<pin name="INT" x="12.7" y="33.02" length="middle" rot="R180"/>
+<pin name="AD0" x="12.7" y="27.94" length="middle" rot="R180"/>
+<pin name="NC" x="12.7" y="22.86" length="middle" rot="R180"/>
+<pin name="SDA" x="12.7" y="17.78" length="middle" rot="R180"/>
+<pin name="SCL" x="12.7" y="12.7" length="middle" rot="R180"/>
+<pin name="GND" x="12.7" y="7.62" length="middle" rot="R180"/>
+<pin name="VCC" x="12.7" y="2.54" length="middle" rot="R180"/>
+<wire x1="7.62" y1="0" x2="-12.7" y2="0" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="0" x2="-12.7" y2="35.56" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="35.56" x2="7.62" y2="35.56" width="0.254" layer="94"/>
+<wire x1="7.62" y1="35.56" x2="7.62" y2="0" width="0.254" layer="94"/>
+<text x="-12.7" y="36.322" size="1.778" layer="95">&gt;NAME</text>
+<text x="-12.7" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<wire x1="-2.54" y1="17.78" x2="-10.16" y2="17.78" width="0.254" layer="97"/>
+<wire x1="-10.16" y1="17.78" x2="-8.89" y2="19.05" width="0.254" layer="97"/>
+<wire x1="-10.16" y1="17.78" x2="-8.89" y2="16.51" width="0.254" layer="97"/>
+<wire x1="-8.89" y1="16.51" x2="-8.89" y2="19.05" width="0.254" layer="97"/>
+<wire x1="-2.54" y1="17.78" x2="-2.54" y2="10.16" width="0.254" layer="97"/>
+<wire x1="-2.54" y1="10.16" x2="-1.27" y2="11.43" width="0.254" layer="97"/>
+<wire x1="-1.27" y1="11.43" x2="-3.81" y2="11.43" width="0.254" layer="97"/>
+<wire x1="-3.81" y1="11.43" x2="-2.54" y2="10.16" width="0.254" layer="97"/>
+<text x="-6.858" y="18.034" size="1.778" layer="97">X</text>
+<text x="-4.572" y="13.208" size="1.778" layer="97">Y</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="MPU-6050" prefix="IC">
@@ -186,6 +211,18 @@ Source: &lt;a href="https://product.tdk.com/system/files/dam/doc/product/sensor/
 <attribute name="MOUSER_PART_NUMBER" value="410-MPU-6050" constant="no"/>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/TDK-InvenSense/MPU-6050?qs=u4fy%2FsgLU9O14B5JgyQFvg%3D%3D" constant="no"/>
 </technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MPU-6050_MODULE">
+<gates>
+<gate name="G$1" symbol="MPU-6050_MODULE" x="12.7" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
 </technologies>
 </device>
 </devices>

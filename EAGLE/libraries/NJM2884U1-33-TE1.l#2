@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -60,25 +60,10 @@
 <packages>
 <package name="SOT-89-5_TOR">
 <wire x1="-1.2841" y1="-1.2446" x2="-1.7159" y2="-1.2446" width="0.1524" layer="51"/>
-<wire x1="-1.7159" y1="-1.2446" x2="-1.7159" y2="-2.0574" width="0.1524" layer="51"/>
-<wire x1="-1.7159" y1="-2.0574" x2="-1.2841" y2="-2.0574" width="0.1524" layer="51"/>
-<wire x1="-1.2841" y1="-2.0574" x2="-1.2841" y2="-1.2446" width="0.1524" layer="51"/>
 <wire x1="1.7159" y1="-1.2446" x2="1.2841" y2="-1.2446" width="0.1524" layer="51"/>
-<wire x1="1.2841" y1="-1.2446" x2="1.2841" y2="-2.0574" width="0.1524" layer="51"/>
-<wire x1="1.2841" y1="-2.0574" x2="1.7159" y2="-2.0574" width="0.1524" layer="51"/>
-<wire x1="1.7159" y1="-2.0574" x2="1.7159" y2="-1.2446" width="0.1524" layer="51"/>
 <wire x1="0.2413" y1="-1.2446" x2="-0.2413" y2="-1.2446" width="0.1524" layer="51"/>
-<wire x1="-0.2413" y1="-1.2446" x2="-0.2413" y2="-2.0574" width="0.1524" layer="51"/>
-<wire x1="-0.2413" y1="-2.0574" x2="0.2413" y2="-2.0574" width="0.1524" layer="51"/>
-<wire x1="0.2413" y1="-2.0574" x2="0.2413" y2="-1.2446" width="0.1524" layer="51"/>
 <wire x1="-1.7159" y1="1.2446" x2="-1.2841" y2="1.2446" width="0.1524" layer="51"/>
-<wire x1="-1.2841" y1="1.2446" x2="-1.2841" y2="2.0574" width="0.1524" layer="51"/>
-<wire x1="-1.2841" y1="2.0574" x2="-1.7159" y2="2.0574" width="0.1524" layer="51"/>
-<wire x1="-1.7159" y1="2.0574" x2="-1.7159" y2="1.2446" width="0.1524" layer="51"/>
 <wire x1="1.2841" y1="1.2446" x2="1.7159" y2="1.2446" width="0.1524" layer="51"/>
-<wire x1="1.7159" y1="1.2446" x2="1.7159" y2="2.0574" width="0.1524" layer="51"/>
-<wire x1="1.7159" y1="2.0574" x2="1.2841" y2="2.0574" width="0.1524" layer="51"/>
-<wire x1="1.2841" y1="2.0574" x2="1.2841" y2="1.2446" width="0.1524" layer="51"/>
 <wire x1="-2.2479" y1="-1.2446" x2="2.2479" y2="-1.2446" width="0.1524" layer="51"/>
 <wire x1="2.2479" y1="-1.2446" x2="2.2479" y2="1.2446" width="0.1524" layer="51"/>
 <wire x1="2.2479" y1="1.2446" x2="-2.2479" y2="1.2446" width="0.1524" layer="51"/>
@@ -198,8 +183,6 @@
 <wire x1="0.574" y1="-1.3716" x2="0.9514" y2="-1.3716" width="0.1524" layer="21"/>
 <wire x1="2.0486" y1="-1.3716" x2="2.3749" y2="-1.3716" width="0.1524" layer="21"/>
 <wire x1="-2.0486" y1="1.3716" x2="-2.3749" y2="1.3716" width="0.1524" layer="21"/>
-<wire x1="-3.3909" y1="-1.8542" x2="-3.6449" y2="-1.8542" width="0.1524" layer="21" curve="-180"/>
-<wire x1="-3.6449" y1="-1.8542" x2="-3.3909" y2="-1.8542" width="0.1524" layer="21" curve="-180"/>
 <text x="-15.2035" y="-9.8806" size="1.27" layer="47" ratio="6">Default Padstyle: RX17Y40D0T</text>
 <text x="-14.4237" y="-11.1506" size="1.27" layer="47" ratio="6">Pin 2 Padstyle: RX19Y40D0T</text>
 <text x="-14.8136" y="-12.4206" size="1.27" layer="47" ratio="6">Alt 1 Padstyle: OX60Y90D30P</text>
@@ -213,68 +196,38 @@
 <text x="-4.0424" y="4.064" size="0.635" layer="47" ratio="4">0.067in/1.702mm</text>
 <text x="-4.0424" y="5.969" size="0.635" layer="47" ratio="4">0.177in/4.496mm</text>
 <text x="-13.3807" y="-0.3175" size="0.635" layer="47" ratio="4">0.098in/2.489mm</text>
-<text x="-1.7288" y="-0.635" size="1.27" layer="21" ratio="6">&gt;VALUE</text>
-<text x="-3.2712" y="-0.635" size="1.27" layer="27" ratio="6">&gt;NAME</text>
+<text x="4.064" y="-3.2528" size="1.27" layer="21" ratio="6" rot="R90">&gt;VALUE</text>
+<text x="-3.175" y="-3.2712" size="1.27" layer="27" ratio="6" rot="R90">&gt;NAME</text>
 <polygon width="0.0254" layer="1">
 <vertex x="-0.2413" y="-1.2446"/>
 <vertex x="-0.2413" y="-0.9398"/>
 <vertex x="-0.8763" y="-0.3556"/>
-<vertex x="-0.8763" y="2.413"/>
-<vertex x="-0.2413" y="2.413"/>
-<vertex x="0.2413" y="2.413"/>
-<vertex x="0.8763" y="2.413"/>
 <vertex x="0.8763" y="-0.3556"/>
 <vertex x="0.2413" y="-0.9398"/>
 <vertex x="0.2413" y="-1.2446"/>
 </polygon>
-<polygon width="0.0254" layer="29">
-<vertex x="-0.2413" y="-1.2446"/>
-<vertex x="-0.2413" y="-0.9398"/>
-<vertex x="-0.8763" y="-0.3556"/>
-<vertex x="-0.8763" y="2.413"/>
-<vertex x="-0.2413" y="2.413"/>
-<vertex x="0.2413" y="2.413"/>
-<vertex x="0.8763" y="2.413"/>
-<vertex x="0.8763" y="-0.3556"/>
-<vertex x="0.2413" y="-0.9398"/>
-<vertex x="0.2413" y="-1.2446"/>
-</polygon>
-<polygon width="0.0254" layer="31">
-<vertex x="-0.2413" y="-1.2446"/>
-<vertex x="-0.2413" y="-0.9398"/>
-<vertex x="-0.8763" y="-0.3556"/>
-<vertex x="-0.8763" y="2.413"/>
-<vertex x="-0.2413" y="2.413"/>
-<vertex x="0.2413" y="2.413"/>
-<vertex x="0.8763" y="2.413"/>
-<vertex x="0.8763" y="-0.3556"/>
-<vertex x="0.2413" y="-0.9398"/>
-<vertex x="0.2413" y="-1.2446"/>
-</polygon>
-<polygon width="0.0254" layer="41">
-<vertex x="2.6289" y="2.2352"/>
-<vertex x="2.6289" y="-2.6416"/>
-<vertex x="-2.6289" y="-2.6416"/>
-<vertex x="-2.6289" y="2.2352"/>
-</polygon>
-<smd name="1" x="-1.5" y="-1.7526" dx="0.4318" dy="1.016" layer="1"/>
-<smd name="2" x="0" y="-1.7526" dx="0.4826" dy="1.016" layer="1"/>
-<smd name="3" x="1.5" y="-1.7526" dx="0.4318" dy="1.016" layer="1"/>
-<smd name="4" x="1.5" y="1.7526" dx="0.4318" dy="1.016" layer="1"/>
-<smd name="5" x="-1.5" y="1.7526" dx="0.4318" dy="1.016" layer="1"/>
+<smd name="1" x="-1.5" y="-1.7526" dx="0.4318" dy="1.016" layer="1" stop="no" cream="no"/>
+<smd name="2" x="0" y="-1.7526" dx="0.4826" dy="1.016" layer="1" stop="no" cream="no"/>
+<smd name="3" x="1.5" y="-1.7526" dx="0.4318" dy="1.016" layer="1" stop="no" cream="no"/>
+<smd name="4" x="1.5" y="1.7526" dx="0.4318" dy="1.016" layer="1" stop="no" cream="no"/>
+<smd name="5" x="-1.5" y="1.7526" dx="0.4318" dy="1.016" layer="1" stop="no" cream="no"/>
+<smd name="6" x="0" y="1.016" dx="2.7686" dy="1.7526" layer="1" rot="R90" stop="no" cream="no"/>
+<pad name="P$1" x="0" y="0" drill="0.35" stop="no" thermals="no"/>
+<pad name="P$2" x="0" y="1.27" drill="0.35" stop="no" thermals="no"/>
+<pad name="P$3" x="0" y="2.54" drill="0.35" stop="no" thermals="no"/>
 </package>
 </packages>
 <symbols>
 <symbol name="SOT-89-5">
-<wire x1="-27.94" y1="15.24" x2="7.62" y2="15.24" width="0.254" layer="94"/>
-<wire x1="7.62" y1="15.24" x2="7.62" y2="0" width="0.254" layer="94"/>
-<wire x1="7.62" y1="0" x2="-27.94" y2="0" width="0.254" layer="94"/>
-<wire x1="-27.94" y1="0" x2="-27.94" y2="15.24" width="0.254" layer="94"/>
-<pin name="VFB" x="-22.86" y="-5.08" length="middle" rot="R90"/>
-<pin name="GND" x="-10.16" y="-5.08" length="middle" rot="R90"/>
-<pin name="CE" x="2.54" y="-5.08" length="middle" rot="R90"/>
-<pin name="VDD" x="2.54" y="20.32" length="middle" rot="R270"/>
-<pin name="VOUT" x="-22.86" y="20.32" length="middle" rot="R270"/>
+<wire x1="0" y1="17.78" x2="15.24" y2="17.78" width="0.254" layer="94"/>
+<wire x1="15.24" y1="17.78" x2="15.24" y2="0" width="0.254" layer="94"/>
+<wire x1="15.24" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="17.78" width="0.254" layer="94"/>
+<pin name="VFB" x="2.54" y="-5.08" length="middle" rot="R90"/>
+<pin name="GND" x="7.62" y="-5.08" length="middle" rot="R90"/>
+<pin name="CE" x="12.7" y="-5.08" length="middle" rot="R90"/>
+<pin name="VDD" x="12.7" y="22.86" length="middle" rot="R270"/>
+<pin name="VOUT" x="2.54" y="22.86" length="middle" rot="R270"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -286,7 +239,7 @@
 <device name="" package="SOT-89-5_TOR">
 <connects>
 <connect gate="G$1" pin="CE" pad="3"/>
-<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="GND" pad="2 6"/>
 <connect gate="G$1" pin="VDD" pad="4"/>
 <connect gate="G$1" pin="VFB" pad="1"/>
 <connect gate="G$1" pin="VOUT" pad="5"/>

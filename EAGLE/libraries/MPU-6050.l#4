@@ -173,29 +173,29 @@
 <pin name="EP" x="7.62" y="17.78" length="middle" rot="R270"/>
 </symbol>
 <symbol name="MPU-6050_MODULE">
-<pin name="INT" x="12.7" y="33.02" length="middle" rot="R180"/>
-<pin name="AD0" x="12.7" y="27.94" length="middle" rot="R180"/>
-<pin name="NC" x="12.7" y="22.86" length="middle" direction="nc" rot="R180"/>
-<pin name="SDA" x="12.7" y="17.78" length="middle" rot="R180"/>
-<pin name="SCL" x="12.7" y="12.7" length="middle" rot="R180"/>
-<pin name="GND" x="12.7" y="7.62" length="middle" rot="R180"/>
-<pin name="VCC" x="12.7" y="2.54" length="middle" rot="R180"/>
-<wire x1="7.62" y1="0" x2="-12.7" y2="0" width="0.254" layer="94"/>
-<wire x1="-12.7" y1="0" x2="-12.7" y2="35.56" width="0.254" layer="94"/>
-<wire x1="-12.7" y1="35.56" x2="7.62" y2="35.56" width="0.254" layer="94"/>
-<wire x1="7.62" y1="35.56" x2="7.62" y2="0" width="0.254" layer="94"/>
-<text x="-12.7" y="36.322" size="1.778" layer="95">&gt;NAME</text>
-<text x="-12.7" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
-<wire x1="-2.54" y1="17.78" x2="-10.16" y2="17.78" width="0.254" layer="97"/>
-<wire x1="-10.16" y1="17.78" x2="-8.89" y2="19.05" width="0.254" layer="97"/>
-<wire x1="-10.16" y1="17.78" x2="-8.89" y2="16.51" width="0.254" layer="97"/>
-<wire x1="-8.89" y1="16.51" x2="-8.89" y2="19.05" width="0.254" layer="97"/>
-<wire x1="-2.54" y1="17.78" x2="-2.54" y2="10.16" width="0.254" layer="97"/>
-<wire x1="-2.54" y1="10.16" x2="-1.27" y2="11.43" width="0.254" layer="97"/>
-<wire x1="-1.27" y1="11.43" x2="-3.81" y2="11.43" width="0.254" layer="97"/>
-<wire x1="-3.81" y1="11.43" x2="-2.54" y2="10.16" width="0.254" layer="97"/>
-<text x="-6.858" y="18.034" size="1.778" layer="97">X</text>
-<text x="-4.572" y="13.208" size="1.778" layer="97">Y</text>
+<pin name="INT" x="25.4" y="33.02" length="middle" rot="R180"/>
+<pin name="AD0" x="25.4" y="27.94" length="middle" rot="R180"/>
+<pin name="NC" x="25.4" y="22.86" length="middle" direction="nc" rot="R180"/>
+<pin name="SDA" x="25.4" y="17.78" length="middle" rot="R180"/>
+<pin name="SCL" x="25.4" y="12.7" length="middle" rot="R180"/>
+<pin name="GND" x="25.4" y="7.62" length="middle" rot="R180"/>
+<pin name="VCC" x="25.4" y="2.54" length="middle" rot="R180"/>
+<wire x1="20.32" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="35.56" width="0.254" layer="94"/>
+<wire x1="0" y1="35.56" x2="20.32" y2="35.56" width="0.254" layer="94"/>
+<wire x1="20.32" y1="35.56" x2="20.32" y2="0" width="0.254" layer="94"/>
+<text x="0" y="36.322" size="1.778" layer="95">&gt;NAME</text>
+<text x="0" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<wire x1="10.16" y1="17.78" x2="2.54" y2="17.78" width="0.254" layer="97"/>
+<wire x1="2.54" y1="17.78" x2="3.81" y2="19.05" width="0.254" layer="97"/>
+<wire x1="2.54" y1="17.78" x2="3.81" y2="16.51" width="0.254" layer="97"/>
+<wire x1="3.81" y1="16.51" x2="3.81" y2="19.05" width="0.254" layer="97"/>
+<wire x1="10.16" y1="17.78" x2="10.16" y2="10.16" width="0.254" layer="97"/>
+<wire x1="10.16" y1="10.16" x2="11.43" y2="11.43" width="0.254" layer="97"/>
+<wire x1="11.43" y1="11.43" x2="8.89" y2="11.43" width="0.254" layer="97"/>
+<wire x1="8.89" y1="11.43" x2="10.16" y2="10.16" width="0.254" layer="97"/>
+<text x="5.842" y="18.034" size="1.778" layer="97">X</text>
+<text x="8.128" y="13.208" size="1.778" layer="97">Y</text>
 </symbol>
 </symbols>
 <devicesets>
