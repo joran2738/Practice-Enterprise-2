@@ -6,6 +6,7 @@
 #include "displayText.h"
 #include "spaceInvaders.h"
 #include "menu.h"
+#include "multiplayer.h"
 
 #define DEBUG 1
 
@@ -19,9 +20,10 @@ extern uint8_t lives;
 extern uint32_t money;
 
 uint8_t choice = 0;
+uint8_t max_choice = 1;
+extern uint8_t total_games;
 uint8_t gamechoice = 0;
 extern uint8_t play;
-
 char str[12];
 
 
@@ -44,15 +46,19 @@ void init (void) {
 void loop (void) {
     int key = readInput();
     updateScreen();
+    if (play == menu){
+        max_choice = total_games;
+    }else{
+        max_choice = 1;
+    }
     if(key == left) {
         if(play < paused){
             moveSpaceship(-1);
         }else{
-            if (choice == 1){
+            if (choice == 0){
+                choice = max_choice;
+            }else{
                 choice--;
-            }else if(choice == 0){
-                choice++;
-
             }
             QD << choice;
         }
@@ -61,9 +67,9 @@ void loop (void) {
         if(play < paused){
             moveSpaceship(1);
         }else{
-            if (choice == 1){
-                choice--;
-            }else if(choice == 0){
+            if (choice == max_choice){
+                choice = 0;
+            }else{
                 choice++;
             }
             QD << choice;
@@ -87,10 +93,12 @@ void loop (void) {
 
         }else if(play == menu){
             if(choice == 0){
+                toggle_multiplayer();
+            }else if(choice == 1){
                 gamechoice = 0;
                 play = notPlay;
             }
-            else if(choice == 1){
+            else if(choice == 2){
                 gamechoice = 1;
                 play = notPlay;
                 init();
@@ -99,7 +107,7 @@ void loop (void) {
             }
         }
         else if(!hit){
-            spawnBullet();
+            spawnBullet(0);
         }
 
     }
@@ -115,6 +123,7 @@ void loop (void) {
 
         moveComets();
         moveBullets();
+        moveEnemyBullets();
         updateScreen();
     }if(play < paused){
         spawnStar();

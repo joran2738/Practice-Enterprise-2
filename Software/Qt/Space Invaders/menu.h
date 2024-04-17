@@ -21,6 +21,7 @@ extern uint8_t choice;
 
 void displayPauseMenu(uint32_t game_screen[][SCREEN_HEIGHT]);
 void displayMenu(uint32_t game_screen[][SCREEN_HEIGHT]);
+void displayMenuIcons(uint32_t game_screen[][SCREEN_HEIGHT]);
 
 
 #endif // MENU_H

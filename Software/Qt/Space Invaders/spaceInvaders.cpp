@@ -1,8 +1,10 @@
 
 #include "spaceInvaders.h"
 #include "displayText.h"
+#include "debug.h"
 
 bullets ammo;
+bullets enemy_ammo;
 comets Comet;
 stars Star;
 uint8_t bullet_delay = 0;
@@ -16,6 +18,8 @@ static point SpaceShip = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 extern uint8_t hit;
 uint32_t spaceshipCurrentColor = RED;
 uint8_t hit_graph_counter = 60;
+uint8_t in_multiplayer = 1;
+extern uint8_t connected;
 
 void initSpaceInvaders(){
     money = 0;
@@ -26,7 +30,10 @@ void initSpaceInvaders(){
     comet_delay = rand() % ((20 + 1) - 5) + 5;
 
     initSpaceShip();
-    initAmmo();
+    initAmmo(&ammo,0);
+    if(in_multiplayer){
+        initAmmo(&enemy_ammo,1);
+    }
 
     initComets();
     initStars();
@@ -54,11 +61,23 @@ void spawnComet(){
 
 }
 
-void spawnBullet(){
-    if(ammo.in_play < MAX_BULLETS && bullet_delay == 0){
-        ammo.bullet_ar[ammo.in_play].x = SpaceShip.x;
-        ammo.bullet_ar[ammo.in_play].y = SpaceShip.y - 3;
-        ammo.in_play++;
+void spawnBullet(int enemy){
+    int x_val = SpaceShip.x;
+    int y_val = SpaceShip.y - 3;
+    bullets *am_p;
+    if (enemy){
+        am_p = &enemy_ammo;
+    }else{
+        am_p = &ammo;
+    }
+    if(am_p->in_play < MAX_BULLETS && bullet_delay == 0){
+        if(am_p->enemy){
+            //x_val = read the input from multiplayer;
+            y_val = 3;
+        }
+        am_p->bullet_ar[am_p->in_play].x = x_val;
+        am_p->bullet_ar[am_p->in_play].y = y_val;
+        am_p->in_play++;
         bullet_delay = MAX_DELAY_BULLETS;
     }
 }
@@ -77,17 +96,18 @@ void spawnStar(){
 void moveBullets(){
     for(int i = 0; i < ammo.in_play; i++){
         for (int j = 0; j < Comet.in_play; j++){
-            for (int k = 0; k < Comet.comet_ar[j].size; k++){
-                if(ammo.bullet_ar[i].x == Comet.comet_ar[j].x + k){
-                    if (ammo.bullet_ar[i].y <= Comet.comet_ar[j].y + Comet.comet_ar[j].size - 1){
-                        //QD << "hit a comet";
-                        hitComet(i,j);
-                    }
+            if(ammo.bullet_ar[i].x >= Comet.comet_ar[j].x && ammo.bullet_ar[i].x < Comet.comet_ar[j].x + Comet.comet_ar[j].size){
+                if (ammo.bullet_ar[i].y <= Comet.comet_ar[j].y + Comet.comet_ar[j].size - 1){
+                    //QD << "hit a comet";
+                    hitComet(i,j);
+                    continue;
                 }
             }
+
         }
         ammo.bullet_ar[i].y--;
         if (ammo.bullet_ar[i].y < 0){
+            send_Bullet(ammo.bullet_ar[i]);
             for(int j = i; j < MAX_BULLETS - 1; j++){
                 ammo.bullet_ar[j].x = ammo.bullet_ar[j+1].x;
                 ammo.bullet_ar[j].y = ammo.bullet_ar[j+1].y;
@@ -97,20 +117,39 @@ void moveBullets(){
     }
 }
 
+void moveEnemyBullets(void){
+    if (!in_multiplayer){
+        QD << "not multiplayer";
+        return;
+    }
+    for(int i = 0; i < enemy_ammo.in_play; i++){
+        if(enemy_ammo.bullet_ar[i].x <= SpaceShip.x + SPACESHIP_WIDTH / 2 && enemy_ammo.bullet_ar[i].x >= SpaceShip.x - SPACESHIP_WIDTH / 2){
+            if (enemy_ammo.bullet_ar[i].y >= SpaceShip.y - SPACESHIP_HEIGHT / 2 && hit == 0){
+                beenHit();
+                for(int j = i; j < MAX_BULLETS - 1; j++){
+                    enemy_ammo.bullet_ar[j].x = enemy_ammo.bullet_ar[j+1].x;
+                    enemy_ammo.bullet_ar[j].y = enemy_ammo.bullet_ar[j+1].y;
+                }
+                enemy_ammo.in_play--;
+            }
+        }
+        enemy_ammo.bullet_ar[i].y++;
+        if (enemy_ammo.bullet_ar[i].y > SCREEN_HEIGHT - 1){
+            for(int j = i; j < MAX_BULLETS - 1; j++){
+                enemy_ammo.bullet_ar[j].x = enemy_ammo.bullet_ar[j+1].x;
+                enemy_ammo.bullet_ar[j].y = enemy_ammo.bullet_ar[j+1].y;
+            }
+            enemy_ammo.in_play--;
+        }
+    }
+}
 void moveComets(){
     for (int i = 0; i<Comet.in_play; i++){
         for(int j = 0; j < Comet.comet_ar[i].size; j++){
             if(Comet.comet_ar[i].x + j <= SpaceShip.x + SPACESHIP_WIDTH / 2 && Comet.comet_ar[i].x + j >= SpaceShip.x - SPACESHIP_WIDTH / 2){
                 if (Comet.comet_ar[i].y + Comet.comet_ar[i].size - 1 >= SpaceShip.y - SPACESHIP_HEIGHT / 2 && hit == 0){
                     hitComet(420,i);
-                    hit = 1;
-                    lives--;
-                    if(lives <= 0){
-                        play = 0;
-                        hit = 0;
-                        initSpaceInvaders();
-
-                    }
+                    beenHit();
                 }
             }
         }
@@ -163,6 +202,7 @@ void hitComet(int bul,int com){
             ammo.bullet_ar[j].y = ammo.bullet_ar[j+1].y;
         }
     }
+
     for(int j = com; j < MAX_COMETS - 1; j++){
         Comet.comet_ar[j].x = Comet.comet_ar[j+1].x;
         Comet.comet_ar[j].y = Comet.comet_ar[j+1].y;
@@ -171,11 +211,12 @@ void hitComet(int bul,int com){
     Comet.in_play--;
 }
 
-void initAmmo(){
-    ammo.in_play=0;
+void initAmmo(bullets *am,int enemy){
+    am->enemy = enemy;
+    am->in_play=0;
     for (int i = 0;i<MAX_BULLETS;i++){
-        ammo.bullet_ar[i].x = -1;
-        ammo.bullet_ar[i].y = -1;
+        am->bullet_ar[i].x = -1;
+        am->bullet_ar[i].y = -1;
     }
 }
 
@@ -206,6 +247,11 @@ void displayStars(uint32_t game_screen[][SCREEN_HEIGHT]){
 void displayAmmo(uint32_t game_screen[][SCREEN_HEIGHT]){
     for(int i = 0; i < ammo.in_play; i++){
         game_screen[ammo.bullet_ar[i].x][ammo.bullet_ar[i].y] = RED;
+    }
+    if(in_multiplayer){
+        for(int i = 0; i < enemy_ammo.in_play; i++){
+            game_screen[enemy_ammo.bullet_ar[i].x][enemy_ammo.bullet_ar[i].y] = LIGHT_BLUE;
+        }
     }
 }
 
@@ -264,3 +310,28 @@ void delayBullet(){
         bullet_delay--;
     }
 }
+
+void beenHit(){
+    hit = 1;
+    lives--;
+    if(lives <= 0){
+        play = 0;
+        hit = 0;
+        initSpaceInvaders();
+
+    }
+}
+
+void send_Bullet(point bullet){
+    if(connected && bullet.y != -2){
+        QD << "a bullet has been send to the other player at x:" << bullet.x;
+        if(enemy_ammo.in_play < MAX_BULLETS){
+            enemy_ammo.bullet_ar[enemy_ammo.in_play].x = rand() % ((PLAYABLE_MAX - 1) - PLAYABLE_OFFSET) + PLAYABLE_OFFSET;
+            enemy_ammo.bullet_ar[enemy_ammo.in_play].y = 3;
+            enemy_ammo.in_play++;
+        }else{
+            star_delay--;
+        }
+    }
+}
+

@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     menu.cpp \
+    multiplayer.cpp \
     snakefield.cpp \
     spaceInvaders.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     ledFont5x8.h \
     mainwindow.h \
     menu.h \
+    multiplayer.h \
     snakefield.h \
     spaceInvaders.h
 
