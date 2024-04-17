@@ -2,30 +2,11 @@
 #include "debug.h"
 #include "game.h"
 #include "displayText.h"
+#include "brickbreaker.h"
 
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
-static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
-static ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
-static brick bricks[MAX_BRICK_LINES][10];
-static point score = {1, 9};
-static point highScorePoint = {1, 0};
-uint8_t start = 0;
-uint8_t points = 0;
-uint8_t lives = 3;
-uint8_t delay = BRICK_SPEED;
-uint8_t highScore = 0;
-uint8_t loopTester = 0;
-uint8_t guardian = 0;
-uint8_t guardianTimer = 100;
-
-void changeDirection(directions);
-void gameEnd(void);
-void lowerBricks(void);
-void checkGameOver(void);
-void checkBrickHit(void);
-void dropPowerUp(int, int);
 
 void init (void) {
     person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
