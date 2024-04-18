@@ -11,9 +11,7 @@ uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
 uint8_t start = 0;
-uint8_t guardianTimer = 100;
 uint8_t delay = BRICK_SPEED;
-uint8_t guardian = 0;
 
 void init (void) {
 
@@ -21,6 +19,11 @@ void init (void) {
 }
 
 void loop (void) {
+
+    if (start == 0) {
+        initBrickbreaker();
+    }
+
     int key = readInput();
     if(key == left) {
         person.x--;
@@ -60,14 +63,8 @@ void loop (void) {
         checkGameOver();
     }
 
-    if (guardian == 1) {
-        if (guardianTimer <= 0) {
-            guardian = 0;
-            guardianTimer = 100;
-        } else {
-            guardianTimer--;
-        }
-    }
+    checkGuardianTimer();
+
     updateScreen();
 }
 

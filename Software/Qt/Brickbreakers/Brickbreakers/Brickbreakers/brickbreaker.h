@@ -50,5 +50,6 @@ void lowerBricks(void);
 void checkGameOver(void);
 void checkBrickHit(void);
 void dropPowerUp(int, int);
+void checkGuardianTimer(void);
 
 #endif // BRICKBREAKER_H

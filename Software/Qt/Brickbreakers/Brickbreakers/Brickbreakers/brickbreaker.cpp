@@ -14,12 +14,28 @@ uint8_t lives = 3;
 extern uint8_t delay;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
-extern uint8_t guardian;
-extern uint8_t guardianTimer;
+uint8_t guardian = 0;
+uint8_t guardianTimer = 100;
 
 void initBrickbreaker() {
     person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
     ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
+
+    for (int i = 0; i < MAX_BRICK_LINES; i++) {
+        for(int j = 0; j < 10; j++) {
+            bricks[i][j].x = j * 5;
+            bricks[i][j].y = i + 8;
+            bricks[i][j].visible = 0;
+            bricks[i][j].toughness = 1;
+        }
+    }
+
+    for (int i = 0; i < BRICK_LINES; i++) {
+        for(int j = 0; j < 10; j++) {
+            bricks[i][j].visible = 1;
+            bricks[i][j].toughness = rand() % (3) + 1;
+        }
+    }
 }
 
 void playBall() {
@@ -409,21 +425,7 @@ void dropPowerUp(int x, int y) {
 
 void printScreen(uint32_t game_screen[][SCREEN_HEIGHT]) {
     if (start == 0) {
-        for (int i = 0; i < MAX_BRICK_LINES; i++) {
-            for(int j = 0; j < 10; j++) {
-                bricks[i][j].x = j * 5;
-                bricks[i][j].y = i + 8;
-                bricks[i][j].visible = 0;
-                bricks[i][j].toughness = 1;
-            }
-        }
 
-        for (int i = 0; i < BRICK_LINES; i++) {
-            for(int j = 0; j < 10; j++) {
-                bricks[i][j].visible = 1;
-                bricks[i][j].toughness = rand() % (3) + 1;
-            }
-        }
     }
 
     for(int x = 0; x < SCREEN_WIDTH; x++) {
@@ -481,4 +483,15 @@ void printScreen(uint32_t game_screen[][SCREEN_HEIGHT]) {
     displayText(game_screen, str, score.x, score.y, WHITE);
     snprintf(str, 12, "%u", highScore);
     displayText(game_screen, str, highScorePoint.x, highScorePoint.y, WHITE);
+}
+
+void checkGuardianTimer() {
+    if (guardian == 1) {
+        if (guardianTimer <= 0) {
+            guardian = 0;
+            guardianTimer = 100;
+        } else {
+            guardianTimer--;
+        }
+    }
 }
