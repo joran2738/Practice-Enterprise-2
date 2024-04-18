@@ -1,27 +1,28 @@
 #ifndef BRICKBREAKER_H
 #define BRICKBREAKER_H
 
-#include "game.h"
-
 //config
 
-#define BAR_SIZE 17
+#include <stdint.h>
+
+#define EVENTSIZE 100
+#define SCREEN_WIDTH 50
+#define SCREEN_HEIGHT 50
+#define BAR_SIZE 49
 #define BRICK_LINES 10
 #define MAX_BRICK_LINES 38
 #define BRICK_SPEED 140
 
-//function declarations
+//Enums
 
-void playBall(void);
-void moveBall(void);
-void changeDirection(directions);
-void gameEnd(void);
-void lowerBricks(void);
-void checkGameOver(void);
-void checkBrickHit(void);
-void dropPowerUp(int, int);
+enum directions {N, NE, E, SE, S, SW, W, NW, pause};
 
 //typedefs
+
+typedef struct {
+    int x;
+    int y;
+} point;
 
 typedef struct {
     int x;
@@ -35,5 +36,19 @@ typedef struct {
     int visible;
     int toughness;
 } brick;
+
+
+//function declarations
+
+void initBrickbreaker(void);
+void printScreen(uint32_t game_screen[][SCREEN_HEIGHT]);
+void playBall(void);
+void moveBall(void);
+void changeDirection(directions);
+void gameEnd(void);
+void lowerBricks(void);
+void checkGameOver(void);
+void checkBrickHit(void);
+void dropPowerUp(int, int);
 
 #endif // BRICKBREAKER_H

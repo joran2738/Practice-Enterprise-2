@@ -16,12 +16,5 @@ void updateScreen(void);
 
 //Enums
 enum keys { left=1, up, right, down, action};
-enum directions {N, NE, E, SE, S, SW, W, NW, pause};
-
-//Typedefs
-typedef struct {
-    int x;
-    int y;
-} point;
 
 #endif // GAME_H
