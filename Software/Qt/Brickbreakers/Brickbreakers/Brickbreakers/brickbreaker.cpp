@@ -421,6 +421,12 @@ void dropPowerUp(int x, int y) {
         guardian = 1;
         QD << "A power up just dropped from brick at x =" << x << "y =" << y;
     }
+
+    if (dropChance <= 15 && dropChance > 10) {
+        QD << "test";
+        explodeBricks(x, y);
+        QD << "An explosion just happened at x =" << x << "y =" << y;
+    }
 }
 
 void printScreen(uint32_t game_screen[][SCREEN_HEIGHT]) {
@@ -492,6 +498,36 @@ void checkGuardianTimer() {
             guardianTimer = 100;
         } else {
             guardianTimer--;
+        }
+    }
+}
+
+void explodeBricks(int x, int y) {
+    int ymin = y - 1;
+    int xmin = x - 1;
+    int ymax = y + 1;
+    int xmax = x + 1;
+    if(y == 0) {
+        ymin = y;
+    }
+    if(y == MAX_BRICK_LINES) {
+        ymax == y;
+    }
+    if(x == 0) {
+        xmin == x;
+    }
+    if(x == 10) {
+        xmax = x;
+    }
+
+
+    for(int i = ymin; i <= ymax; i++) {
+        for(int j = xmin; j <= xmax; j++) {
+            if(bricks[i][j].visible == 1) {
+                bricks[i][j].toughness = 0;
+                bricks[i][j].visible = 0;
+                points++;
+            }
         }
     }
 }
