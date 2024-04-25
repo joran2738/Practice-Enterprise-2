@@ -5,6 +5,9 @@ release/game.o
 release/gamefield.o
 release/main.o
 release/mainwindow.o
+release/menu.o
+release/multiplayer.o
+release/spaceInvaders.o
 release/moc_eventfilter.o
 release/moc_gamefield.o
 release/moc_mainwindow.o

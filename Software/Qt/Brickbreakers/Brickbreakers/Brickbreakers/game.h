@@ -5,8 +5,8 @@
 
 //Configs
 #define EVENTSIZE 100
-#define SCREEN_WIDTH 50
-#define SCREEN_HEIGHT 50
+#define SCREEN_WIDTH 80
+#define SCREEN_HEIGHT 60
 
 //Function declaration
 void init (void);

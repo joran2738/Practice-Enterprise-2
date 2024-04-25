@@ -6,11 +6,11 @@
 #include <stdint.h>
 
 #define EVENTSIZE 100
-#define SCREEN_WIDTH 50
-#define SCREEN_HEIGHT 50
+#define SCREEN_WIDTH 80
+#define SCREEN_HEIGHT 60
 #define BAR_SIZE 49
 #define BRICK_LINES 10
-#define MAX_BRICK_LINES 38
+#define MAX_BRICK_LINES 48
 #define BRICK_SPEED 140
 
 //Enums

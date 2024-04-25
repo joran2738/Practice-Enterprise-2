@@ -10,7 +10,7 @@ static point score = {1, 9};
 static point highScorePoint = {1, 0};
 extern uint8_t start;
 uint8_t points = 0;
-uint8_t lives = 3;
+uint8_t lives1 = 3;
 extern uint8_t delay;
 uint8_t highScore = 0;
 uint8_t loopTester = 0;
@@ -50,7 +50,7 @@ void playBall() {
                 if (ball.dir == SE) {
                     ball.dir = NW;
                 } else {
-                    lives--;
+                    lives1--;
                     gameEnd();
                 }
             } else {
@@ -58,11 +58,11 @@ void playBall() {
                     if (ball.dir == SW) {
                         ball.dir = NE;
                     } else {
-                        lives--;
+                        lives1--;
                         gameEnd();
                     }
                 } else {
-                    lives--;
+                    lives1--;
                     gameEnd();
                 }
             }
@@ -188,7 +188,7 @@ void gameEnd() {
     person.x = (SCREEN_WIDTH)/2;
     ball = {(person.x), SCREEN_HEIGHT - 6, pause};
 
-    if (lives <= 0) {
+    if (lives1 <= 0) {
         if (points > highScore) {
             highScore = points;
             QD << highScore;
@@ -196,7 +196,7 @@ void gameEnd() {
 
         start = 0;
         points = 0;
-        lives = 3;
+        lives1 = 3;
     }
 }
 
@@ -216,7 +216,7 @@ void lowerBricks() {
 void checkGameOver() {
     for (int j = 0; j < 10; j++) {
         if (bricks[MAX_BRICK_LINES - 1][j].visible == 1) {
-            lives = 0;
+            lives1 = 0;
             ball = {(person.x), SCREEN_HEIGHT - 6, pause};
             gameEnd();
             QD << "Game Over, noob";
@@ -440,7 +440,7 @@ void printScreen(uint32_t game_screen[][SCREEN_HEIGHT]) {
         }
     }
 
-    for (int i = 0; i < lives; i++) {
+    for (int i = 0; i < lives1; i++) {
         game_screen[48 - (i*2)][0] = BLUE;
     }
 
@@ -511,10 +511,10 @@ void explodeBricks(int x, int y) {
         ymin = y;
     }
     if(y == MAX_BRICK_LINES) {
-        ymax == y;
+        ymax = y;
     }
     if(x == 0) {
-        xmin == x;
+        xmin = x;
     }
     if(x == 10) {
         xmax = x;

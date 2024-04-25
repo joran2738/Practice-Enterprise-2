@@ -5,6 +5,9 @@ debug/game.o
 debug/gamefield.o
 debug/main.o
 debug/mainwindow.o
+debug/menu.o
+debug/multiplayer.o
+debug/spaceInvaders.o
 debug/moc_eventfilter.o
 debug/moc_gamefield.o
 debug/moc_mainwindow.o

@@ -15,7 +15,10 @@ SOURCES += \
     game.cpp \
     gamefield.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    menu.cpp \
+    multiplayer.cpp \
+    spaceInvaders.cpp
 
 HEADERS += \
     brickbreaker.h \
@@ -25,7 +28,10 @@ HEADERS += \
     game.h \
     gamefield.h \
     ledFont5x8.h \
-    mainwindow.h
+    mainwindow.h \
+    menu.h \
+    multiplayer.h \
+    spaceInvaders.h
 
 FORMS += \
     mainwindow.ui
