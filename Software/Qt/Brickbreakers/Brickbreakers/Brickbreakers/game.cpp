@@ -39,6 +39,7 @@ void init (void) {
             game_screen[x][y] = DARK_GRAY;
         }
     }
+    QD << "gamechoice: " << gamechoice;
     if(gamechoice == 1){
         initSpaceInvaders();
     } else {
@@ -58,9 +59,12 @@ void loop (void) {
     }
     if(key == left) {
         if(play < paused){
-            if(choice == 1) {
-                moveSpaceship(-1);
-            } else if(choice == 2) {
+            if(gamechoice == 1) {
+                if(play == inPlay) {
+                    moveSpaceship(-1);
+                }
+
+            } else if(gamechoice == 2) {
                 person.x--;
                 if(person.x < BAR_SIZE/2) {
                     person.x = (BAR_SIZE/2);
@@ -82,7 +86,9 @@ void loop (void) {
     if(key == right) {
         if(play < paused){
             if (gamechoice == 1) {
-                moveSpaceship(1);
+                if (play == inPlay) {
+                    moveSpaceship(1);
+                }
             } else if (gamechoice == 2) {
                 person.x++;
                 if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
@@ -109,6 +115,7 @@ void loop (void) {
             if (ball.dir == pause) {
                 ball.dir = NE;
                 start = 1;
+                playBall();
             }
             if(!hit){
                 spawnBullet(0);
@@ -130,8 +137,9 @@ void loop (void) {
             if(choice == 0){
                 toggle_multiplayer();
             }else if(choice == 1){
-                gamechoice = 0;
+                gamechoice = 2;
                 play = notPlay;
+                init();
             }
             else if(choice == 2){
                 gamechoice = 1;
@@ -172,6 +180,7 @@ void loop (void) {
                 checkGameOver();
             }
             checkGuardianTimer();
+            playBall();
         }
         updateScreen();
     }

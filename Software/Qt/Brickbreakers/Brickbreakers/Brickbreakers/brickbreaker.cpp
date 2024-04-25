@@ -20,7 +20,6 @@ uint8_t guardianTimer = 100;
 void initBrickbreaker() {
     person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
     ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
-
     for (int i = 0; i < MAX_BRICK_LINES; i++) {
         for(int j = 0; j < 10; j++) {
             bricks[i][j].x = j * 5;
