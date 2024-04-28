@@ -1,58 +1,136 @@
 //This code is meant to be plain c code so it can be used on an STM32 microcontroller.
 
-#include <stdint.h>
 #include "debug.h"
 #include "game.h"
+#include <QDateTime>
+#include "displayText.h"
+#include "spaceInvaders.h"
+#include "menu.h"
+#include "multiplayer.h"
 
 #define DEBUG 1
 
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
 uint32_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
-static point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
-bullets ammo;
 
-uint8_t delay = 0;
+uint8_t hit = 0;
+
+extern uint8_t lives;
+extern uint32_t money;
+
+uint8_t choice = 0;
+uint8_t max_choice = 1;
+extern uint8_t total_games;
+uint8_t gamechoice = 0;
+extern uint8_t play;
+char str[12];
 
 
 void init (void) {
+    choice = 0;
     for(int x = 0; x < SCREEN_WIDTH; x++){
         for(int y = 0; y < SCREEN_HEIGHT; y++){
-            game_screen[x][y] = 0xFF00FF00; //Green
+            game_screen[x][y] = DARK_GRAY;
         }
     }
-    ammo.in_play=0;
-    for (int i = 0;i<MAX_BULLETS;i++){
-        ammo.bullet[i].x = -1;
-        ammo.bullet[i].y = -1;
+    if(gamechoice == 1){
+        initSpaceInvaders();
+    }else{
+        //nothing yet, your init
     }
+
+
 }
 
 void loop (void) {
     int key = readInput();
+    updateScreen();
+    if (play == menu){
+        max_choice = total_games;
+    }else{
+        max_choice = 1;
+    }
     if(key == left) {
-        person.x--;
-        if(person.x < SPACESHIP_WIDTH/2) {
-            person.x = (SPACESHIP_WIDTH/2);
+        if(play < paused){
+            moveSpaceship(-1);
+        }else{
+            if (choice == 0){
+                choice = max_choice;
+            }else{
+                choice--;
+            }
+            QD << choice;
         }
     }
     if(key == right) {
-        person.x++;
-        if(person.x > SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1) {
-            person.x = SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1;
+        if(play < paused){
+            moveSpaceship(1);
+        }else{
+            if (choice == max_choice){
+                choice = 0;
+            }else{
+                choice++;
+            }
+            QD << choice;
         }
     }
-    if(key == action) {
+    if(key == down){
+        if (play == notPlay){
+            play = inPlay;
+        }else if(play == paused){
+            if(choice == 0){
+                QD << "return";
+                play = menu;
+                init();
+            }
+            else if(choice == 1){
+                QD << "play on";
+                play = inPlay;
+            }else{
+                displayPauseMenu(game_screen);
+            }
 
-        if(ammo.in_play < MAX_BULLETS && delay == 0){
-            ammo.bullet[ammo.in_play].x = person.x;
-            ammo.bullet[ammo.in_play].y = person.y - 3;
-            ammo.in_play++;
-            delay = MAX_DELAY;
+        }else if(play == menu){
+            if(choice == 0){
+                toggle_multiplayer();
+            }else if(choice == 1){
+                gamechoice = 0;
+                play = notPlay;
+            }
+            else if(choice == 2){
+                gamechoice = 1;
+                play = notPlay;
+                init();
+            }else{
+                displayMenu(game_screen);
+            }
         }
+        else if(!hit){
+            spawnBullet(0);
+        }
+
     }
-    moveBullets();
-    updateScreen();
+    if(key == up && play < 2){
+        play = paused;
+        choice = 1;
+    }
+
+    if(play == inPlay){
+        spawnComet();
+
+        delayBullet();
+
+        moveComets();
+        moveBullets();
+        moveEnemyBullets();
+        updateScreen();
+    }if(play < paused){
+        spawnStar();
+
+        moveStars();
+    }
+
 }
 
 int readInput()
@@ -60,7 +138,6 @@ int readInput()
     int newKey = 0;
     if(eventindex > 0) {
         newKey = eventlist[0];
-        //QD << newKey << eventindex;
         for(int i=0; i < eventindex; i++){
             eventlist[i] = eventlist[i+1];
         }
@@ -71,44 +148,63 @@ int readInput()
 
 void updateScreen()
 {
+    if (play == menu){
+        displayMenu(game_screen);
+        return;
+    }
 
+    //hit
+    if (gamechoice == 1 && hit > 0){
+        spaceShipHitColorToggle();
+    }
+    //background
     for(int x = 0; x < SCREEN_WIDTH; x++) {
         for(int y = 0; y < SCREEN_HEIGHT; y++) {
-            game_screen[x][y] = 0xFF00FF00; //Green
+            game_screen[x][y] = DARK_GRAY;
         }
     }
 
-    for (int i = person.x - SPACESHIP_WIDTH / 2; i <= person.x + SPACESHIP_WIDTH / 2; i++) {
-        for (int j = person.y - SPACESHIP_HEIGHT / 2; j <= person.y + SPACESHIP_HEIGHT / 2; j++) {
-            if (i == person.x && j != person.y + SPACESHIP_HEIGHT / 2){
-                game_screen[i][j] = 0xFFFF0000; //RED
-            }else if((i == person.x - SPACESHIP_WIDTH / 2 || i == person.x + SPACESHIP_WIDTH / 2) && j != person.y - SPACESHIP_HEIGHT / 2){
-                game_screen[i][j] = 0xFFFF0000; //RED
-            }else if((i == person.x + 1 || person.x - 1 ) && j == person.y - (SPACESHIP_HEIGHT / 2) + 2){
-                game_screen[i][j] = 0xFFFF0000; //RED
-            }
-        }
+    if(gamechoice == 1){
+        //stars
+        displayStars(game_screen);
+
+        //bullets
+        displayAmmo(game_screen);
+
+        // comets
+        displayComets(game_screen);
+    }else{
+        //nothin yet, here comes your things
     }
-    for(int i = 0; i < ammo.in_play; i++){
-        game_screen[ammo.bullet[i].x][ammo.bullet[i].y] = 0xFFFF0000; //RED
+
+    //start
+    if(!play){
+        displayText(game_screen,"START", SCREEN_WIDTH - (SCREEN_WIDTH / 2)-14, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) - 4, WHITE);
     }
-    if (delay > 0){
-        delay--;
+    else if(play == paused){
+        displayPauseMenu(game_screen);
     }
+
+    if(gamechoice == 1){
+        //spaceship
+        displaySpaceShip(game_screen);
+
+        //lives
+        displayLives(game_screen);
+
+        // score
+        snprintf(str, 12, "%u", money);
+        displayText(game_screen,str, SCREEN_WIDTH - 18, 1, WHITE);
+    }else{
+        displayText(game_screen,"bricks", SCREEN_WIDTH - (SCREEN_WIDTH / 2) - 18, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) + 5, WHITE);
+        //nothin yet, here comes your things
+    }
+
+
 }
 
-void moveBullets(){
-    for(int i = 0; i < ammo.in_play; i++){
-        ammo.bullet[i].y--;
-        if (ammo.bullet[i].y < 0){
-            for(int j = i; j < ammo.in_play - 1; j++){
-                if (j != MAX_BULLETS - 1 ){
-                    ammo.bullet[j].x = ammo.bullet[j+1].x;
-                    ammo.bullet[j].y = ammo.bullet[j+1].y;
-                }
-            }
-            ammo.in_play--;
-        }
-    }
-}
+
+
+
+
 

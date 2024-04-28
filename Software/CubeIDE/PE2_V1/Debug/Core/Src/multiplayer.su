@@ -1,0 +1,2 @@
+../Core/Src/multiplayer.c:16:6:check_availability	4	static
+../Core/Src/multiplayer.c:24:6:toggle_multiplayer	8	static
