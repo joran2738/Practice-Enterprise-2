@@ -1,0 +1,3 @@
+../Core/Src/game.c:38:6:init	16	static
+../Core/Src/game.c:54:5:loop	16	static
+../Core/Src/game.c:146:6:updateScreen	24	static
