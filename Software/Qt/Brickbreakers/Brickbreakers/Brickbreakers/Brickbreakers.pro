@@ -9,18 +9,29 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    brickbreaker.cpp \
+    displayText.cpp \
     eventfilter.cpp \
     game.cpp \
     gamefield.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    menu.cpp \
+    multiplayer.cpp \
+    spaceInvaders.cpp
 
 HEADERS += \
+    brickbreaker.h \
     debug.h \
+    displayText.h \
     eventfilter.h \
     game.h \
     gamefield.h \
-    mainwindow.h
+    ledFont5x8.h \
+    mainwindow.h \
+    menu.h \
+    multiplayer.h \
+    spaceInvaders.h
 
 FORMS += \
     mainwindow.ui
