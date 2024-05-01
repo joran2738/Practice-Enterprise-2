@@ -53,6 +53,40 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
+char i2cdata[2];
+int16_t gx = 0;
+int16_t ax = 0;
+int16_t gy = 0;
+int16_t ay = 0;
+int16_t gz = 0;
+int16_t az = 0;
+
+float angleX = 0.0;
+float angleY = 0.0;
+float angleZ = 0.0;
+
+#define ADDR_R 0xD0
+#define ADDR_W 0xD1
+#define REG_WHOAMI 0x75
+
+#define REG_PWR_MGMT 0x6B
+#define REG_SMPLRT_DIV 0x19
+#define REG_GYRO_CONF 0x1B
+#define REG_ACCEL_CONF 0x1C
+
+#define REG_GYRO_XOUT158 0x43
+#define REG_GYRO_XOUT70 0x44
+#define REG_GYRO_YOUT158 0x45
+#define REG_GYRO_YOUT70 0x46
+#define REG_GYRO_ZOUT158 0x47
+#define REG_GYRO_ZOUT70 0x48
+
+#define REG_ACCEL_XOUT158 0x3B
+#define REG_ACCEL_XOUT70 0x3C
+#define REG_ACCEL_YOUT158 0x3D
+#define REG_ACCEL_YOUT70 0x3E
+#define REG_ACCEL_ZOUT158 0x3F
+#define REG_ACCEL_ZOUT70 0x40
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,6 +103,9 @@ static void MX_USART3_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t key = 0;
+int16_t angle = 90;
+uint32_t millis = 0;
+uint32_t premillis = 0;
 
 int _write(int file, char *ptr, int len) {
     HAL_StatusTypeDef xStatus;
@@ -93,6 +130,91 @@ int _write(int file, char *ptr, int len) {
     }
     return len;
 }
+
+uint8_t read_MPU_mem(uint8_t reg_addr){
+	uint8_t data;
+	if(HAL_I2C_Mem_Read(&hi2c2, ADDR_R, reg_addr, 1, &data, 1, 100) == HAL_OK){
+		return data;
+	}
+	else{
+		printf("mem not read\r\n");
+	}
+}
+
+void write_MPU_mem(uint8_t reg_addr, uint8_t data){
+	if(HAL_I2C_Mem_Write(&hi2c2, ADDR_W, reg_addr, 1, &data, 1, 100) == HAL_OK){
+		return data;
+	}
+	else{
+		printf("mem not written\r\n");
+	}
+}
+
+void read_MPU(){
+	uint8_t LSByte = 1;
+	uint8_t MSByte = 1;
+
+	MSByte = read_MPU_mem(REG_GYRO_XOUT158);
+	LSByte = read_MPU_mem(REG_GYRO_XOUT70);
+
+	gx = ((int16_t)((MSByte << 8) | LSByte)) / 131;
+
+	MSByte = read_MPU_mem(REG_GYRO_YOUT158);
+	LSByte = read_MPU_mem(REG_GYRO_YOUT70);
+
+	gy = ((int16_t)((MSByte << 8) | LSByte)) / 131;
+
+	MSByte = read_MPU_mem(REG_GYRO_ZOUT158);
+	LSByte = read_MPU_mem(REG_GYRO_ZOUT70);
+
+	gz = ((int16_t)((MSByte << 8) | LSByte)) / 131;
+
+	MSByte = read_MPU_mem(REG_ACCEL_XOUT158);
+	LSByte = read_MPU_mem(REG_ACCEL_XOUT70);
+
+	ax = ((int16_t)((MSByte << 8) | LSByte)) / 16384;
+
+	MSByte = read_MPU_mem(REG_ACCEL_YOUT158);
+	LSByte = read_MPU_mem(REG_ACCEL_YOUT70);
+
+	ay = ((int16_t)((MSByte << 8) | LSByte)) / 16384;
+
+	MSByte = read_MPU_mem(REG_ACCEL_ZOUT158);
+	LSByte = read_MPU_mem(REG_ACCEL_ZOUT70);
+
+	az = ((int16_t)((MSByte << 8) | LSByte)) / 16384;
+}
+
+static float wrap(float angle,float limit){
+  while (angle >  limit) angle -= 2*limit;
+  while (angle < -limit) angle += 2*limit;
+  return angle;
+}
+
+void update_MPU_vars(){
+	read_MPU();
+
+	float sgZ = az<0 ? -1 : 1; // allow one angle to go from -180 to +180 degrees
+	float angleAccX =   atan2(ay, sgZ*sqrt(az*az + ax*ax)) * 57.29578 ; // [-180,+180] deg
+	float angleAccY = - atan2(ax,     sqrt(az*az + ax*ay)) * 57.29578 ; // [- 90,+ 90] deg
+
+	uint32_t mil = millis = HAL_GetTick();;
+	float dt = (mil - premillis);
+	premillis = mil;
+
+	angleX = wrap(0.98*(angleAccX + wrap(angleX + gx*dt - angleAccX,180)) + (1.0 - 0.98)*angleAccX,180);
+	angleY = wrap(0.98*(angleAccY + wrap(angleY + sgZ*gy*dt - angleAccY, 90)) + (1.0 - 0.98)*angleAccY, 90);
+	angleZ += gz*dt;
+}
+void init_MPU(){
+	write_MPU_mem(REG_PWR_MGMT, 0);
+	write_MPU_mem(REG_SMPLRT_DIV,0x07);
+	write_MPU_mem(REG_GYRO_CONF, 0);
+	write_MPU_mem(REG_ACCEL_CONF, 0);
+}
+
+
+
 /* USER CODE END 0 */
 
 /**
@@ -116,7 +238,6 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -128,6 +249,14 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+  if(HAL_I2C_IsDeviceReady(&hi2c2, ADDR_R, 1, 100) == HAL_OK){
+	  printf("succesfully communicated\n\r");
+	  init_MPU();
+  }
+  else{
+	  printf("i2C not found\n\r");
+  }
+
 
   /* USER CODE END 2 */
 
@@ -141,6 +270,15 @@ int main(void)
 	  //key = loop(key);
 	  HAL_Delay(1000);
 	  printf("doing code\r\n");
+	  printf("whoami: 0x%x\r\n\n",read_MPU_mem(REG_WHOAMI));
+	  read_MPU();
+	  millis = HAL_GetTick();
+	  printf("° changed: %d",gx * (millis / 1000));
+	  angle = angle + gx * (millis / 1000);
+	  printf("gyro x raw: %d\t angle: %d\r\n",gx,angle);
+	  update_MPU_vars();
+	  printf("angleX:%d, angleY:%d, angleZ:%d\n\r",angleX,angleY,angleZ);
+
   }
   /* USER CODE END 3 */
 }
