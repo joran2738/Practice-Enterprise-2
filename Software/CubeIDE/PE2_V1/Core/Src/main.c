@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/times.h>
 #include <sys/unistd.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -142,10 +143,7 @@ uint8_t read_MPU_mem(uint8_t reg_addr){
 }
 
 void write_MPU_mem(uint8_t reg_addr, uint8_t data){
-	if(HAL_I2C_Mem_Write(&hi2c2, ADDR_W, reg_addr, 1, &data, 1, 100) == HAL_OK){
-		return data;
-	}
-	else{
+	if(HAL_I2C_Mem_Write(&hi2c2, ADDR_W, reg_addr, 1, &data, 1, 100) != HAL_OK){
 		printf("mem not written\r\n");
 	}
 }
@@ -157,7 +155,7 @@ void read_MPU(){
 	MSByte = read_MPU_mem(REG_GYRO_XOUT158);
 	LSByte = read_MPU_mem(REG_GYRO_XOUT70);
 
-	gx = ((int16_t)((MSByte << 8) | LSByte)) / 131;
+	gx = ((int16_t)((MSByte << 8) | LSByte)) / 131 + 3;
 
 	MSByte = read_MPU_mem(REG_GYRO_YOUT158);
 	LSByte = read_MPU_mem(REG_GYRO_YOUT70);
@@ -167,7 +165,7 @@ void read_MPU(){
 	MSByte = read_MPU_mem(REG_GYRO_ZOUT158);
 	LSByte = read_MPU_mem(REG_GYRO_ZOUT70);
 
-	gz = ((int16_t)((MSByte << 8) | LSByte)) / 131;
+	gz = ((int16_t)((MSByte << 8) | LSByte)) / 131 + 1;
 
 	MSByte = read_MPU_mem(REG_ACCEL_XOUT158);
 	LSByte = read_MPU_mem(REG_ACCEL_XOUT70);
@@ -191,6 +189,7 @@ static float wrap(float angle,float limit){
   return angle;
 }
 
+
 void update_MPU_vars(){
 	read_MPU();
 
@@ -199,13 +198,14 @@ void update_MPU_vars(){
 	float angleAccY = - atan2(ax,     sqrt(az*az + ax*ay)) * 57.29578 ; // [- 90,+ 90] deg
 
 	uint32_t mil = millis = HAL_GetTick();;
-	float dt = (mil - premillis);
+	float dt = (mil - premillis) * 1e-3;
 	premillis = mil;
 
 	angleX = wrap(0.98*(angleAccX + wrap(angleX + gx*dt - angleAccX,180)) + (1.0 - 0.98)*angleAccX,180);
 	angleY = wrap(0.98*(angleAccY + wrap(angleY + sgZ*gy*dt - angleAccY, 90)) + (1.0 - 0.98)*angleAccY, 90);
 	angleZ += gz*dt;
 }
+
 void init_MPU(){
 	write_MPU_mem(REG_PWR_MGMT, 0);
 	write_MPU_mem(REG_SMPLRT_DIV,0x07);
@@ -256,7 +256,7 @@ int main(void)
   else{
 	  printf("i2C not found\n\r");
   }
-
+  float factor = 1;
 
   /* USER CODE END 2 */
 
@@ -268,16 +268,21 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  //key = loop(key);
-	  HAL_Delay(1000);
-	  printf("doing code\r\n");
-	  printf("whoami: 0x%x\r\n\n",read_MPU_mem(REG_WHOAMI));
-	  read_MPU();
-	  millis = HAL_GetTick();
-	  printf("° changed: %d",gx * (millis / 1000));
-	  angle = angle + gx * (millis / 1000);
-	  printf("gyro x raw: %d\t angle: %d\r\n",gx,angle);
+	  HAL_Delay(100);
+	  //printf("doing code\r\n");
+	  //printf("whoami: 0x%x\r\n\n",read_MPU_mem(REG_WHOAMI));
+
 	  update_MPU_vars();
-	  printf("angleX:%d, angleY:%d, angleZ:%d\n\r",angleX,angleY,angleZ);
+	  //printf("angleX:%d, angleY:%d, angleZ:%d\n\r",(int16_t)angleX,(int16_t)angleY,(int16_t)angleZ);
+	  if ((int16_t)angleX > 20){
+		  printf("going right\r\n");
+	  }
+	  else if ((int16_t)angleX < -20){
+		  printf("going left\r\n");
+	  }
+	  else{
+		  printf("level\r\n");
+	  }
 
   }
   /* USER CODE END 3 */
