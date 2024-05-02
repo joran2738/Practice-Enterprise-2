@@ -136,7 +136,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  HAL_Delay(1000);
-	  printf("boop i'm here\n");
+	  printf("boop i'm here\n\r");
   }
   /* USER CODE END 3 */
 }

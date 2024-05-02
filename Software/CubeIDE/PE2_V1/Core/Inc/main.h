@@ -31,7 +31,12 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "fonts.h"
+#include "z_displ_ILI9XXX.h"
+#include "z_displ_ILI9XXX_test.h"
+#include "z_touch_XPT2046.h"
+#include "z_touch_XPT2046_test.h"
+#include "z_touch_XPT2046_menu.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -69,14 +74,20 @@ void Error_Handler(void);
 #define MIDDLE_Pin GPIO_PIN_0
 #define MIDDLE_GPIO_Port GPIOA
 #define MIDDLE_EXTI_IRQn EXTI0_IRQn
-#define SPI2_T_CS_Pin GPIO_PIN_12
-#define SPI2_T_CS_GPIO_Port GPIOB
-#define SPI2_CS_Pin GPIO_PIN_8
-#define SPI2_CS_GPIO_Port GPIOA
-#define SPI2_RESET_Pin GPIO_PIN_9
-#define SPI2_RESET_GPIO_Port GPIOA
-#define SPI2_DC_Pin GPIO_PIN_10
-#define SPI2_DC_GPIO_Port GPIOA
+#define TOUCH_CS_Pin GPIO_PIN_12
+#define TOUCH_CS_GPIO_Port GPIOB
+#define DISPL_SCK_Pin GPIO_PIN_13
+#define DISPL_SCK_GPIO_Port GPIOB
+#define TOUCH_MISO_Pin GPIO_PIN_14
+#define TOUCH_MISO_GPIO_Port GPIOB
+#define DISPL_MOSI_Pin GPIO_PIN_15
+#define DISPL_MOSI_GPIO_Port GPIOB
+#define DISPL_CS_Pin GPIO_PIN_8
+#define DISPL_CS_GPIO_Port GPIOA
+#define DISPL_RST_Pin GPIO_PIN_9
+#define DISPL_RST_GPIO_Port GPIOA
+#define DISPL_DC_Pin GPIO_PIN_10
+#define DISPL_DC_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
