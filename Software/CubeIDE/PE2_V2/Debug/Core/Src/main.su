@@ -1,0 +1,15 @@
+../Core/Src/main.c:107:5:_write	32	static
+../Core/Src/main.c:131:9:read_MPU_mem	40	static
+../Core/Src/main.c:142:6:write_MPU_mem	32	static
+../Core/Src/main.c:148:6:read_y_accel	16	static
+../Core/Src/main.c:156:6:init_MPU	8	static
+../Core/Src/main.c:162:6:print_balk_test	24	static
+../Core/Src/main.c:179:5:main	8	static
+../Core/Src/main.c:285:6:SystemClock_Config	120	static
+../Core/Src/main.c:331:13:MX_I2C2_Init	8	static
+../Core/Src/main.c:379:13:MX_SPI2_Init	8	static
+../Core/Src/main.c:419:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:454:13:MX_USART3_UART_Init	8	static
+../Core/Src/main.c:489:13:MX_GPIO_Init	48	static
+../Core/Src/main.c:545:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/main.c:570:6:Error_Handler	4	static,ignoring_inline_asm
