@@ -86,6 +86,7 @@ int loop (int key) {
     }
     if(key == down){
         if (play == notPlay){
+        	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, DARK_GREY);
             play = inPlay;
         }else if(play == paused){
             if(choice == 0){
@@ -170,7 +171,7 @@ void updateScreen()
 
     //start
     if(!play){
-        //displayText(game_screen,"START", SCREEN_WIDTH - (SCREEN_WIDTH / 2)-14, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) - 4, WHITE);
+    	Displ_WString(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, "START", Font20, 2, WHITE, DARK_GREY);
     }
     else if(play == paused){
     	displayPauseMenu(0);
@@ -182,7 +183,6 @@ void updateScreen()
 
     	//lives
     	displayLives();
-        //displayText(game_screen,"space", SCREEN_WIDTH - (SCREEN_WIDTH / 2) - 18, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) + 5, WHITE);
 
     }else{
         //displayText(game_screen,"bricks", SCREEN_WIDTH - (SCREEN_WIDTH / 2) - 18, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) + 5, WHITE);

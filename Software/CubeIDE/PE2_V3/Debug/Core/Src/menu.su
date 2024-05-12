@@ -1,6 +1,6 @@
 ../Core/Src/menu.c:22:6:displayPauseMenu	40	static
-../Core/Src/menu.c:46:6:displayMenu	32	static
-../Core/Src/menu.c:90:6:displayMenuIcons	8	static
-../Core/Src/menu.c:102:6:displayMultiplayerIcon	24	static
-../Core/Src/menu.c:119:6:displayBricksIcon	16	static
-../Core/Src/menu.c:126:6:displaySpaceIcon	16	static
+../Core/Src/menu.c:46:6:displayMenu	56	static
+../Core/Src/menu.c:83:6:displayMenuIcons	8	static
+../Core/Src/menu.c:95:6:displayMultiplayerIcon	24	static
+../Core/Src/menu.c:112:6:displayBricksIcon	16	static
+../Core/Src/menu.c:119:6:displaySpaceIcon	16	static

@@ -141,7 +141,7 @@
  * TouchGFX buffers>2700bytes need BUFLEVEL 13
  * TouchGFX buffers>1300bytes need BUFLEVEL 12
 ***************************************************/
-#define BUFLEVEL 6
+#define BUFLEVEL 10
 
 /*|||||||| END OF USER/PROJECT PARAMETERS ||||||||*/
 

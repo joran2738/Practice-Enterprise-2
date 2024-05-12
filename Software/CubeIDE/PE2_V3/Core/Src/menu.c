@@ -65,22 +65,15 @@ void displayMenu(){
     displayMenuIcons();
 
     // text
-/*
-    for (int i = 0; i < SCREEN_WIDTH; i++){
-        for (int j = SCREEN_HEIGHT - 16; j < SCREEN_HEIGHT; j++){
-            game_screen[i][j] = ENC_BLACK;
-        }
-    }
-*/
     switch (choice) {
     case 0:
-        //displayText(game_screen,"Multiplayer", 2, SCREEN_HEIGHT - 16, WHITE);
+    	Displ_WString(8, SCREEN_HEIGHT * 4 - 40, "Multiplayer   ", Font20, 1, WHITE, DARK_GREY);
         break;
     case 1:
-        //displayText(game_screen,"Brick Breaker", 2, SCREEN_HEIGHT - 16, WHITE);
+    	Displ_WString(8, SCREEN_HEIGHT * 4 - 40, "Brick Breaker ", Font20, 1, WHITE, DARK_GREY);
         break;
     case 2:
-        //displayText(game_screen,"Space Invaders", 2, SCREEN_HEIGHT - 16, WHITE);
+    	Displ_WString(8, SCREEN_HEIGHT * 4 - 40, "Space Invaders", Font20, 1, WHITE, DARK_GREY);
         break;
     default:
         break;
