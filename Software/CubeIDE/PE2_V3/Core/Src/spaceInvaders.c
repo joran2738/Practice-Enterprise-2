@@ -57,6 +57,21 @@ void hitComet(int,int);
  */
 void beenHit(void);
 
+/**
+ * @fn void powerups(void)
+ * @brief
+ *
+ */
+void powerups(void);
+
+/**
+ * @fn void displayPowerup(uint16_t)
+ * @brief
+ *
+ * @param
+ */
+void displayPowerup(uint16_t);
+
 bullets ammo;
 bullets enemy_ammo;
 comets Comet;
@@ -67,6 +82,8 @@ uint32_t money = 0;
 uint8_t play = 3;
 uint8_t comet_delay = 0;
 uint8_t star_delay = 0;
+uint8_t powerUp = 0;
+uint8_t powerUp_delay = 0;
 
 static point SpaceShip = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 extern uint8_t hit;
@@ -236,16 +253,29 @@ void moveEnemyBullets(void){
 
 void moveComets(){
 	displayComets(DARK_GREY);
-    for (int i = 0; i<Comet.in_play; i++){
-        for(int j = 0; j < Comet.comet_ar[i].size; j++){
-            if(Comet.comet_ar[i].x + j <= SpaceShip.x + SPACESHIP_WIDTH / 2 && Comet.comet_ar[i].x + j >= SpaceShip.x - SPACESHIP_WIDTH / 2){
+	for (int i = 0; i<Comet.in_play; i++){
+		for(int j = 0; j < Comet.comet_ar[i].size; j++){
+			if(Comet.comet_ar[i].x + j <= SpaceShip.x + SPACESHIP_WIDTH / 2 && Comet.comet_ar[i].x + j >= SpaceShip.x - SPACESHIP_WIDTH / 2){
+				if(powerUp == 2 && Comet.comet_ar[i].y + Comet.comet_ar[i].size - 1 >= SpaceShip.y - SPACESHIP_HEIGHT / 2){
+					hitComet(420,i);
+					displayPowerup(DARK_GREY);
+					powerUp = 0;
+				}
                 if (Comet.comet_ar[i].y + Comet.comet_ar[i].size - 1 >= SpaceShip.y - SPACESHIP_HEIGHT / 2 && hit == 0){
                     hitComet(420,i);
                     beenHit();
                 }
             }
         }
+        if(powerUp == 1 && SpaceShip.x >= Comet.comet_ar[i].x && SpaceShip.x <= Comet.comet_ar[i].x + Comet.comet_ar[i].size){
+        	hitComet(420,i);
+        	if(powerUp_delay == 0){
+        		displayPowerup(DARK_GREY);
+        		powerUp = 0;
 
+        	}
+        	powerUp_delay--;
+        }
         Comet.comet_ar[i].y++;
         if (Comet.comet_ar[i].y > SCREEN_HEIGHT - 1){
             for(int j = i; j < MAX_COMETS - 1; j++){
@@ -276,19 +306,34 @@ void moveStars(){
 
 void moveSpaceship(int direction){
 	displaySpaceShip(DARK_GREY);
+	if(powerUp > 0){
+		displayPowerup(DARK_GREY);
+	}
     if(direction < 0){
         SpaceShip.x--;
         if(SpaceShip.x < SPACESHIP_WIDTH/2) {
-            SpaceShip.x = (SPACESHIP_WIDTH/2);
+        	SpaceShip.x = (SPACESHIP_WIDTH/2);
         }
-        displaySpaceShip(RED);
+        displaySpaceShip(spaceshipCurrentColor);
+        if(powerUp == 1){
+        	displayPowerup(RED);
+        }
+        if(powerUp == 2){
+        	displayPowerup(LIGHT_BLUE);
+        }
         return;
     }
     SpaceShip.x++;
     if(SpaceShip.x > SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1) {
-        SpaceShip.x = SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1;
+    	SpaceShip.x = SCREEN_WIDTH - (SPACESHIP_WIDTH/2) - 1;
     }
     displaySpaceShip(spaceshipCurrentColor);
+    if(powerUp == 1){
+    	displayPowerup(RED);
+    }
+	if(powerUp == 2){
+		displayPowerup(LIGHT_BLUE);
+	}
 }
 
 void hitComet(int bul,int com){
@@ -299,6 +344,7 @@ void hitComet(int bul,int com){
             ammo.bullet_ar[j].x = ammo.bullet_ar[j+1].x;
             ammo.bullet_ar[j].y = ammo.bullet_ar[j+1].y;
         }
+        powerups();
     }
 
     for(int j = com; j < MAX_COMETS - 1; j++){
@@ -398,6 +444,30 @@ void send_Bullet(point bullet){
     }
 }
 
+void powerups(){
+    uint8_t powerupornot = rand() % ((3 - 0) - 0) + 0;
+    if(powerUp == 0 && powerupornot == 0){
+        powerUp = rand() % ((3 - 1) - 0) + 1;
+        if(powerUp == 1){
+        	displayPowerup(RED);
+        }
+        else if(powerUp == 2){
+        	displayPowerup(LIGHT_BLUE);
+        }
+        powerUp_delay = MAX_DELAY_POWERUP;
+    }
+}
+
+void displayPowerup(uint16_t color){
+
+    if(powerUp == 1){
+		Displ_FillArea(SpaceShip.x * 4, 0, 4, 180, color);
+		Displ_FillArea(SpaceShip.x * 4 + 1, 180, 2, 30, color);
+    }
+    else if(powerUp == 2){
+    	Displ_drawCircle(SpaceShip.x * 4 + 1, SpaceShip.y * 4 + 2, 14, color);
+    }
+}
 
 
 

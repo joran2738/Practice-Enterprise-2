@@ -28,6 +28,7 @@ extern uint8_t lives;
 extern uint32_t money;
 
 uint8_t choice = 0;
+uint8_t last_choice_pause = 40;
 uint8_t max_choice = 1;
 extern uint8_t total_games;
 uint8_t gamechoice = 0;
@@ -37,14 +38,10 @@ char str[12];
 
 void init (void) {
     choice = 0;
-    for(int x = 0; x < SCREEN_WIDTH; x++){
-        for(int y = 0; y < SCREEN_HEIGHT; y++){
-            game_screen[x][y] = ENC_DARK_GRAY;
-        }
-    }
     if(gamechoice == 1){
         initSpaceInvaders();
     }else{
+    	Displ_CLS(BLACK);
         //nothing yet, your init
     }
 
@@ -60,7 +57,9 @@ int loop (int key) {
     }
     if(key == left) {
         if(play < paused){
-            moveSpaceship(-1);
+        	if(gamechoice == 1){
+        		moveSpaceship(-1);
+        	}
         }else{
             if (choice == 0){
                 choice = max_choice;
@@ -73,14 +72,15 @@ int loop (int key) {
     }
     if(key == right) {
         if(play < paused){
-            moveSpaceship(1);
+        	if(gamechoice == 1){
+        		moveSpaceship(1);
+        	}
         }else{
             if (choice == max_choice){
                 choice = 0;
             }else{
                 choice++;
             }
-            //QD << choice; // change to uart debug
         }
         key = 0;
     }
@@ -89,12 +89,10 @@ int loop (int key) {
             play = inPlay;
         }else if(play == paused){
             if(choice == 0){
-                //QD << "return"; // change to uart debug
                 play = menu;
                 init();
             }
             else if(choice == 1){
-                //QD << "play on";  // change to uart debug
             	displayPauseMenu(1);
                 play = inPlay;
             }else{
@@ -107,6 +105,8 @@ int loop (int key) {
             }else if(choice == 1){
                 gamechoice = 0;
                 play = notPlay;
+
+                init();
             }
             else if(choice == 2){
                 gamechoice = 1;
@@ -125,6 +125,7 @@ int loop (int key) {
     if(key == up && play < 2){
         play = paused;
         choice = 1;
+        last_choice_pause = 40;
         key = 0;
     }
 

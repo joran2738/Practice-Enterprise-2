@@ -99,7 +99,7 @@ static void MX_USART3_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 volatile uint32_t debounce_time = 0;
-#define DEBOUNCE_DELAY 10 // doesn't work that well
+#define DEBOUNCE_DELAY 30 // doesn't work that well
 
 uint8_t key = 0;
 int16_t angle = 90;
@@ -516,19 +516,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (current_time - debounce_time > DEBOUNCE_DELAY) {
         // Update debounce time
         debounce_time = current_time;
-
         // Your button handling code here
         printf("interrupt!\r\n");
-        if (GPIO_Pin == LEFT_Pin) {
+        if (GPIO_Pin == LEFT_Pin && HAL_GPIO_ReadPin(LEFT_GPIO_Port, GPIO_Pin) == 0) {
             key = left;
             printf("left clicked\r\n");
-        } else if (GPIO_Pin == TOP_Pin) {
+        } else if (GPIO_Pin == TOP_Pin && HAL_GPIO_ReadPin(TOP_GPIO_Port, GPIO_Pin) == 0) {
             key = up;
             printf("up clicked\r\n");
-        } else if (GPIO_Pin == RIGHT_Pin) {
+        } else if (GPIO_Pin == RIGHT_Pin && HAL_GPIO_ReadPin(RIGHT_GPIO_Port, GPIO_Pin) == 0) {
             key = right;
             printf("right clicked\r\n");
-        } else if (GPIO_Pin == MIDDLE_Pin) {
+        } else if (GPIO_Pin == MIDDLE_Pin && HAL_GPIO_ReadPin(MIDDLE_GPIO_Port, GPIO_Pin) == 0) {
             key = down;
             printf("down clicked\r\n");
         }

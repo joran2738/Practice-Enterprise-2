@@ -31,7 +31,7 @@
 #define HEARTS_X 8
 #define HEARTS_OFFSET 12
 
-
+#define MAX_DELAY_POWERUP 5
 //Typedefs
 typedef struct {
     int8_t x;
@@ -176,6 +176,8 @@ void spaceShipHitColorToggle(void);
  *
  */
 void delayBullet(void);
+
+
 
 //multiplayer
 /**

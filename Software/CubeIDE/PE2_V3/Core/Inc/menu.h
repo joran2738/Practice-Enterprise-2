@@ -20,6 +20,7 @@
 enum gameState{notPlay,inPlay,paused,menu};
 
 extern uint8_t choice;
+extern uint8_t last_choice_pause;
 
 
 void displayPauseMenu(uint8_t);

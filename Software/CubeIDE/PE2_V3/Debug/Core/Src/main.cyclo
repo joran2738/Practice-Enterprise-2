@@ -10,5 +10,5 @@ main.c:345:13:MX_SPI2_Init	2
 main.c:385:13:MX_USART2_UART_Init	2
 main.c:420:13:MX_USART3_UART_Init	2
 main.c:455:13:MX_GPIO_Init	1
-main.c:511:6:HAL_GPIO_EXTI_Callback	6
-main.c:543:6:Error_Handler	1
+main.c:511:6:HAL_GPIO_EXTI_Callback	10
+main.c:542:6:Error_Handler	1

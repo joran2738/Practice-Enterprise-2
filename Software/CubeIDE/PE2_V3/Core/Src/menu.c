@@ -12,7 +12,8 @@
 
 int total_games = 2;
 extern uint8_t connected;
-uint8_t last_choice = 5;
+uint8_t last_choice_menu = 40;
+
 
 void displayMultiplayerIcon(void);
 void displayBricksIcon(void);
@@ -21,18 +22,24 @@ void displaySpaceIcon(void);
 void displayPauseMenu(uint8_t clear){
 	uint16_t back_color = GREY;
 	uint16_t continue_color = RED;
-	if(choice == 0){
-		back_color = RED;
-		continue_color = GREY;
-	}
-	else if(clear){
-		back_color = DARK_GREY;
-		continue_color = DARK_GREY;
-	}
-	Displ_FillArea(SCREEN_WIDTH * 2 - BUTTON_SIZE - 12, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2, BUTTON_SIZE, BUTTON_SIZE, back_color);
-	Displ_FillArea(SCREEN_WIDTH * 2 + 12, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2, BUTTON_SIZE, BUTTON_SIZE, continue_color);
+	uint16_t triangle_color = WHITE;
+	if(choice != last_choice_pause || clear){
+		last_choice_pause = choice;
+		if(choice == 0){
+			back_color = RED;
+			continue_color = GREY;
+		}
+		else if(clear){
+			back_color = DARK_GREY;
+			continue_color = DARK_GREY;
+			triangle_color = DARK_GREY;
+		}
+		Displ_FillArea(SCREEN_WIDTH * 2 - BUTTON_SIZE - 12, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2, BUTTON_SIZE, BUTTON_SIZE, back_color);
+		Displ_FillArea(SCREEN_WIDTH * 2 + 12, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2, BUTTON_SIZE, BUTTON_SIZE, continue_color);
 
-	Displ_fillTriangle(SCREEN_WIDTH * 2 + 20, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2 + 8, SCREEN_WIDTH * 2 + 20, SCREEN_HEIGHT * 2 + BUTTON_SIZE / 2 - 8, SCREEN_WIDTH * 2 + 20 + BUTTON_SIZE - 8, SCREEN_HEIGHT * 2, WHITE);
+		Displ_fillTriangle(SCREEN_WIDTH * 2 + 20, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2 + 8, SCREEN_WIDTH * 2 + 20, SCREEN_HEIGHT * 2 + BUTTON_SIZE / 2 - 8, SCREEN_WIDTH * 2 + 20 + BUTTON_SIZE - 16, SCREEN_HEIGHT * 2, triangle_color);
+		Displ_fillTriangle(SCREEN_WIDTH * 2 - 20, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2 + 8, SCREEN_WIDTH * 2 - 20, SCREEN_HEIGHT * 2 + BUTTON_SIZE / 2 - 8, SCREEN_WIDTH * 2 - 20 - BUTTON_SIZE + 16, SCREEN_HEIGHT * 2, triangle_color);
+	}
 
 }
 
@@ -40,8 +47,8 @@ void displayMenu(){
 	int y_offset = 12;
 	int x_offset = 12;
 	//box around
-	if(choice != last_choice){
-		last_choice =  choice;
+	if(choice != last_choice_menu){
+		last_choice_menu =  choice;
 		for(int i = 0; i < total_games + 1 && i < 8; i++){
 			if(i == choice){
 				Displ_FillArea(x_offset, y_offset,BUTTON_SIZE , BUTTON_SIZE, RED);
