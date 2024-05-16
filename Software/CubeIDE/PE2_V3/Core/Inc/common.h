@@ -18,4 +18,6 @@ typedef struct {
     int8_t y;
 } point;
 
+#define RANDOM(MIN, MAX) (rand() % ((MAX) - (MIN) + 1) + (MIN))
+
 #endif /* INC_COMMON_H_ */
