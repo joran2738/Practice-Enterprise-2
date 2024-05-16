@@ -850,7 +850,7 @@ void gameEnd() {
  80006d8:	b580      	push	{r7, lr}
  80006da:	b082      	sub	sp, #8
  80006dc:	af02      	add	r7, sp, #8
-    Displ_FillArea(0, (person.y - 1)*4, SCREEN_WIDTH, 10, D_GREEN);
+    Displ_FillArea(0, (person.y - 1)*4, SCREEN_WIDTH*4, 10, D_GREEN);
  80006de:	4b1c      	ldr	r3, [pc, #112]	; (8000750 <gameEnd+0x78>)
  80006e0:	f993 3001 	ldrsb.w	r3, [r3, #1]
  80006e4:	3b01      	subs	r3, #1
@@ -860,66 +860,65 @@ void gameEnd() {
  80006ec:	f44f 63c0 	mov.w	r3, #1536	; 0x600
  80006f0:	9300      	str	r3, [sp, #0]
  80006f2:	230a      	movs	r3, #10
- 80006f4:	2250      	movs	r2, #80	; 0x50
- 80006f6:	2000      	movs	r0, #0
- 80006f8:	f004 f93a 	bl	8004970 <Displ_FillArea>
+ 80006f4:	f44f 72a0 	mov.w	r2, #320	; 0x140
+ 80006f8:	2000      	movs	r0, #0
+ 80006fa:	f004 f939 	bl	8004970 <Displ_FillArea>
     person.x = (SCREEN_WIDTH)/2;
- 80006fc:	4b14      	ldr	r3, [pc, #80]	; (8000750 <gameEnd+0x78>)
- 80006fe:	2228      	movs	r2, #40	; 0x28
- 8000700:	701a      	strb	r2, [r3, #0]
+ 80006fe:	4b14      	ldr	r3, [pc, #80]	; (8000750 <gameEnd+0x78>)
+ 8000700:	2228      	movs	r2, #40	; 0x28
+ 8000702:	701a      	strb	r2, [r3, #0]
     ball.x = person.x;
- 8000702:	4b13      	ldr	r3, [pc, #76]	; (8000750 <gameEnd+0x78>)
- 8000704:	f993 3000 	ldrsb.w	r3, [r3]
- 8000708:	461a      	mov	r2, r3
- 800070a:	4b12      	ldr	r3, [pc, #72]	; (8000754 <gameEnd+0x7c>)
- 800070c:	601a      	str	r2, [r3, #0]
+ 8000704:	4b12      	ldr	r3, [pc, #72]	; (8000750 <gameEnd+0x78>)
+ 8000706:	f993 3000 	ldrsb.w	r3, [r3]
+ 800070a:	461a      	mov	r2, r3
+ 800070c:	4b11      	ldr	r3, [pc, #68]	; (8000754 <gameEnd+0x7c>)
+ 800070e:	601a      	str	r2, [r3, #0]
     ball.y = SCREEN_HEIGHT - 6;
- 800070e:	4b11      	ldr	r3, [pc, #68]	; (8000754 <gameEnd+0x7c>)
- 8000710:	2236      	movs	r2, #54	; 0x36
- 8000712:	605a      	str	r2, [r3, #4]
+ 8000710:	4b10      	ldr	r3, [pc, #64]	; (8000754 <gameEnd+0x7c>)
+ 8000712:	2236      	movs	r2, #54	; 0x36
+ 8000714:	605a      	str	r2, [r3, #4]
     ball.dir = still;
- 8000714:	4b0f      	ldr	r3, [pc, #60]	; (8000754 <gameEnd+0x7c>)
- 8000716:	2208      	movs	r2, #8
- 8000718:	721a      	strb	r2, [r3, #8]
+ 8000716:	4b0f      	ldr	r3, [pc, #60]	; (8000754 <gameEnd+0x7c>)
+ 8000718:	2208      	movs	r2, #8
+ 800071a:	721a      	strb	r2, [r3, #8]
 
     if (lives1 <= 0) {
- 800071a:	4b0f      	ldr	r3, [pc, #60]	; (8000758 <gameEnd+0x80>)
- 800071c:	781b      	ldrb	r3, [r3, #0]
- 800071e:	2b00      	cmp	r3, #0
- 8000720:	d112      	bne.n	8000748 <gameEnd+0x70>
+ 800071c:	4b0e      	ldr	r3, [pc, #56]	; (8000758 <gameEnd+0x80>)
+ 800071e:	781b      	ldrb	r3, [r3, #0]
+ 8000720:	2b00      	cmp	r3, #0
+ 8000722:	d112      	bne.n	800074a <gameEnd+0x72>
         if (points > highScore) {
- 8000722:	4b0e      	ldr	r3, [pc, #56]	; (800075c <gameEnd+0x84>)
- 8000724:	781a      	ldrb	r2, [r3, #0]
- 8000726:	4b0e      	ldr	r3, [pc, #56]	; (8000760 <gameEnd+0x88>)
- 8000728:	781b      	ldrb	r3, [r3, #0]
- 800072a:	429a      	cmp	r2, r3
- 800072c:	d903      	bls.n	8000736 <gameEnd+0x5e>
+ 8000724:	4b0d      	ldr	r3, [pc, #52]	; (800075c <gameEnd+0x84>)
+ 8000726:	781a      	ldrb	r2, [r3, #0]
+ 8000728:	4b0d      	ldr	r3, [pc, #52]	; (8000760 <gameEnd+0x88>)
+ 800072a:	781b      	ldrb	r3, [r3, #0]
+ 800072c:	429a      	cmp	r2, r3
+ 800072e:	d903      	bls.n	8000738 <gameEnd+0x60>
             highScore = points;
- 800072e:	4b0b      	ldr	r3, [pc, #44]	; (800075c <gameEnd+0x84>)
- 8000730:	781a      	ldrb	r2, [r3, #0]
- 8000732:	4b0b      	ldr	r3, [pc, #44]	; (8000760 <gameEnd+0x88>)
- 8000734:	701a      	strb	r2, [r3, #0]
+ 8000730:	4b0a      	ldr	r3, [pc, #40]	; (800075c <gameEnd+0x84>)
+ 8000732:	781a      	ldrb	r2, [r3, #0]
+ 8000734:	4b0a      	ldr	r3, [pc, #40]	; (8000760 <gameEnd+0x88>)
+ 8000736:	701a      	strb	r2, [r3, #0]
             //////QD << highScore;
         }
 
         start = 0;
- 8000736:	4b0b      	ldr	r3, [pc, #44]	; (8000764 <gameEnd+0x8c>)
- 8000738:	2200      	movs	r2, #0
- 800073a:	701a      	strb	r2, [r3, #0]
+ 8000738:	4b0a      	ldr	r3, [pc, #40]	; (8000764 <gameEnd+0x8c>)
+ 800073a:	2200      	movs	r2, #0
+ 800073c:	701a      	strb	r2, [r3, #0]
         points = 0;
- 800073c:	4b07      	ldr	r3, [pc, #28]	; (800075c <gameEnd+0x84>)
- 800073e:	2200      	movs	r2, #0
- 8000740:	701a      	strb	r2, [r3, #0]
+ 800073e:	4b07      	ldr	r3, [pc, #28]	; (800075c <gameEnd+0x84>)
+ 8000740:	2200      	movs	r2, #0
+ 8000742:	701a      	strb	r2, [r3, #0]
         lives1 = 3;
- 8000742:	4b05      	ldr	r3, [pc, #20]	; (8000758 <gameEnd+0x80>)
- 8000744:	2203      	movs	r2, #3
- 8000746:	701a      	strb	r2, [r3, #0]
+ 8000744:	4b04      	ldr	r3, [pc, #16]	; (8000758 <gameEnd+0x80>)
+ 8000746:	2203      	movs	r2, #3
+ 8000748:	701a      	strb	r2, [r3, #0]
     }
 }
- 8000748:	bf00      	nop
- 800074a:	46bd      	mov	sp, r7
- 800074c:	bd80      	pop	{r7, pc}
- 800074e:	bf00      	nop
+ 800074a:	bf00      	nop
+ 800074c:	46bd      	mov	sp, r7
+ 800074e:	bd80      	pop	{r7, pc}
  8000750:	20000014 	.word	0x20000014
  8000754:	20000018 	.word	0x20000018
  8000758:	20000000 	.word	0x20000000

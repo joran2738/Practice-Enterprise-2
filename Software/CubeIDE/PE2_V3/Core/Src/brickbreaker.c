@@ -203,7 +203,7 @@ void changeDirection(directions inDir) {
 }
 
 void gameEnd() {
-    Displ_FillArea(0, (person.y - 1)*4, SCREEN_WIDTH, 10, D_GREEN);
+    Displ_FillArea(0, (person.y - 1)*4, SCREEN_WIDTH*4, 10, D_GREEN);
     person.x = (SCREEN_WIDTH)/2;
     ball.x = person.x;
     ball.y = SCREEN_HEIGHT - 6;
