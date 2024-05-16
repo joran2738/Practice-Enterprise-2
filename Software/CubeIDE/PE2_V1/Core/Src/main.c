@@ -157,7 +157,7 @@ void read_MPU(){
 	MSByte = read_MPU_mem(REG_GYRO_XOUT158);
 	LSByte = read_MPU_mem(REG_GYRO_XOUT70);
 
-	gx = ((int16_t)((MSByte << 8) | LSByte)) / 131 + 3;
+	gx = ((int16_t)((MSByte << 8) | LSByte)) / 131 + 2;
 
 	MSByte = read_MPU_mem(REG_GYRO_YOUT158);
 	LSByte = read_MPU_mem(REG_GYRO_YOUT70);
@@ -292,18 +292,18 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      HAL_Delay(100);
-      update_MPU_vars();
-      printf("angleX:%d, angleY:%d, angleZ:%d\n\r",(int16_t)angleX,(int16_t)angleY,(int16_t)angleZ);
-      if ((int16_t)angleX > 20){
-          printf("going right\r\n");
-      }
-      else if ((int16_t)angleX < -20){
-          printf("going left\r\n");
-      }
-      else{
-          printf("level\r\n");
-      }
+//      HAL_Delay(100);
+//      update_MPU_vars();
+//      printf("angleX:%d, angleY:%d, angleZ:%d\n\r",(int16_t)angleX,(int16_t)angleY,(int16_t)angleZ);
+//      if ((int16_t)angleX > 20){
+//          printf("going right\r\n");
+//      }
+//      else if ((int16_t)angleX < -20){
+//          printf("going left\r\n");
+//      }
+//      else{
+//          printf("level\r\n");
+//      }
 
   }
   /* USER CODE END 3 */

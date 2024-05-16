@@ -1,5 +1,5 @@
 z_displ_ILI9XXX.c:53:6:Displ_Select	2
-z_displ_ILI9XXX.c:74:6:Displ_Transmit	4
+z_displ_ILI9XXX.c:74:6:Displ_Transmit	5
 z_displ_ILI9XXX.c:138:6:Displ_WriteCommand	1
 z_displ_ILI9XXX.c:151:6:Displ_WriteData	2
 z_displ_ILI9XXX.c:163:6:ILI9XXX_Init	1
