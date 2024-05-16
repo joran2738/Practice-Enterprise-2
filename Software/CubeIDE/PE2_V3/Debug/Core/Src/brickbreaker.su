@@ -1,0 +1,13 @@
+../Core/Src/brickbreaker.c:27:6:initBrickbreaker	24	static
+../Core/Src/brickbreaker.c:52:6:playBall	8	static
+../Core/Src/brickbreaker.c:99:6:moveBall	16	static
+../Core/Src/brickbreaker.c:133:6:changeDirection	16	static
+../Core/Src/brickbreaker.c:205:6:gameEnd	4	static
+../Core/Src/brickbreaker.c:223:6:lowerBricks	24	static
+../Core/Src/brickbreaker.c:236:6:checkGameOver	16	static
+../Core/Src/brickbreaker.c:249:6:checkBrickHit	32	static
+../Core/Src/brickbreaker.c:436:6:dropPowerUp	24	static
+../Core/Src/brickbreaker.c:455:6:printScreen	32	static
+../Core/Src/brickbreaker.c:501:6:checkGuardianTimer	16	static
+../Core/Src/brickbreaker.c:513:6:explodeBricks	40	static
+../Core/Src/brickbreaker.c:543:5:setBrickToughness	16	static

@@ -175,12 +175,12 @@
 /***************   display size      ***************
  ***************************************************/
 #ifdef ILI9341
-#define DISPL_WIDTH  240		// 0 orientation
-#define DISPL_HEIGHT 320		// 0 orientation
+#define DISPL_WIDTH  240        // 0 orientation
+#define DISPL_HEIGHT 320        // 0 orientation
 #endif
 #ifdef ILI9488
-#define DISPL_WIDTH  320		// 0 orientation
-#define DISPL_HEIGHT 480		// 0 orientation
+#define DISPL_WIDTH  320        // 0 orientation
+#define DISPL_HEIGHT 480        // 0 orientation
 #endif
 
 
@@ -188,24 +188,23 @@
  *** below DISPL_DMA_CUTOFF data size, transfer ****
  ****** will be polling, even if DMA enabled *******
  ***************************************************/
-#define DISPL_DMA_CUTOFF 	20    // (bytes) used only in DMA_MODE
+#define DISPL_DMA_CUTOFF    20    // (bytes) used only in DMA_MODE
 
 /*||||||||||| END OF DEVICE PARAMETERS ||||||||||||*/
 
 
 #include <string.h>
-#include "common.h"
 
 typedef enum {
-	Displ_Orientat_0,
-	Displ_Orientat_90,
-	Displ_Orientat_180,
-	Displ_Orientat_270
+    Displ_Orientat_0,
+    Displ_Orientat_90,
+    Displ_Orientat_180,
+    Displ_Orientat_270
 } Displ_Orientat_e;
 
 
-#define SPI_COMMAND 	GPIO_PIN_RESET  	//DISPL_DC_Pin level sending commands
-#define SPI_DATA 		GPIO_PIN_SET		//DISPL_DC_Pin level sending data
+#define SPI_COMMAND     GPIO_PIN_RESET      //DISPL_DC_Pin level sending commands
+#define SPI_DATA        GPIO_PIN_SET        //DISPL_DC_Pin level sending data
 
 // set the buffers size as per BUFLEVEL and DISPLAY_USING_TOUCHGFX
 // (if using TouchGFX, don't buffers from this library)
@@ -215,74 +214,73 @@ typedef enum {
 /*******************************
  * Color names
  *******************************/
-#define	RED			0xF800			// this is 1
-#define	GREEN		0x07E0			// this is 2
-#define	BLUE		0x001F			// this is 3
+#define RED         0xF800          // this is 1
+#define GREEN       0x07E0          // this is 2
+#define BLUE        0x001F          // this is 3
 #define LIGHT_BLUE  0xF7DB      // this is 4
-#define DARK_GREY   0x2C2C	    // this is 6
-#define YELLOW		0xFFE0			// this is 7
-#define GREY        0x9696		// this is 8
-#define LIGHT_GREEN 0xFA3C		// this is 9
-#define MAGENTA		0xF81F
-#define ORANGE		0xFD00
-#define CYAN		0x07FF
-#define	D_RED 		0xC000
-#define	D_GREEN		0x0600
-#define	D_BLUE		0x0018
-#define D_YELLOW	0xC600
-#define D_MAGENTA	0xC018
-#define D_ORANGE	0xC300
-#define D_CYAN		0x0618
-#define	DD_RED		0x8000
-#define	DD_GREEN	0x0400
-#define DD_BLUE		0x0010
-#define DD_YELLOW	0x8400
-#define DD_MAGENTA	0x8020
-#define DD_ORANGE	0x8200
-#define DD_CYAN		0x0410
-#define WHITE		0xFFFF			// this is 10
-#define D_WHITE		0xC618
-#define DD_WHITE	0x8410
-#define DDD_WHITE	0x4208
-#define DDDD_WHITE	0x2104
-#define	BLACK		0x0000			// this is 5
-
+#define DARK_GREY   0x2C2C      // this is 6
+#define YELLOW      0xFFE0          // this is 7
+#define GREY        0x9696      // this is 8
+#define LIGHT_GREEN 0xFA3C      // this is 9
+#define MAGENTA     0xF81F
+#define ORANGE      0xFD00
+#define CYAN        0x07FF
+#define D_RED       0xC000
+#define D_GREEN     0x0600
+#define D_BLUE      0x0018
+#define D_YELLOW    0xC600
+#define D_MAGENTA   0xC018
+#define D_ORANGE    0xC300
+#define D_CYAN      0x0618
+#define DD_RED      0x8000
+#define DD_GREEN    0x0400
+#define DD_BLUE     0x0010
+#define DD_YELLOW   0x8400
+#define DD_MAGENTA  0x8020
+#define DD_ORANGE   0x8200
+#define DD_CYAN     0x0410
+#define WHITE       0xFFFF          // this is 10
+#define D_WHITE     0xC618
+#define DD_WHITE    0x8410
+#define DDD_WHITE   0x4208
+#define DDDD_WHITE  0x2104
+#define BLACK       0x0000          // this is 5
 #define color565(r, g, b) ((((r) & 0xF8) << 8) | (((g) & 0xFC) << 3) | (((b) & 0xF8) >> 3))
 
 
 /**********************************
 / ILI9XXX LCD family commands
  **********************************/
-#define ILI9XXX_SLEEP_OUT			0x11	//wake up display
-#define ILI9XXX_DISPLAY_ON			0x29	// enable display
-#define ILI9XXX_PIXEL_FORMAT    	0x3A	// RGB565/RGB666/...
-#define ILI9XXX_RGB_INTERFACE   	0xB0	// type of communication (full duplex, half, etc.)
-#define ILI9XXX_MEMWR				0x2C	// writes into memory
-#define ILI9XXX_COLUMN_ADDR			0x2A	// set area display to write into
-#define ILI9XXX_PAGE_ADDR			0x2B	// set area display to write into
-#define ILI9XXX_MADCTL				0x36	// order followed writing into memory (-> screen orientation)
-#define ILI9XXX_MADCTL_0DEG 		0X88	// parameter of MADCTL command
-#define ILI9XXX_MADCTL_90DEG 		0xE8	// parameter of MADCTL command
-#define ILI9XXX_MADCTL_180DEG 		0x48	// parameter of MADCTL command
-#define ILI9XXX_MADCTL_270DEG 		0x28	// parameter of MADCTL command
+#define ILI9XXX_SLEEP_OUT           0x11    //wake up display
+#define ILI9XXX_DISPLAY_ON          0x29    // enable display
+#define ILI9XXX_PIXEL_FORMAT        0x3A    // RGB565/RGB666/...
+#define ILI9XXX_RGB_INTERFACE       0xB0    // type of communication (full duplex, half, etc.)
+#define ILI9XXX_MEMWR               0x2C    // writes into memory
+#define ILI9XXX_COLUMN_ADDR         0x2A    // set area display to write into
+#define ILI9XXX_PAGE_ADDR           0x2B    // set area display to write into
+#define ILI9XXX_MADCTL              0x36    // order followed writing into memory (-> screen orientation)
+#define ILI9XXX_MADCTL_0DEG         0X88    // parameter of MADCTL command
+#define ILI9XXX_MADCTL_90DEG        0xE8    // parameter of MADCTL command
+#define ILI9XXX_MADCTL_180DEG       0x48    // parameter of MADCTL command
+#define ILI9XXX_MADCTL_270DEG       0x28    // parameter of MADCTL command
 
-#define ILI9XXX_INIT_SHORT_DELAY	5		// Hal_Delay parameter
-#define ILI9XXX_INIT_LONG_DELAY		150		// Hal_Delay parameter
+#define ILI9XXX_INIT_SHORT_DELAY    5       // Hal_Delay parameter
+#define ILI9XXX_INIT_LONG_DELAY     150     // Hal_Delay parameter
 
-#define ILI9XXX_POWER0				0xC0
-#define ILI9XXX_POWER1				0xC1
-#define ILI9488_POWER2				0xC2
-#define ILI9341_POWERA				0xCB
-#define ILI9341_POWERB				0xCF
+#define ILI9XXX_POWER0              0xC0
+#define ILI9XXX_POWER1              0xC1
+#define ILI9488_POWER2              0xC2
+#define ILI9341_POWERA              0xCB
+#define ILI9341_POWERB              0xCF
 
 /**********************************************************
  * macro setting SPI baudrate prescaler
  **********************************************************/
-#define SET_DISPL_SPI_BAUDRATE			DISPL_SPI->CR1 &= (uint16_t) ~SPI_CR1_BR_Msk; \
-										DISPL_SPI->CR1 |= DISPL_PRESCALER
+#define SET_DISPL_SPI_BAUDRATE          DISPL_SPI->CR1 &= (uint16_t) ~SPI_CR1_BR_Msk; \
+                                        DISPL_SPI->CR1 |= DISPL_PRESCALER
 
-#define SET_TOUCH_SPI_BAUDRATE			TOUCH_SPI->CR1 &= (uint16_t) ~SPI_CR1_BR_Msk; \
-										TOUCH_SPI->CR1 |= TOUCH_PRESCALER
+#define SET_TOUCH_SPI_BAUDRATE          TOUCH_SPI->CR1 &= (uint16_t) ~SPI_CR1_BR_Msk; \
+                                        TOUCH_SPI->CR1 |= TOUCH_PRESCALER
 /**********************************************************/
 
 
@@ -310,7 +308,6 @@ void Displ_WChar(uint16_t x, uint16_t y, char ch, sFONT font, uint8_t size, uint
 void Displ_WString(uint16_t x, uint16_t y, const char* str, sFONT font, uint8_t size, uint16_t color, uint16_t bgcolor);
 #endif /* ! DISPLAY_USING_TOUCHGFX */
 void Displ_FillArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
-void displ_game_screen(uint8_t game_screen[][SCREEN_HEIGHT]);
 void Displ_Orientation(Displ_Orientat_e orientation);
 void Displ_Init(Displ_Orientat_e orientation);
 

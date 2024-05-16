@@ -29,9 +29,9 @@ Core/Src/stm32f3xx_it.o: ../Core/Src/stm32f3xx_it.c ../Core/Inc/main.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h \
  ../Core/Inc/fonts.h ../Core/Inc/z_displ_ILI9XXX.h ../Core/Inc/main.h \
- ../Core/Inc/common.h ../Core/Inc/z_displ_ILI9XXX_test.h \
- ../Core/Inc/z_touch_XPT2046.h ../Core/Inc/z_touch_XPT2046_test.h \
- ../Core/Inc/z_touch_XPT2046_menu.h ../Core/Inc/stm32f3xx_it.h
+ ../Core/Inc/z_displ_ILI9XXX_test.h ../Core/Inc/z_touch_XPT2046.h \
+ ../Core/Inc/z_touch_XPT2046_test.h ../Core/Inc/z_touch_XPT2046_menu.h \
+ ../Core/Inc/stm32f3xx_it.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:
@@ -65,7 +65,6 @@ Core/Src/stm32f3xx_it.o: ../Core/Src/stm32f3xx_it.c ../Core/Inc/main.h \
 ../Core/Inc/fonts.h:
 ../Core/Inc/z_displ_ILI9XXX.h:
 ../Core/Inc/main.h:
-../Core/Inc/common.h:
 ../Core/Inc/z_displ_ILI9XXX_test.h:
 ../Core/Inc/z_touch_XPT2046.h:
 ../Core/Inc/z_touch_XPT2046_test.h:

@@ -20,8 +20,6 @@
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
 
-uint8_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
-
 uint8_t hit = 0;
 
 extern uint8_t lives;
@@ -35,14 +33,18 @@ uint8_t gamechoice = 0;
 extern uint8_t play;
 char str[12];
 
+point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
+ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, still};
+uint8_t start = 0;
+uint8_t delay = BRICK_SPEED;
+directions ballDirection = NE;
 
 void init (void) {
     choice = 0;
     if(gamechoice == 1){
         initSpaceInvaders();
-    }else{
-    	Displ_CLS(BLACK);
-        //nothing yet, your init
+    }else if(gamechoice == 2){
+        initBrickbreaker();
     }
 
 
@@ -59,7 +61,18 @@ int loop (int key) {
         if(play < paused){
         	if(gamechoice == 1){
         		moveSpaceship(-1);
-        	}
+        	}else if(gamechoice == 2) {
+        	    Displ_FillArea(person.x*4 - BAR_SIZE*2, person.y*4, BAR_SIZE*4, 4, D_GREEN);
+                person.x--;
+                if(person.x < BAR_SIZE/2) {
+                    person.x = (BAR_SIZE/2);
+                }
+                if (ball.dir == still) {
+                    Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
+                    ball.x--;
+                    ballDirection = NW;
+                }
+            }
         }else{
             if (choice == 0){
                 choice = max_choice;
@@ -74,7 +87,18 @@ int loop (int key) {
         if(play < paused){
         	if(gamechoice == 1){
         		moveSpaceship(1);
-        	}
+        	}else if (gamechoice == 2) {
+        	    Displ_FillArea(person.x*4 - BAR_SIZE*2, person.y*4, BAR_SIZE*4, 4, D_GREEN);
+                person.x++;
+                if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
+                    person.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
+                }
+                if (ball.dir == still) {
+                    Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
+                    ball.x++;
+                    ballDirection = NE;
+                }
+            }
         }else{
             if (choice == max_choice){
                 choice = 0;
@@ -88,6 +112,15 @@ int loop (int key) {
         if (play == notPlay){
         	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, DARK_GREY);
             play = inPlay;
+        }else if(play == inPlay) {
+            if (ball.dir == still) {
+                ball.dir = ballDirection;
+                start = 1;
+                playBall();
+            }
+//            if(!hit){                  not sure if this was yours or I added for fixing bug
+//                spawnBullet(0);
+//            }
         }else if(play == paused){
             if(choice == 0){
                 play = menu;
@@ -104,7 +137,7 @@ int loop (int key) {
             if(choice == 0){
                 toggle_multiplayer();
             }else if(choice == 1){
-                gamechoice = 0;
+                gamechoice = 2;
                 play = notPlay;
 
                 init();
@@ -137,7 +170,19 @@ int loop (int key) {
     		moveComets();
     		moveBullets();
     		moveEnemyBullets();
-    	}
+    	}else if(gamechoice == 2) {
+            if (start == 1 && ball.dir != still) {
+                if (delay <= 0) {
+                    lowerBricks();
+                    delay = BRICK_SPEED;
+                } else {
+                    delay--;
+                }
+                checkGameOver();
+            }
+            checkGuardianTimer();
+            playBall();
+        }
 
     	updateScreen();
     }if(play < paused){
@@ -158,15 +203,19 @@ void updateScreen()
         return;
     }
 
-    //hit
-    if (gamechoice == 1 && hit > 0){
-        spaceShipHitColorToggle();
-    }
-    //background
-    for(int x = 0; x < SCREEN_WIDTH; x++) {
-        for(int y = 0; y < SCREEN_HEIGHT; y++) {
-            game_screen[x][y] = ENC_DARK_GRAY;
+    if (gamechoice == 1){
+        //hit
+        if (hit > 0) {
+            spaceShipHitColorToggle();
         }
+
+        //spaceship
+        displaySpaceShip(RED);
+
+        //lives
+        displayLives();
+    }else if(gamechoice == 2) {
+        printScreen();
     }
 
     //start
@@ -176,20 +225,6 @@ void updateScreen()
     else if(play == paused){
     	displayPauseMenu(0);
     }
-
-    if(gamechoice == 1){
-    	//spaceship
-    	displaySpaceShip(RED);
-
-    	//lives
-    	displayLives();
-
-    }else{
-        //displayText(game_screen,"bricks", SCREEN_WIDTH - (SCREEN_WIDTH / 2) - 18, SCREEN_HEIGHT - (SCREEN_HEIGHT / 2) + 5, WHITE);
-        //nothin yet, here comes your things
-    }
-
-
 }
 
 

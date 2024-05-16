@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include "spaceInvaders.h"
+#include "brickbreaker.h"
 #include "z_displ_ILI9XXX.h"
 //Configs
 #define EVENTSIZE 100
