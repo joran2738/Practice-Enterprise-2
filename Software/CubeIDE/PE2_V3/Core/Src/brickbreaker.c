@@ -203,6 +203,7 @@ void changeDirection(directions inDir) {
 }
 
 void gameEnd() {
+    Displ_FillArea(0, (person.y - 1)*4, SCREEN_WIDTH, 10, D_GREEN);
     person.x = (SCREEN_WIDTH)/2;
     ball.x = person.x;
     ball.y = SCREEN_HEIGHT - 6;
@@ -236,6 +237,7 @@ void lowerBricks() {
 void checkGameOver() {
     for (int j = 0; j < 10; j++) {
         if (bricks[MAX_BRICK_LINES - 1][j].visible == 1) {
+
             lives1 = 0;
             ball.x = person.x;
             ball.y = SCREEN_HEIGHT - 6;

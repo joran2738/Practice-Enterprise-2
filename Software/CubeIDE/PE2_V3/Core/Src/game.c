@@ -118,9 +118,9 @@ int loop (int key) {
                 start = 1;
                 playBall();
             }
-//            if(!hit){                  not sure if this was yours or I added for fixing bug
-//                spawnBullet(0);
-//            }
+            if(!hit){                  //not sure if this was yours or I added for fixing bug
+                spawnBullet(0);
+            }
         }else if(play == paused){
             if(choice == 0){
                 play = menu;
