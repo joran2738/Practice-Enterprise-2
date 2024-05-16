@@ -1,0 +1,3 @@
+../Core/Src/menu.c:16:6:displayPauseMenu	56	static
+../Core/Src/menu.c:48:6:displayMenu	48	static
+../Core/Src/menu.c:97:6:displayMenuIcons	80	static
