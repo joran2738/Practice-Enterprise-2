@@ -31,6 +31,7 @@ point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
 ballPoint ball = {(SCREEN_WIDTH)/2, SCREEN_HEIGHT - 6, pause};
 uint8_t start = 0;
 uint8_t delay = BRICK_SPEED;
+directions ballDirection = NE;
 
 void init (void) {
     choice = 0;
@@ -71,6 +72,7 @@ void loop (void) {
                 }
                 if (ball.dir == pause) {
                     ball.x--;
+                    ballDirection = NW;
                 }
             }
 
@@ -96,6 +98,7 @@ void loop (void) {
                 }
                 if (ball.dir == pause) {
                     ball.x++;
+                    ballDirection = NE;
                 }
             }
 
@@ -113,7 +116,7 @@ void loop (void) {
             play = inPlay;
         }else if(play == inPlay) {
             if (ball.dir == pause) {
-                ball.dir = NE;
+                ball.dir = ballDirection;
                 start = 1;
                 playBall();
             }
