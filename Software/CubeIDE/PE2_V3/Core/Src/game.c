@@ -31,6 +31,7 @@ uint8_t max_choice = 1;
 extern uint8_t total_games;
 uint8_t gamechoice = 0;
 extern uint8_t play;
+uint8_t last_state;
 char str[12];
 
 point person = {SCREEN_WIDTH/2, SCREEN_HEIGHT - 5};
@@ -73,43 +74,35 @@ int loop (int key) {
                         ballDirection = NW;
                     }
                 }
-            }
-        }else{
-            if (choice == 0){
-                choice = max_choice;
-            }else{
-                choice--;
-            }
-            //QD << choice; // change to uart debug
+        	}
         }
+        if (choice != 0){
+        	choice--;
+        }
+
         key = 0;
     }
     if(key == right) {
-        if(play < paused){
-        	if(gamechoice == 1){
-        		moveSpaceship(1);
-        	}else if (gamechoice == 2) {
-        	    Displ_FillArea(person.x*4 - BAR_SIZE*2, person.y*4, BAR_SIZE*4, 4, D_GREEN);
-                person.x++;
-                if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
-                    person.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
-                } else {
-                    if (ball.dir == still) {
-                        Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
-                        ball.x++;
-                        ballDirection = NE;
-                    }
-                }
-
-            }
-        }else{
-            if (choice == max_choice){
-                choice = 0;
-            }else{
-                choice++;
-            }
-        }
-        key = 0;
+    	if(play < paused){
+    		if(gamechoice == 1){
+    			moveSpaceship(1);
+    		}else if (gamechoice == 2) {
+    			Displ_FillArea(person.x*4 - BAR_SIZE*2, person.y*4, BAR_SIZE*4, 4, D_GREEN);
+    			person.x++;
+    			if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
+    				person.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
+    			}
+    			if (ball.dir == still) {
+    				Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
+    				ball.x++;
+    				ballDirection = NE;
+    			}
+    		}
+    	}
+    	if (choice != max_choice){
+    		choice++;
+    	}
+    	key = 0;
     }
     if(key == down){
         if (play == notPlay){
@@ -131,7 +124,7 @@ int loop (int key) {
             }
             else if(choice == 1){
             	displayPauseMenu(1);
-                play = inPlay;
+                play = last_state;
             }else{
                 displayPauseMenu(0);
             }
@@ -160,6 +153,7 @@ int loop (int key) {
         key = 0;
     }
     if(key == up && play < 2){
+    	last_state = play;
         play = paused;
         choice = 1;
         last_choice_pause = 40;
