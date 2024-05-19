@@ -1,8 +1,8 @@
 /*
  * brickbreaker.h
  *
- *  Created on: 16 mei 2024
- *      Author: vande
+ *  Created on: 31 feb 2008
+ *      Author: Robin
  */
 
 #ifndef INC_BRICKBREAKER_H_
@@ -43,7 +43,6 @@ typedef struct {
     int toughness;
 } brick;
 
-
 //function declarations
 
 void initBrickbreaker(void);
@@ -59,5 +58,6 @@ void dropPowerUp(int, int);
 void checkGuardianTimer(void);
 void explodeBricks(int, int);
 int setBrickToughness(void);
+void drawBricks(void);
 
 #endif /* INC_BRICKBREAKER_H_ */

@@ -13,7 +13,7 @@
 extern point person;
 extern ballPoint ball;
 static brick bricks[MAX_BRICK_LINES][10];
-//static point score = {1, 9};
+static point score = {1, 9};
 //static point highScorePoint = {1, 0};
 extern uint8_t start;
 uint8_t points = 0;
@@ -23,6 +23,7 @@ uint8_t highScore = 0;
 uint8_t loopTester = 0;
 uint8_t guardian = 0;
 uint8_t guardianTimer = 100;
+int toughnessColor[4] = {D_GREEN, GREY, DARK_GREY, BLACK};
 
 void initBrickbreaker() {
     person.x = SCREEN_WIDTH/2;
@@ -45,8 +46,9 @@ void initBrickbreaker() {
             bricks[i][j].toughness = setBrickToughness();
         }
     }
-
+    points = 0;
     Displ_CLS(D_GREEN);
+    drawBricks();
 }
 
 void playBall() {
@@ -232,6 +234,8 @@ void lowerBricks() {
         bricks[0][j].visible = 1;
         bricks[0][j].toughness = setBrickToughness();
     }
+
+    drawBricks();
 }
 
 void checkGameOver() {
@@ -257,10 +261,9 @@ void checkBrickHit() {
             if (bricks[ball.y - 1 - 8][ball.x/8].toughness <= 0) {
                 bricks[ball.y - 1 - 8][ball.x/8].visible = 0;
                 points++;
-                //////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp(ball.x/8, ball.y - 1 - 8);
             }
+            Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][ball.x/8].toughness]);
             bricksHit++;
             ball.dir = SW;
         }
@@ -270,9 +273,9 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x - 1)/8].visible = 0;
                 points++;
                 //////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp((ball.x - 1)/8, ball.y - 8);
             }
+            Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x - 1)/8].toughness]);
             bricksHit++;
             if (ball.dir == NW) {
                 ball.dir = NE;
@@ -288,9 +291,9 @@ void checkBrickHit() {
                     bricks[ball.y - 1 - 8][(ball.x - 1)/8].visible = 0;
                     points++;
                     //////QD << "score:" << points;
-                    Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x - 1)/8].y*4, 32, 4, D_GREEN);
                     dropPowerUp((ball.x - 1)/8, ball.y - 1 - 8);
                 }
+                Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][(ball.x - 1)/8].toughness]);
                 ball.dir = SE;
             }
         }
@@ -302,9 +305,9 @@ void checkBrickHit() {
                 bricks[ball.y - 1 - 8][ball.x/8].visible = 0;
                 points++;
                 //////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp(ball.x/8, ball.y - 1 - 8);
             }
+            Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][ball.x/8].toughness]);
             bricksHit++;
             ball.dir = SE;
         }
@@ -314,9 +317,9 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x + 1)/8].visible = 0;
                 points++;
                 //////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp((ball.x + 1)/8, ball.y - 8);
             }
+            Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x + 1)/8].toughness]);
             bricksHit++;
             if (ball.dir == NE) {
                 ball.dir = NW;
@@ -332,9 +335,9 @@ void checkBrickHit() {
                     bricks[ball.y - 1 - 8][(ball.x + 1)/8].visible = 0;
                     points++;
                     //////QD << "score:" << points;
-                    Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x + 1)/8].y*4, 32, 4, D_GREEN);
                     dropPowerUp((ball.x + 1)/8, ball.y - 1 - 8);
                 }
+                Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][(ball.x + 1)/8].toughness]);
                 ball.dir = SW;
             }
         }
@@ -346,9 +349,9 @@ void checkBrickHit() {
                 bricks[ball.y + 1 - 8][ball.x/8].visible = 0;
                 points++;
                 //////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp(ball.x/8, ball.y + 1 - 8);
             }
+            Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][ball.x/8].toughness]);
             bricksHit++;
             ball.dir = NE;
         }
@@ -358,9 +361,9 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x + 1)/8].visible = 0;
                 points++;
                 //////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp((ball.x + 1)/8, ball.y - 8);
             }
+            Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x + 1)/8].toughness]);
             bricksHit++;
             if (ball.dir == SE) {
                 ball.dir = SW;
@@ -376,9 +379,9 @@ void checkBrickHit() {
                     bricks[ball.y - 8 + 1][(ball.x + 1)/8].visible = 0;
                     points++;
                     //////QD << "score:" << points;
-                    Displ_FillArea(bricks[ball.y - 8 + 1][(ball.x + 1)/8].x*4, bricks[ball.y - 8 + 1][(ball.x + 1)/8].y*4, 32, 4, D_GREEN);
                     dropPowerUp((ball.x + 1)/8, ball.y - 8 + 1);
                 }
+                Displ_FillArea(bricks[ball.y - 8 + 1][(ball.x + 1)/8].x*4, bricks[ball.y - 8 + 1][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8 + 1][(ball.x + 1)/8].toughness]);
                 ball.dir = NW;
             }
         }
@@ -390,9 +393,9 @@ void checkBrickHit() {
                 bricks[ball.y + 1 - 8][ball.x/8].visible = 0;
                 points++;
                 ////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp(ball.x/8, ball.y + 1 - 8);
             }
+            Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][ball.x/8].toughness]);
             bricksHit++;
             ball.dir = NW;
         }
@@ -402,9 +405,9 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x - 1)/8].visible = 0;
                 points++;
                 ////QD << "score:" << points;
-                Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, D_GREEN);
                 dropPowerUp((ball.x - 1)/8, ball.y - 8);
             }
+            Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x - 1)/8].toughness]);
             bricksHit++;
             if (ball.dir == SW) {
                 ball.dir = SE;
@@ -420,10 +423,10 @@ void checkBrickHit() {
                     bricks[ball.y + 1 - 8][(ball.x - 1)/8].visible = 0;
                     points++;
                     ////QD << "score:" << points;
-                    Displ_FillArea(bricks[ball.y + 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y + 1 - 8][(ball.x - 1)/8].y*4, 32, 4, D_GREEN);
                     dropPowerUp((ball.x - 1)/8, ball.y + 1 - 8);
                 }
                 ball.dir = NE;
+                Displ_FillArea(bricks[ball.y + 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y + 1 - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][(ball.x - 1)/8].toughness]);
             }
         }
         break;
@@ -476,25 +479,10 @@ void printScreen() {
 //
 //    game_screen[ball.x][ball.y] = ENC_BLUE;
     Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_BLUE);
-//
-    for (int i = 0; i < MAX_BRICK_LINES; i++) {
-        for(int j = 0; j < 10; j++) {
-            if(bricks[i][j].visible == 1) {
-                if (bricks[i][j].toughness == 3) {
-                    Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, BLACK);
-                }
-                if (bricks[i][j].toughness == 2) {
-                    Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, DARK_GREY);
-                }
-                if (bricks[i][j].toughness == 1) {
-                    Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, GREY);
-                }
-            }
-        }
-    }
 
-    //char str[12];
-    //snprintf(str, 12, "%u", points);
+    char str[12];
+    snprintf(str, 12, "%u", points);
+    Displ_WString(score.x*4, score.y, str, Font16, 1, WHITE, D_GREEN);
     //displayText(game_screen, str, score.x, score.y, WHITE);
     //snprintf(str, 12, "%u", highScore);
     //displayText(game_screen, str, highScorePoint.x, highScorePoint.y, WHITE);
@@ -557,4 +545,22 @@ int setBrickToughness(void) {
     }
 
     return toughness;
+}
+
+void drawBricks() {
+    for (int i = 0; i < MAX_BRICK_LINES; i++) {
+        for(int j = 0; j < 10; j++) {
+            if(bricks[i][j].visible == 1) {
+                if (bricks[i][j].toughness == 3) {
+                    Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, BLACK);
+                }
+                if (bricks[i][j].toughness == 2) {
+                    Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, DARK_GREY);
+                }
+                if (bricks[i][j].toughness == 1) {
+                    Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, GREY);
+                }
+            }
+        }
+    }
 }

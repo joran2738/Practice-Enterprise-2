@@ -66,11 +66,12 @@ int loop (int key) {
                 person.x--;
                 if(person.x < BAR_SIZE/2) {
                     person.x = (BAR_SIZE/2);
-                }
-                if (ball.dir == still) {
-                    Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
-                    ball.x--;
-                    ballDirection = NW;
+                } else {
+                    if (ball.dir == still) {
+                        Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
+                        ball.x--;
+                        ballDirection = NW;
+                    }
                 }
             }
         }else{
@@ -92,12 +93,14 @@ int loop (int key) {
                 person.x++;
                 if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
                     person.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
+                } else {
+                    if (ball.dir == still) {
+                        Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
+                        ball.x++;
+                        ballDirection = NE;
+                    }
                 }
-                if (ball.dir == still) {
-                    Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
-                    ball.x++;
-                    ballDirection = NE;
-                }
+
             }
         }else{
             if (choice == max_choice){
