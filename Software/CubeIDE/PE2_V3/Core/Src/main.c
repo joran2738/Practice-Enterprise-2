@@ -109,29 +109,29 @@ uint32_t millis = 0;
 uint32_t premillis = 0;
 extern uint8_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
 
-int _write(int file, char *ptr, int len) {
-    HAL_StatusTypeDef xStatus;
-    switch (file) {
-    case STDOUT_FILENO: /*stdout*/
-		xStatus = HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-		if (xStatus != HAL_OK) {
-			errno = EIO;
-			return -1;
-		}
-        break;
-    case STDERR_FILENO: /* stderr */
-		xStatus = HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-		if (xStatus != HAL_OK) {
-			errno = EIO;
-			return -1;
-		}
-        break;
-    default:
-        errno = EBADF;
-        return -1;
-    }
-    return len;
-}
+//int _write(int file, char *ptr, int len) {
+//    HAL_StatusTypeDef xStatus;
+//    switch (file) {
+//    case STDOUT_FILENO: /*stdout*/
+//		xStatus = HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, HAL_MAX_DELAY);
+//		if (xStatus != HAL_OK) {
+//			errno = EIO;
+//			return -1;
+//		}
+//        break;
+//    case STDERR_FILENO: /* stderr */
+//		xStatus = HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, HAL_MAX_DELAY);
+//		if (xStatus != HAL_OK) {
+//			errno = EIO;
+//			return -1;
+//		}
+//        break;
+//    default:
+//        errno = EBADF;
+//        return -1;
+//    }
+//    return len;
+//}
 
 uint8_t read_MPU_mem(uint8_t reg_addr){
 	uint8_t data;
@@ -396,7 +396,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 38400;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -410,7 +410,7 @@ static void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
+  USART2->CR1 |= (USART_CR1_TE | USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_UE);
   /* USER CODE END USART2_Init 2 */
 
 }

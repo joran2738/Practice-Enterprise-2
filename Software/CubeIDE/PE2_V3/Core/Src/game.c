@@ -14,8 +14,10 @@
 #include "displayText.h"
 #include "menu.h"
 #include "multiplayer.h"
+#include "string.h"
 
 #define DEBUG 1
+extern UART_HandleTypeDef huart2;
 
 uint8_t eventlist[EVENTSIZE];
 uint8_t eventindex = 0;
@@ -131,7 +133,8 @@ int loop (int key) {
 
         }else if(play == menu){
             if(choice == 0){
-                toggle_multiplayer();
+                //toggle_multiplayer();
+                HAL_UART_Transmit(&huart2, "Hello", strlen("Hello"), 300);
             }else if(choice == 1){
                 gamechoice = 2;
                 play = notPlay;

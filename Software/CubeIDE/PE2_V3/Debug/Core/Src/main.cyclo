@@ -1,4 +1,3 @@
-main.c:112:5:_write	5
 main.c:136:9:read_MPU_mem	2
 main.c:147:6:write_MPU_mem	2
 main.c:153:6:read_y_accel	1

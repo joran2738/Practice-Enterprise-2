@@ -8,9 +8,12 @@
 #include "multiplayer.h"
 #include "debug.h"
 #include <stdint.h>
+#include "string.h"
+#include "z_displ_ILI9XXX.h"
 
 uint8_t emulate = 1;
 uint8_t connected = 0;
+char characterArray[100];
 
 
 void check_availability(){
@@ -30,5 +33,15 @@ void toggle_multiplayer(){
         check_availability();
     }
 
+}
+
+void addCharacterToArray(char c) {
+    char filler[2];
+    filler[0] = c;
+    filler[1] = '\0';
+
+    strcat(characterArray, filler);
+    //printf("%c\r\n", c);
+    Displ_WString(20, 150, characterArray, Font16, 1, WHITE, BLACK);
 }
 

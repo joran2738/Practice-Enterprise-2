@@ -22,6 +22,8 @@
 #include "stm32f3xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "debug.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -249,6 +251,19 @@ void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
 
+    char ch;
+    uint16_t number;
+
+    uint32_t isrflags = READ_REG(huart2.Instance->ISR);
+    uint32_t crlits = READ_REG(huart2.Instance->CR1);
+
+    if (((isrflags & USART_ISR_RXNE) != RESET) && ((crlits & USART_CR1_RXNEIE) != RESET)) {
+        huart2.Instance->ISR;
+        //number = huart2.Instance->RDR;
+        ch = huart2.Instance->RDR;
+        //printf("%ul\r\n", number);
+        printf("%c\r\n", ch);
+    }
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */

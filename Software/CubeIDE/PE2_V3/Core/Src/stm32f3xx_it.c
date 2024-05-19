@@ -22,6 +22,7 @@
 #include "stm32f3xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "multiplayer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +58,7 @@
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_spi2_tx;
 extern SPI_HandleTypeDef hspi2;
+extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -239,6 +241,33 @@ void SPI2_IRQHandler(void)
   /* USER CODE BEGIN SPI2_IRQn 1 */
 
   /* USER CODE END SPI2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART2 global interrupt.
+  */
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+    char ch;
+    uint16_t number;
+
+    uint32_t isrflags = READ_REG(huart2.Instance->ISR);
+    uint32_t crlits = READ_REG(huart2.Instance->CR1);
+
+    if (((isrflags & USART_ISR_RXNE) != RESET) && ((crlits & USART_CR1_RXNEIE) != RESET)) {
+        huart2.Instance->ISR;
+        //number = huart2.Instance->RDR;
+        ch = huart2.Instance->RDR;
+        //printf("%ul\r\n", number);
+        //printf("%c\r\n", ch);
+        addCharacterToArray(ch);
+    }
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
+  /* USER CODE BEGIN USART2_IRQn 1 */
+
+  /* USER CODE END USART2_IRQn 1 */
 }
 
 /**

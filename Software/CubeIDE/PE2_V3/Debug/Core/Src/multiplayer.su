@@ -1,2 +1,3 @@
-../Core/Src/multiplayer.c:16:6:check_availability	4	static
-../Core/Src/multiplayer.c:24:6:toggle_multiplayer	8	static
+../Core/Src/multiplayer.c:19:6:check_availability	4	static
+../Core/Src/multiplayer.c:27:6:toggle_multiplayer	8	static
+../Core/Src/multiplayer.c:38:6:addCharacterToArray	56	static
