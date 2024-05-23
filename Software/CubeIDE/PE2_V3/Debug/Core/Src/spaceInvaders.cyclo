@@ -6,7 +6,7 @@ spaceInvaders.c:161:6:initStars	2
 spaceInvaders.c:169:6:spawnComet	3
 spaceInvaders.c:184:6:spawnBullet	5
 spaceInvaders.c:205:6:spawnStar	3
-spaceInvaders.c:216:6:moveBullets	8
+spaceInvaders.c:216:6:moveBullets	6
 spaceInvaders.c:241:6:moveEnemyBullets	10
 spaceInvaders.c:270:6:moveComets	15
 spaceInvaders.c:308:6:moveStars	4
@@ -20,6 +20,6 @@ spaceInvaders.c:408:6:displayLives	4
 spaceInvaders.c:420:6:spaceShipHitColorToggle	5
 spaceInvaders.c:433:6:delayBullet	2
 spaceInvaders.c:439:6:beenHit	2
-spaceInvaders.c:450:6:send_Bullet	4
+spaceInvaders.c:450:6:send_Bullet	3
 spaceInvaders.c:463:6:powerups	5
 spaceInvaders.c:477:6:displayPowerup	3

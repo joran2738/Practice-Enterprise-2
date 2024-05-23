@@ -17,7 +17,7 @@ uint8_t emulate = 1;
 uint8_t connected = 0;
 Multiplayer mp = disabled;
 char characterArray[100];
-uint8_t signal = 0;
+uint8_t test = 0;
 uint8_t mpGameChoice = 0;
 uint8_t mpGameState;
 uint8_t mpMenuState;
@@ -105,9 +105,9 @@ uint8_t returnCoord() {
 }
 
 void setCoordinate() {
-    char buffer[];
-    strncpy(buffer, characterArray, len(characterArray) - 2);
-    buffer[len(characterArray) - 1] = '\0';
+    char buffer[100];
+    strncpy(buffer, characterArray, strlen(characterArray) - 2);
+    buffer[strlen(characterArray) - 1] = '\0';
 
     return atoi(buffer);
 }

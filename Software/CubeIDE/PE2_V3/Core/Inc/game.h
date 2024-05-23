@@ -8,12 +8,11 @@
 #ifndef INC_GAME_H_
 #define INC_GAME_H_
 
-#include "stm32f3xx_hal.h"
-
 #include <stdint.h>
 #include "spaceInvaders.h"
 #include "brickbreaker.h"
 #include "z_displ_ILI9XXX.h"
+#include "stm32f3xx_hal.h"
 //Configs
 #define EVENTSIZE 100
 

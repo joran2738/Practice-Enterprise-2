@@ -6,7 +6,7 @@
 ../Core/Src/spaceInvaders.c:169:6:spawnComet	8	static
 ../Core/Src/spaceInvaders.c:184:6:spawnBullet	32	static
 ../Core/Src/spaceInvaders.c:205:6:spawnStar	8	static
-../Core/Src/spaceInvaders.c:216:6:moveBullets	24	static
+../Core/Src/spaceInvaders.c:216:6:moveBullets	16	static
 ../Core/Src/spaceInvaders.c:241:6:moveEnemyBullets	24	static
 ../Core/Src/spaceInvaders.c:270:6:moveComets	24	static
 ../Core/Src/spaceInvaders.c:308:6:moveStars	16	static

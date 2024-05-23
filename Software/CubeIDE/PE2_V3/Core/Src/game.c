@@ -10,13 +10,13 @@
 
 #include "debug.h"
 #include "game.h"
-//#include <QDateTime>	// should be the tic thingy
 #include "displayText.h"
 #include "menu.h"
 #include "multiplayer.h"
 #include "string.h"
 
 #define DEBUG 1
+
 extern UART_HandleTypeDef huart2;
 
 uint8_t eventlist[EVENTSIZE];
@@ -137,6 +137,8 @@ int loop (int key) {
                 //toggle_multiplayer();
                 if(returnConnection() == 0) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"Play?", strlen("Play?"), 300);
+                } else if(returnConnection() == 1) {
+                    //HAL_UART_Transmit(&huart2, (uint8_t *)"")
                 } else {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"Hello", strlen("Hello"), 300);
                 }

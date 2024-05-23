@@ -1,5 +1,5 @@
 Core/Src/multiplayer.o: ../Core/Src/multiplayer.c \
- ../Core/Inc/multiplayer.h \
+ ../Core/Inc/multiplayer.h ../Core/Inc/common.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
  ../Core/Inc/stm32f3xx_hal_conf.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
@@ -34,6 +34,7 @@ Core/Src/multiplayer.o: ../Core/Src/multiplayer.c \
  ../Core/Inc/z_displ_ILI9XXX_test.h ../Core/Inc/z_touch_XPT2046.h \
  ../Core/Inc/z_touch_XPT2046_test.h ../Core/Inc/z_touch_XPT2046_menu.h
 ../Core/Inc/multiplayer.h:
+../Core/Inc/common.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h:

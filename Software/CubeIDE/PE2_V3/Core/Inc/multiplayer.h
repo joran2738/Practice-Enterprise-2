@@ -8,6 +8,7 @@
 #ifndef INC_MULTIPLAYER_H_
 #define INC_MULTIPLAYER_H_
 
+#include "common.h"
 #include "stm32f3xx_hal.h"
 
 typedef enum  {disabled = 0, enabled} Multiplayer;
