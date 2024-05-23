@@ -64,9 +64,13 @@ void addCharacterToArray(char c) {
         setMPGameChoice();
         //printArray();
     }else if(c == 'B') {
+        setCoordinate();
     }else if(c == 'S'){
     	mpMenuState = 1;
     }else if(c == 'X') {
+       connected = 0;
+       mp = disabled;
+       printArray();
     }
 }
 
@@ -111,4 +115,9 @@ void setCoord() {
     buffer[strlen(characterArray) - 1] = '\0';
 
     x_coord = (uint8_t)atoi(buffer);
+}
+
+void closeConnection() {
+    connected = 0;
+    mp = disabled;
 }

@@ -139,7 +139,8 @@ int loop (int key) {
                 if(returnConnection() == 0) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"Play?", strlen("Play?"), 300);
                 } else if(returnConnection() == 1) {
-                    //HAL_UART_Transmit(&huart2, (uint8_t *)"")
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"X", strlen("X"), 300);
+                    closeConnection();
                 } else {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"Hello", strlen("Hello"), 300);
                 }
