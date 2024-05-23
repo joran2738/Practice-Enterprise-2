@@ -1,3 +1,9 @@
-multiplayer.c:19:6:check_availability	2
-multiplayer.c:27:6:toggle_multiplayer	2
-multiplayer.c:38:6:addCharacterToArray	1
+multiplayer.c:24:6:check_availability	1
+multiplayer.c:28:6:toggle_multiplayer	2
+multiplayer.c:39:6:addCharacterToArray	6
+multiplayer.c:67:6:printArray	1
+multiplayer.c:73:5:returnTest	1
+multiplayer.c:77:6:turnOffTest	1
+multiplayer.c:81:5:returnConnection	1
+multiplayer.c:85:6:setMPGameChoice	1
+multiplayer.c:90:9:returnMPGameChoice	1

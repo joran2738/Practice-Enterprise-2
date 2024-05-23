@@ -1,3 +1,9 @@
-../Core/Src/multiplayer.c:19:6:check_availability	4	static
-../Core/Src/multiplayer.c:27:6:toggle_multiplayer	8	static
-../Core/Src/multiplayer.c:38:6:addCharacterToArray	56	static
+../Core/Src/multiplayer.c:24:6:check_availability	8	static
+../Core/Src/multiplayer.c:28:6:toggle_multiplayer	8	static
+../Core/Src/multiplayer.c:39:6:addCharacterToArray	24	static
+../Core/Src/multiplayer.c:67:6:printArray	8	static
+../Core/Src/multiplayer.c:73:5:returnTest	4	static
+../Core/Src/multiplayer.c:77:6:turnOffTest	4	static
+../Core/Src/multiplayer.c:81:5:returnConnection	4	static
+../Core/Src/multiplayer.c:85:6:setMPGameChoice	8	static
+../Core/Src/multiplayer.c:90:9:returnMPGameChoice	4	static

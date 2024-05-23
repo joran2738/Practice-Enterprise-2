@@ -122,6 +122,7 @@ int loop (int key) {
         }else if(play == paused){
             if(choice == 0){
                 play = menu;
+                gamechoice = 0;
                 init();
             }
             else if(choice == 1){
@@ -134,17 +135,22 @@ int loop (int key) {
         }else if(play == menu){
             if(choice == 0){
                 //toggle_multiplayer();
-                HAL_UART_Transmit(&huart2, "Hello", strlen("Hello"), 300);
+                if(returnConnection() == 0) {
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"Play?", strlen("Play?"), 300);
+                } else {
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"Hello", strlen("Hello"), 300);
+                }
+
             }else if(choice == 1){
                 gamechoice = 2;
                 play = notPlay;
-
+                HAL_UART_Transmit(&huart2, (uint8_t *)"2G", strlen("2G"), 300);
                 init();
             }
             else if(choice == 2){
                 gamechoice = 1;
                 play = notPlay;
-
+                HAL_UART_Transmit(&huart2, (uint8_t *)"1G", strlen("1G"), 300);
                 init();
             }else{
                 displayMenu();
@@ -192,6 +198,23 @@ int loop (int key) {
     	}
 
     }
+
+
+    if (returnTest() == 1) {
+        if (gamechoice == 2) {
+            lowerBricks();
+            printArray();
+        }
+        if(returnConnection() == 1 && gamechoice == 0) {
+            gamechoice = returnMPGameChoice();
+            printArray();
+            turnOffTest();
+            play = notPlay;
+            init();
+
+        }
+    }
+
     return key;
 }
 

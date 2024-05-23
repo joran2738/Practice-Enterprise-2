@@ -202,11 +202,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_Delay(100);
   if(HAL_I2C_IsDeviceReady(&hi2c2, ADDR_R, 1, 100) == HAL_OK){
-	  printf("succesfully communicated\n\r");
+	  printf("succesfully communicated\r\n");
 	  init_MPU();
   }
   else{
-	  printf("i2C not found\n\r");
+	  printf("i2C not found\r\n");
   }
 
   Displ_Init(Displ_Orientat_90);       // initialize the display and set the initial display orientation (here is orientaton: 0°) - THIS FUNCTION MUST PRECEED ANY OTHER DISPLAY FUNCTION CALL.
@@ -239,8 +239,8 @@ int main(void)
       }
       key = loop(key);
       for (int i = 0; i < ammo.in_play; i++){
-    	  printf("hello?\r\n");
-    	  printf("ammo %d: x:%d, y:%d\r\n",i,ammo.bullet_ar[i].x,ammo.bullet_ar[i].y);
+    	  //printf("hello?\r\n");
+    	  //printf("ammo %d: x:%d, y:%d\r\n",i,ammo.bullet_ar[i].x,ammo.bullet_ar[i].y);
 
       }
   }

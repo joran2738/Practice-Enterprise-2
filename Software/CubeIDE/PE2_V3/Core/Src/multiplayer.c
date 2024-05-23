@@ -11,17 +11,21 @@
 #include "string.h"
 #include "z_displ_ILI9XXX.h"
 
+extern UART_HandleTypeDef huart2;
+
 uint8_t emulate = 1;
 uint8_t connected = 0;
+Multiplayer mp = disabled;
 char characterArray[100];
+uint8_t signal = 0;
+uint8_t mpGameChoice = 0;
+uint8_t mpGameState;
+uint8_t mpMenuState;
+uint8_t x_coord = 0;
 
 
 void check_availability(){
-    //QD << "(mockup) is player 2 there?";  // change to uart debug
-    if(emulate /*or answer was received */){
-        connected = 1;
-        // QD << "(mockup) player 2 connected";  // change to uart debug
-    }
+    HAL_UART_Transmit(&huart2, (uint8_t *)"play?", strlen("play?"), 300);
 }
 
 void toggle_multiplayer(){
@@ -42,6 +46,68 @@ void addCharacterToArray(char c) {
 
     strcat(characterArray, filler);
     //printf("%c\r\n", c);
-    Displ_WString(20, 150, characterArray, Font16, 1, WHITE, BLACK);
+
+    if(c == 'o' && mp == enabled) {
+        test = 1;
+        //printArray();
+    }
+    if(c == '?') {
+        HAL_UART_Transmit(&huart2, (uint8_t *)"Yes!", strlen("Yes!"), 300);
+        printArray();
+        connected = 1;
+        mp = enabled;
+    }if(c == '!') {
+        connected = 1;
+        mp = enabled;
+        printArray();
+    }if(c == 'G') {
+        test = 1;
+        setMPGameChoice();
+        //printArray();
+    }if(c == 'B') {
+        setCoordinate();
+    }
 }
 
+void printArray() {
+    printf("%s\r\n", characterArray);
+    memset(characterArray, '\0', sizeof(characterArray));
+    test = 0;
+}
+
+int returnTest() {
+    return test;
+}
+
+void turnOffTest() {
+    test = 0;
+}
+
+int returnConnection() {
+    return connected;
+}
+
+void setMPGameChoice() {
+    mpGameChoice = characterArray[0] - '0';
+    printf("%d\r\n", mpGameChoice);
+}
+
+uint8_t returnMPGameChoice() {
+    return mpGameChoice;
+}
+
+void clearArray() {
+    memset(characterArray, '\0', sizeof(characterArray));
+}
+
+uint8_t returnCoord() {
+    return x_coord;
+}
+
+void setCoordinate() {
+    char buffer[];
+    strncpy(buffer, characterArray, len(characterArray) - 2);
+    buffer[len(characterArray) - 1] = '\0';
+
+    return atoi(buffer);
+}
