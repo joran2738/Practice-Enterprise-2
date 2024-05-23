@@ -110,6 +110,7 @@ int loop (int key) {
         if (play == notPlay){
         	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, DARK_GREY);
             play = inPlay;
+            HAL_UART_Transmit(&huart2, (uint8_t *)"S", strlen("S"), 300);
         }else if(play == inPlay) {
             if (ball.dir == still) {
                 ball.dir = ballDirection;
@@ -202,18 +203,20 @@ int loop (int key) {
     }
 
 
-    if (returnTest() == 1) {
+    if (returnConnection() == 1 && returnTest() == 1) {
         if (gamechoice == 2) {
             lowerBricks();
             printArray();
         }
-        if(returnConnection() == 1 && gamechoice == 0) {
+        if(gamechoice == 0) {
             gamechoice = returnMPGameChoice();
             printArray();
             turnOffTest();
             play = notPlay;
             init();
-
+        }
+        if(play == notPlay && mpMenuState == inPlay){
+        	play = inPlay;
         }
     }
 

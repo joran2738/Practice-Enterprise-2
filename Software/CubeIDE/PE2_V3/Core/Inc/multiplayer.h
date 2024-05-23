@@ -25,5 +25,6 @@ void setMPGameChoice(void);
 uint8_t returnMPGameChoice(void);
 void clearArray(void);
 uint8_t returnCoord(void);
+void setCoord(void);
 
 #endif /* INC_MULTIPLAYER_H_ */

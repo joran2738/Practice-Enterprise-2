@@ -50,22 +50,23 @@ void addCharacterToArray(char c) {
     if(c == 'o' && mp == enabled) {
         test = 1;
         //printArray();
-    }
-    if(c == '?') {
+    }else if(c == '?') {
         HAL_UART_Transmit(&huart2, (uint8_t *)"Yes!", strlen("Yes!"), 300);
         printArray();
         connected = 1;
         mp = enabled;
-    }if(c == '!') {
+    }else if(c == '!') {
         connected = 1;
         mp = enabled;
         printArray();
-    }if(c == 'G') {
+    }else if(c == 'G') {
         test = 1;
         setMPGameChoice();
         //printArray();
-    }if(c == 'B') {
-        setCoordinate();
+    }else if(c == 'B') {
+        setCoord();
+    }else if(c == 'S'){
+    	mpMenuState = 1;
     }
 }
 
@@ -104,10 +105,10 @@ uint8_t returnCoord() {
     return x_coord;
 }
 
-void setCoordinate() {
+void setCoord() {
     char buffer[100];
     strncpy(buffer, characterArray, strlen(characterArray) - 2);
     buffer[strlen(characterArray) - 1] = '\0';
 
-    return atoi(buffer);
+    x_coord = (uint8_t)atoi(buffer);
 }
