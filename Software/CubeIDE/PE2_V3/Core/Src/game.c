@@ -216,9 +216,6 @@ int loop (int key) {
             play = notPlay;
             init();
         }
-        if(play == notPlay && mpMenuState == inPlay){
-        	play = inPlay;
-        }
     }
 
     return key;

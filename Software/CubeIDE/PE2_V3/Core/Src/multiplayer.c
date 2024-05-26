@@ -64,7 +64,7 @@ void addCharacterToArray(char c) {
         setMPGameChoice();
         //printArray();
     }else if(c == 'B') {
-        setCoordinate();
+        setCoord();
     }else if(c == 'S'){
     	mpMenuState = 1;
     }else if(c == 'X') {

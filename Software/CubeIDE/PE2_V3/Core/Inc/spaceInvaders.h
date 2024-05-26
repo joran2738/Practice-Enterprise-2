@@ -1,17 +1,19 @@
-/*
- * spaceInvaders.h
+/**
+ * @file spaceInvaders.h
  *
+ * @brief SpaceInvaders game header
  *  Created on: Apr 17, 2024
- *      Author: joran
+ *      Author: Joran
  */
 #ifndef INC_SPACEINVADERS_H_
 #define INC_SPACEINVADERS_H_
 
+// Includes
 #include <stdint.h>
 #include "common.h"
 #include "z_displ_ILI9XXX.h"
-//#include <QDateTime> // tic thing
 
+// Defines
 #define SPACESHIP_WIDTH 5
 #define SPACESHIP_HEIGHT 5
 
@@ -32,32 +34,52 @@
 #define HEARTS_OFFSET 12
 
 #define MAX_DELAY_POWERUP 5
-//Typedefs
+
+// Typedefs
+/**
+ * @struct comet_t
+ * @brief contains info about a comet
+ *
+ */
 typedef struct {
 	uint8_t x;
 	uint8_t y;
     int8_t size;
     int8_t coins;
-} comet;
+} comet_t;
 
+/**
+ * @struct stars_t
+ * @brief contains the stars that are being displayed
+ *
+ */
 typedef struct {
     int8_t in_play;
     point star_ar[MAX_STARS];
-} stars;
+} stars_t;
 
+/**
+ * @struct bullets_t
+ * @brief contains the bullets that are being displayed
+ *
+ */
 typedef struct {
     int8_t enemy;
     int8_t in_play;
     point bullet_ar[MAX_BULLETS];
-}bullets;
+} bullets_t;
 
+/**
+ * @struct comets_t
+ * @brief contains the comets that are being displayed
+ *
+ */
 typedef struct {
 	int8_t in_play;
-    comet comet_ar[MAX_COMETS];
-}comets;
+    comet_t comet_ar[MAX_COMETS];
+} comets_t;
 
-//functions
-
+// Functions
 /**
  * @fn void initSpaceInvaders(void)
  * @brief initialises the spaceinvaders game
@@ -71,7 +93,7 @@ void initSpaceInvaders(void);
  * generates a random delay for the spawning of the next comet
  *
  */
-void spawnComet();
+void spawnComet(void);
 
 /**
  * @fn void spawnBullet(int)
@@ -88,7 +110,7 @@ void spawnBullet(int);
  * generates a random delay for the spawning of the next star
  *
  */
-void spawnStar();
+void spawnStar(void);
 
 /**
  * @fn void moveBullets(void)
@@ -136,6 +158,14 @@ void displayStars(uint16_t);
 void displayAmmo(uint16_t);
 
 /**
+ * @fn void displayEnemyAmmo(uint16_t)
+ * @brief displays the enemy Bullets on the screen
+ *
+ * @param[in] color uint16_t: the color the ammo should be displayed with
+ */
+void displayEnemyAmmo(uint16_t color);
+
+/**
  * @fn void displayComets(uint16_t)
  * @brief displays the comets on the screen
  *
@@ -167,14 +197,14 @@ void spaceShipHitColorToggle(void);
 
 /**
  * @fn void delayBullet(void)
- * @brief decrements the bullet_delay variable, if 0 the spaceship can shoot a bullet aswell
+ * @brief decrements the bullet_delay variable, if 0 the spaceship can shoot a bullet again
  *
  */
 void delayBullet(void);
 
 
 
-//multiplayer
+// Multiplayer functions
 /**
  * @fn void moveEnemyBullets(void)
  * @brief move the enemy bullets
