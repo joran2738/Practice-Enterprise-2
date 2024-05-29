@@ -110,18 +110,23 @@ int loop (int key) {
         if (play == notPlay){
         	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, DARK_GREY);
             play = inPlay;
-            HAL_UART_Transmit(&huart2, (uint8_t *)"S", strlen("S"), 300);
+            if(returnConnection() == 1) {
+                HAL_UART_Transmit(&huart2, (uint8_t *)"S", strlen("S"), 300);
+            }
         }else if(play == inPlay) {
             if (ball.dir == still) {
                 ball.dir = ballDirection;
                 start = 1;
                 playBall();
             }
-            if(!hit){                  //not sure if this was yours or I added for fixing bug
+            if(!hit){
                 spawnBullet(0);
             }
         }else if(play == paused){
             if(choice == 0){
+                if(returnConnection() == 1) {
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"M", strlen("M"), 300);
+                }
                 play = menu;
                 gamechoice = 0;
                 init();
@@ -129,6 +134,9 @@ int loop (int key) {
             else if(choice == 1){
             	displayPauseMenu(1);
                 play = last_state;
+                if(returnConnection() == 1) {
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"C", strlen("C"), 300);
+                }
             }else{
                 displayPauseMenu(0);
             }
@@ -137,28 +145,31 @@ int loop (int key) {
             if(choice == 0){
                 //toggle_multiplayer();
                 if(returnConnection() == 0) {
-                    HAL_UART_Transmit(&huart2, (uint8_t *)"Play?", strlen("Play?"), 300);
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"?", strlen("?"), 300);
                 } else if(returnConnection() == 1) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"X", strlen("X"), 300);
                     closeConnection();
-                } else {
-                    HAL_UART_Transmit(&huart2, (uint8_t *)"Hello", strlen("Hello"), 300);
                 }
 
             }else if(choice == 1){
                 gamechoice = 2;
                 play = notPlay;
-                HAL_UART_Transmit(&huart2, (uint8_t *)"2G", strlen("2G"), 300);
+                if(returnConnection() == 1) {
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"2G", strlen("2G"), 300);
+                }
                 init();
             }
             else if(choice == 2){
                 gamechoice = 1;
                 play = notPlay;
-                HAL_UART_Transmit(&huart2, (uint8_t *)"1G", strlen("1G"), 300);
+                if(returnConnection() == 1) {
+                    HAL_UART_Transmit(&huart2, (uint8_t *)"1G", strlen("1G"), 300);
+                }
                 init();
             }else{
                 displayMenu();
             }
+
         }
         else if(!hit){
             spawnBullet(0);
@@ -171,6 +182,9 @@ int loop (int key) {
         choice = 1;
         last_choice_pause = 40;
         key = 0;
+        if(returnConnection() == 1) {
+            HAL_UART_Transmit(&huart2, (uint8_t *)"P", strlen("P"), 300);
+        }
     }
 
     if(play == inPlay){
@@ -216,8 +230,27 @@ int loop (int key) {
             play = notPlay;
             init();
         }
-        if(play == notPlay && mpMenuState == inPlay){
+        if(play == notPlay && returnMPMenuState() == inPlay){
         	play = inPlay;
+        	turnOffTest();
+        }
+        if (play < 2 && returnMPMenuState() == paused) {
+            last_state = play;
+            play = paused;
+            choice = 1;
+            last_choice_pause = 40;
+            turnOffTest();
+        }
+        if (play == paused && returnMPMenuState() == inPlay) {
+            printf("play = %d, mpMenu = %d\r\n", play, returnMPMenuState());
+            turnOffTest();
+            displayPauseMenu(1);
+            play = last_state;
+        }if (play == paused && returnMPMenuState() == menu) {
+            turnOffTest();
+            play = menu;
+            gamechoice = 0;
+            init();
         }
     }
 

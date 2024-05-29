@@ -17,7 +17,7 @@ uint8_t emulate = 1;
 uint8_t connected = 0;
 Multiplayer mp = disabled;
 char characterArray[100];
-uint8_t test = 0;
+uint8_t inSignal = 0;
 uint8_t mpGameChoice = 0;
 uint8_t mpGameState;
 uint8_t mpMenuState;
@@ -25,7 +25,7 @@ uint8_t x_coord = 0;
 
 
 void check_availability(){
-    HAL_UART_Transmit(&huart2, (uint8_t *)"play?", strlen("play?"), 300);
+    HAL_UART_Transmit(&huart2, (uint8_t *)"?", strlen("?"), 300);
 }
 
 void toggle_multiplayer(){
@@ -48,10 +48,10 @@ void addCharacterToArray(char c) {
     //printf("%c\r\n", c);
 
     if(c == 'o' && mp == enabled) {
-        test = 1;
-        //printArray();
+        inSignal = 1;
+        printArray();
     }else if(c == '?') {
-        HAL_UART_Transmit(&huart2, (uint8_t *)"Yes!", strlen("Yes!"), 300);
+        HAL_UART_Transmit(&huart2, (uint8_t *)"!", strlen("!"), 300);
         printArray();
         connected = 1;
         mp = enabled;
@@ -60,32 +60,45 @@ void addCharacterToArray(char c) {
         mp = enabled;
         printArray();
     }else if(c == 'G') {
-        test = 1;
+        inSignal = 1;
         setMPGameChoice();
-        //printArray();
+        printArray();
     }else if(c == 'B') {
-        setCoordinate();
+        setCoord();
     }else if(c == 'S'){
+        inSignal = 1;
     	mpMenuState = 1;
+    	printArray();
     }else if(c == 'X') {
        connected = 0;
        mp = disabled;
        printArray();
+    }else if(c == 'P') {
+        inSignal = 1;
+        mpMenuState = 2;
+        printArray();
+    }else if(c == 'C') {
+        inSignal = 1;
+        mpMenuState = 1;
+        printArray();
+    }else if(c == 'M') {
+        inSignal = 1;
+        mpMenuState = 3;
+        printArray();
     }
 }
 
 void printArray() {
     printf("%s\r\n", characterArray);
     memset(characterArray, '\0', sizeof(characterArray));
-    test = 0;
 }
 
 int returnTest() {
-    return test;
+    return inSignal;
 }
 
 void turnOffTest() {
-    test = 0;
+    inSignal = 0;
 }
 
 int returnConnection() {
@@ -120,4 +133,8 @@ void setCoord() {
 void closeConnection() {
     connected = 0;
     mp = disabled;
+}
+
+uint8_t returnMPMenuState() {
+    return mpMenuState;
 }

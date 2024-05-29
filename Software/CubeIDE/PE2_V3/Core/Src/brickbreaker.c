@@ -126,8 +126,7 @@ void moveBall() {
     case still:
         break;
     default:
-        //////QD << "You shouldn't be here!";
-        ball.x = ball.x;
+        printf("You shouldn't be here\r\n");
     }
 
 }
@@ -147,8 +146,7 @@ void changeDirection(directions inDir) {
         case still:
             break;
         default:
-            //////QD << "You shouldn't be here!";
-            ball.x = ball.x;
+            printf("You shouldn't be here\r\n");
         }
     }
 
@@ -163,8 +161,7 @@ void changeDirection(directions inDir) {
         case still:
             break;
         default:
-            //////QD << "You shouldn't be here!";
-            ball.x = ball.x;
+            printf("You shouldn't be here\r\n");
         }
     }
 
@@ -182,8 +179,7 @@ void changeDirection(directions inDir) {
         case still:
             break;
         default:
-            //////QD << "You shouldn't be here!";
-            ball.dir = ball.dir;
+            printf("You shouldn't be here\r\n");
         }
     }
 
@@ -198,8 +194,7 @@ void changeDirection(directions inDir) {
         case still:
             break;
         default:
-            //////QD << "You shouldn't be here!";
-            ball.x = ball.x;
+            printf("You shouldn't be here\r\n");
         }
     }
 }
@@ -214,7 +209,6 @@ void gameEnd() {
     if (lives1 <= 0) {
         if (points > highScore) {
             highScore = points;
-            //////QD << highScore;
         }
 
         start = 0;
@@ -247,7 +241,6 @@ void checkGameOver() {
             ball.y = SCREEN_HEIGHT - 6;
             ball.dir = still;
             gameEnd();
-            //////QD << "Game Over, noob";
         }
     }
 }
@@ -272,7 +265,6 @@ void checkBrickHit() {
             if (bricks[ball.y - 8][(ball.x - 1)/8].toughness <= 0) {
                 bricks[ball.y - 8][(ball.x - 1)/8].visible = 0;
                 points++;
-                //////QD << "score:" << points;
                 dropPowerUp((ball.x - 1)/8, ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x - 1)/8].toughness]);
@@ -290,7 +282,6 @@ void checkBrickHit() {
                 if (bricks[ball.y - 1 - 8][(ball.x - 1)/8].toughness <= 0) {
                     bricks[ball.y - 1 - 8][(ball.x - 1)/8].visible = 0;
                     points++;
-                    //////QD << "score:" << points;
                     dropPowerUp((ball.x - 1)/8, ball.y - 1 - 8);
                 }
                 Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][(ball.x - 1)/8].toughness]);
@@ -304,7 +295,6 @@ void checkBrickHit() {
             if (bricks[ball.y - 1 - 8][ball.x/8].toughness <= 0) {
                 bricks[ball.y - 1 - 8][ball.x/8].visible = 0;
                 points++;
-                //////QD << "score:" << points;
                 dropPowerUp(ball.x/8, ball.y - 1 - 8);
             }
             Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][ball.x/8].toughness]);
@@ -316,7 +306,6 @@ void checkBrickHit() {
             if (bricks[ball.y - 8][(ball.x + 1)/8].toughness <= 0) {
                 bricks[ball.y - 8][(ball.x + 1)/8].visible = 0;
                 points++;
-                //////QD << "score:" << points;
                 dropPowerUp((ball.x + 1)/8, ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x + 1)/8].toughness]);
@@ -334,7 +323,6 @@ void checkBrickHit() {
                 if (bricks[ball.y - 1 - 8][(ball.x + 1)/8].toughness <= 0) {
                     bricks[ball.y - 1 - 8][(ball.x + 1)/8].visible = 0;
                     points++;
-                    //////QD << "score:" << points;
                     dropPowerUp((ball.x + 1)/8, ball.y - 1 - 8);
                 }
                 Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][(ball.x + 1)/8].toughness]);
@@ -348,7 +336,6 @@ void checkBrickHit() {
             if (bricks[ball.y + 1 - 8][ball.x/8].toughness <= 0) {
                 bricks[ball.y + 1 - 8][ball.x/8].visible = 0;
                 points++;
-                //////QD << "score:" << points;
                 dropPowerUp(ball.x/8, ball.y + 1 - 8);
             }
             Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][ball.x/8].toughness]);
@@ -360,7 +347,6 @@ void checkBrickHit() {
             if (bricks[ball.y - 8][(ball.x + 1)/8].toughness <= 0) {
                 bricks[ball.y - 8][(ball.x + 1)/8].visible = 0;
                 points++;
-                //////QD << "score:" << points;
                 dropPowerUp((ball.x + 1)/8, ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x + 1)/8].toughness]);
@@ -378,7 +364,7 @@ void checkBrickHit() {
                 if (bricks[ball.y - 8 + 1][(ball.x + 1)/8].toughness <= 0) {
                     bricks[ball.y - 8 + 1][(ball.x + 1)/8].visible = 0;
                     points++;
-                    //////QD << "score:" << points;
+
                     dropPowerUp((ball.x + 1)/8, ball.y - 8 + 1);
                 }
                 Displ_FillArea(bricks[ball.y - 8 + 1][(ball.x + 1)/8].x*4, bricks[ball.y - 8 + 1][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8 + 1][(ball.x + 1)/8].toughness]);
@@ -392,7 +378,6 @@ void checkBrickHit() {
             if (bricks[ball.y + 1 - 8][ball.x/8].toughness <= 0) {
                 bricks[ball.y + 1 - 8][ball.x/8].visible = 0;
                 points++;
-                ////QD << "score:" << points;
                 dropPowerUp(ball.x/8, ball.y + 1 - 8);
             }
             Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][ball.x/8].toughness]);
@@ -404,7 +389,6 @@ void checkBrickHit() {
             if (bricks[ball.y - 8][(ball.x - 1)/8].toughness <= 0) {
                 bricks[ball.y - 8][(ball.x - 1)/8].visible = 0;
                 points++;
-                ////QD << "score:" << points;
                 dropPowerUp((ball.x - 1)/8, ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x - 1)/8].toughness]);
@@ -422,7 +406,6 @@ void checkBrickHit() {
                 if (bricks[ball.y + 1 - 8][(ball.x - 1)/8].toughness <= 0) {
                     bricks[ball.y + 1 - 8][(ball.x - 1)/8].visible = 0;
                     points++;
-                    ////QD << "score:" << points;
                     dropPowerUp((ball.x - 1)/8, ball.y + 1 - 8);
                 }
                 ball.dir = NE;
@@ -433,7 +416,6 @@ void checkBrickHit() {
     case still:
         break;
     default:
-        //////QD << "You shouldn't be here";
         ball.dir = ball.dir;
     }
 }
@@ -447,17 +429,16 @@ void dropPowerUp(int x, int y) {
 
     if (dropChance <= 10 && dropChance > 0) {
         guardian = 1;
-        //////QD << "A power up just dropped from brick at x =" << x << "y =" << y;
     }
 
     if (dropChance <= 15 && dropChance > 10) {
-        //////QD << "test";
         explodeBricks(x, y);
-        //////QD << "An explosion just happened at x =" << x << "y =" << y;
     }
 }
 
 void printScreen() {
+    Displ_FillArea(SCREEN_WIDTH*4 - 8 - (3*8), 4, 30, 4, D_GREEN);
+
     for (int i = 0; i < lives1; i++) {
         Displ_FillArea(SCREEN_WIDTH*4 - 8 - (i*8), 4, 4, 4, D_BLUE);
     }
@@ -465,27 +446,14 @@ void printScreen() {
     if (guardian == 1) {
         Displ_FillArea(0, (person.y - 1)*4, SCREEN_WIDTH*4, 4, GREY);
     }
-//
-//    for(int x = 0; x < SCREEN_WIDTH; x++){
-//        for(int y = 0; y < SCREEN_HEIGHT; y++){
-//            if(x == person.x && y == person.y){
-//                for(int i = x - BAR_SIZE/2; i <= x + BAR_SIZE/2; i++) {
-//                    game_screen[i][y] = ENC_RED;
-//                }
-//            }
-//        }
-//    }
+
     Displ_FillArea(person.x*4 - BAR_SIZE*2, person.y*4, BAR_SIZE*4, 4, RED);
-//
-//    game_screen[ball.x][ball.y] = ENC_BLUE;
+
     Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_BLUE);
 
     char str[12];
     snprintf(str, 12, "%u", points);
     Displ_WString(score.x*4, score.y, str, Font16, 1, WHITE, D_GREEN);
-    //displayText(game_screen, str, score.x, score.y, WHITE);
-    //snprintf(str, 12, "%u", highScore);
-    //displayText(game_screen, str, highScorePoint.x, highScorePoint.y, WHITE);
 }
 
 void checkGuardianTimer() {
