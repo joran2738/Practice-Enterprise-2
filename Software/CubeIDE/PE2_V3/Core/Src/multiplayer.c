@@ -95,7 +95,7 @@ void printArray() {
     memset(characterArray, '\0', sizeof(characterArray));
 }
 
-int returnSignal() {
+int getSignal() {
     return inSignal;
 }
 
@@ -103,7 +103,7 @@ void turnOffSignal() {
     inSignal = 0;
 }
 
-int returnConnection() {
+int getConnection() {
     return connected;
 }
 
@@ -112,7 +112,7 @@ void setMPGameChoice() {
     printf("%d\r\n", mpGameChoice);
 }
 
-uint8_t returnMPGameChoice() {
+uint8_t getMPGameChoice() {
     return mpGameChoice;
 }
 
@@ -120,7 +120,7 @@ void clearArray() {
     memset(characterArray, '\0', sizeof(characterArray));
 }
 
-uint8_t returnCoord() {
+uint8_t getCoord() {
     return x_coord;
 }
 
@@ -137,7 +137,7 @@ void closeConnection() {
     mp = disabled;
 }
 
-uint8_t returnMPMenuState() {
+uint8_t getMPMenuState() {
     return mpMenuState;
 }
 
@@ -145,6 +145,6 @@ void setGameState(GameState state) {
     mpGameState = state;
 }
 
-GameState returnGameState() {
+GameState getGameState() {
     return mpGameState;
 }

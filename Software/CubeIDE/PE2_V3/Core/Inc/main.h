@@ -33,10 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "fonts.h"
 #include "z_displ_ILI9XXX.h"
-#include "z_displ_ILI9XXX_test.h"
 #include "z_touch_XPT2046.h"
-#include "z_touch_XPT2046_test.h"
-#include "z_touch_XPT2046_menu.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

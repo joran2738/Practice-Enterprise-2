@@ -110,7 +110,7 @@ int loop (int key) {
         if (play == notPlay){
         	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, DARK_GREY);
             play = inPlay;
-            if(returnConnection() == 1) {
+            if(getConnection() == 1) {
                 HAL_UART_Transmit(&huart2, (uint8_t *)"S", strlen("S"), 300);
             }
         }else if(play == inPlay) {
@@ -124,7 +124,7 @@ int loop (int key) {
             }
         }else if(play == paused){
             if(choice == 0){
-                if(returnConnection() == 1) {
+                if(getConnection() == 1) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"M", strlen("M"), 300);
                 }
                 play = menu;
@@ -134,7 +134,7 @@ int loop (int key) {
             else if(choice == 1){
             	displayPauseMenu(1);
                 play = last_state;
-                if(returnConnection() == 1) {
+                if(getConnection() == 1) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"C", strlen("C"), 300);
                 }
             }else{
@@ -144,9 +144,9 @@ int loop (int key) {
         }else if(play == menu){
             if(choice == 0){
                 //toggle_multiplayer();
-                if(returnConnection() == 0) {
+                if(getConnection() == 0) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"?", strlen("?"), 300);
-                } else if(returnConnection() == 1) {
+                } else if(getConnection() == 1) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"X", strlen("X"), 300);
                     closeConnection();
                 }
@@ -154,7 +154,7 @@ int loop (int key) {
             }else if(choice == 1){
                 gamechoice = 2;
                 play = notPlay;
-                if(returnConnection() == 1) {
+                if(getConnection() == 1) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"2G", strlen("2G"), 300);
                 }
                 init();
@@ -162,7 +162,7 @@ int loop (int key) {
             else if(choice == 2){
                 gamechoice = 1;
                 play = notPlay;
-                if(returnConnection() == 1) {
+                if(getConnection() == 1) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"1G", strlen("1G"), 300);
                 }
                 init();
@@ -182,7 +182,7 @@ int loop (int key) {
         choice = 1;
         last_choice_pause = 40;
         key = 0;
-        if(returnConnection() == 1) {
+        if(getConnection() == 1) {
             HAL_UART_Transmit(&huart2, (uint8_t *)"P", strlen("P"), 300);
         }
     }
@@ -218,28 +218,28 @@ int loop (int key) {
     }
 
 
-    if (returnConnection() == 1 && returnSignal() == 1) {
+    if (getConnection() == 1 && getSignal() == 1) {
         if(gamechoice == 0) {
-            gamechoice = returnMPGameChoice();
+            gamechoice = getMPGameChoice();
             printArray();
             turnOffSignal();
             play = notPlay;
             init();
-        }else if(play == notPlay && returnMPMenuState() == inPlay){
+        }else if(play == notPlay && getMPMenuState() == inPlay){
         	play = inPlay;
         	turnOffSignal();
-        }else if (play < 2 && returnMPMenuState() == paused) {
+        }else if (play < 2 && getMPMenuState() == paused) {
             last_state = play;
             play = paused;
             choice = 1;
             last_choice_pause = 40;
             turnOffSignal();
-        }else if (play == paused && returnMPMenuState() == inPlay) {
-            printf("play = %d, mpMenu = %d\r\n", play, returnMPMenuState());
+        }else if (play == paused && getMPMenuState() == inPlay) {
+            printf("play = %d, mpMenu = %d\r\n", play, getMPMenuState());
             turnOffSignal();
             displayPauseMenu(1);
             play = last_state;
-        }else if (play == paused && returnMPMenuState() == menu) {
+        }else if (play == paused && getMPMenuState() == menu) {
             turnOffSignal();
             play = menu;
             gamechoice = 0;

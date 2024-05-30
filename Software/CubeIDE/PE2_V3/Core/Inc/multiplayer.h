@@ -19,17 +19,17 @@ void toggle_multiplayer(void);
 void addCharacterToArray(char);
 
 void printArray(void);
-int returnSignal(void);
+int getSignal(void);
 void turnOffSignal(void);
-int returnConnection(void);
+int getConnection(void);
 void setMPGameChoice(void);
-uint8_t returnMPGameChoice(void);
+uint8_t getMPGameChoice(void);
 void clearArray(void);
-uint8_t returnCoord(void);
+uint8_t getCoord(void);
 void setCoord(void);
 void closeConnection(void);
-uint8_t returnMPMenuState(void);
+uint8_t getMPMenuState(void);
 void setGameState(GameState);
-GameState returnGameState(void);
+GameState getGameState(void);
 
 #endif /* INC_MULTIPLAYER_H_ */

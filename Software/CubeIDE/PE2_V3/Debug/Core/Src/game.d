@@ -30,10 +30,9 @@ Core/Src/game.o: ../Core/Src/game.c ../Core/Inc/debug.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h \
  ../Core/Inc/game.h ../Core/Inc/spaceInvaders.h ../Core/Inc/common.h \
  ../Core/Inc/z_displ_ILI9XXX.h ../Core/Inc/main.h ../Core/Inc/fonts.h \
- ../Core/Inc/z_displ_ILI9XXX_test.h ../Core/Inc/z_touch_XPT2046.h \
- ../Core/Inc/z_touch_XPT2046_test.h ../Core/Inc/z_touch_XPT2046_menu.h \
- ../Core/Inc/brickbreaker.h ../Core/Inc/multiplayer.h \
- ../Core/Inc/displayText.h ../Core/Inc/menu.h ../Core/Inc/multiplayer.h
+ ../Core/Inc/z_touch_XPT2046.h ../Core/Inc/brickbreaker.h \
+ ../Core/Inc/multiplayer.h ../Core/Inc/displayText.h ../Core/Inc/menu.h \
+ ../Core/Inc/multiplayer.h
 ../Core/Inc/debug.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:
@@ -70,10 +69,7 @@ Core/Src/game.o: ../Core/Src/game.c ../Core/Inc/debug.h \
 ../Core/Inc/z_displ_ILI9XXX.h:
 ../Core/Inc/main.h:
 ../Core/Inc/fonts.h:
-../Core/Inc/z_displ_ILI9XXX_test.h:
 ../Core/Inc/z_touch_XPT2046.h:
-../Core/Inc/z_touch_XPT2046_test.h:
-../Core/Inc/z_touch_XPT2046_menu.h:
 ../Core/Inc/brickbreaker.h:
 ../Core/Inc/multiplayer.h:
 ../Core/Inc/displayText.h:
