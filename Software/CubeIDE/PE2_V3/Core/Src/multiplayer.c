@@ -19,7 +19,7 @@ Multiplayer mp = disabled;
 char characterArray[100];
 uint8_t inSignal = 0;
 uint8_t mpGameChoice = 0;
-uint8_t mpGameState;
+GameState mpGameState = 0;
 uint8_t mpMenuState;
 uint8_t x_coord = 0;
 
@@ -47,7 +47,7 @@ void addCharacterToArray(char c) {
     strcat(characterArray, filler);
     //printf("%c\r\n", c);
 
-    if(c == 'o' && mp == enabled) {
+    if(c == 'O' && mp == enabled) {
         inSignal = 1;
         printArray();
     }else if(c == '?') {
@@ -85,6 +85,8 @@ void addCharacterToArray(char c) {
         inSignal = 1;
         mpMenuState = 3;
         printArray();
+    }else if(c == 'L') {
+        mpGameState = win;
     }
 }
 
@@ -93,11 +95,11 @@ void printArray() {
     memset(characterArray, '\0', sizeof(characterArray));
 }
 
-int returnTest() {
+int returnSignal() {
     return inSignal;
 }
 
-void turnOffTest() {
+void turnOffSignal() {
     inSignal = 0;
 }
 
@@ -137,4 +139,12 @@ void closeConnection() {
 
 uint8_t returnMPMenuState() {
     return mpMenuState;
+}
+
+void setGameState(GameState state) {
+    mpGameState = state;
+}
+
+GameState returnGameState() {
+    return mpGameState;
 }

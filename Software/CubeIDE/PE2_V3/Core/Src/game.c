@@ -218,39 +218,38 @@ int loop (int key) {
     }
 
 
-    if (returnConnection() == 1 && returnTest() == 1) {
-        if (gamechoice == 2) {
-            lowerBricks();
-            printArray();
-        }
+    if (returnConnection() == 1 && returnSignal() == 1) {
         if(gamechoice == 0) {
             gamechoice = returnMPGameChoice();
             printArray();
-            turnOffTest();
+            turnOffSignal();
             play = notPlay;
             init();
-        }
-        if(play == notPlay && returnMPMenuState() == inPlay){
+        }else if(play == notPlay && returnMPMenuState() == inPlay){
         	play = inPlay;
-        	turnOffTest();
-        }
-        if (play < 2 && returnMPMenuState() == paused) {
+        	turnOffSignal();
+        }else if (play < 2 && returnMPMenuState() == paused) {
             last_state = play;
             play = paused;
             choice = 1;
             last_choice_pause = 40;
-            turnOffTest();
-        }
-        if (play == paused && returnMPMenuState() == inPlay) {
+            turnOffSignal();
+        }else if (play == paused && returnMPMenuState() == inPlay) {
             printf("play = %d, mpMenu = %d\r\n", play, returnMPMenuState());
-            turnOffTest();
+            turnOffSignal();
             displayPauseMenu(1);
             play = last_state;
-        }if (play == paused && returnMPMenuState() == menu) {
-            turnOffTest();
+        }else if (play == paused && returnMPMenuState() == menu) {
+            turnOffSignal();
             play = menu;
             gamechoice = 0;
             init();
+        }else if(gamechoice == 1) {
+            //your code
+        }else if (gamechoice == 2) {
+            lowerBricks();
+            printArray();
+            turnOffSignal();
         }
     }
 

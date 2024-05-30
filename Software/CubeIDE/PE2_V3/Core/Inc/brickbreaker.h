@@ -11,7 +11,9 @@
 //config
 
 #include <stdint.h>
+#include "stm32f3xx_hal.h"
 #include "common.h"
+#include "multiplayer.h"
 
 #define EVENTSIZE 100
 #define BAR_SIZE 50
@@ -59,5 +61,6 @@ void checkGuardianTimer(void);
 void explodeBricks(int, int);
 int setBrickToughness(void);
 void drawBricks(void);
+void checkEmptyRow(uint8_t);
 
 #endif /* INC_BRICKBREAKER_H_ */

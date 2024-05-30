@@ -10,6 +10,8 @@
 #include "debug.h"
 #include "z_displ_ILI9XXX.h"
 
+extern UART_HandleTypeDef huart2;
+
 extern point person;
 extern ballPoint ball;
 static brick bricks[MAX_BRICK_LINES][10];
@@ -214,6 +216,9 @@ void gameEnd() {
         start = 0;
         points = 0;
         lives1 = 3;
+        initBrickbreaker();
+        HAL_UART_Transmit(&huart2, (uint8_t *)"L", strlen("L"), 300);
+        setGameState(loss);
     }
 }
 
@@ -255,6 +260,7 @@ void checkBrickHit() {
                 bricks[ball.y - 1 - 8][ball.x/8].visible = 0;
                 points++;
                 dropPowerUp(ball.x/8, ball.y - 1 - 8);
+                checkEmptyRow(ball.y - 1 - 8);
             }
             Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][ball.x/8].toughness]);
             bricksHit++;
@@ -266,6 +272,7 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x - 1)/8].visible = 0;
                 points++;
                 dropPowerUp((ball.x - 1)/8, ball.y - 8);
+                checkEmptyRow(ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x - 1)/8].toughness]);
             bricksHit++;
@@ -283,6 +290,7 @@ void checkBrickHit() {
                     bricks[ball.y - 1 - 8][(ball.x - 1)/8].visible = 0;
                     points++;
                     dropPowerUp((ball.x - 1)/8, ball.y - 1 - 8);
+                    checkEmptyRow(ball.y - 1 - 8);
                 }
                 Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][(ball.x - 1)/8].toughness]);
                 ball.dir = SE;
@@ -296,6 +304,7 @@ void checkBrickHit() {
                 bricks[ball.y - 1 - 8][ball.x/8].visible = 0;
                 points++;
                 dropPowerUp(ball.x/8, ball.y - 1 - 8);
+                checkEmptyRow(ball.y - 1 - 8);
             }
             Displ_FillArea(bricks[ball.y - 1 - 8][ball.x/8].x*4, bricks[ball.y - 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][ball.x/8].toughness]);
             bricksHit++;
@@ -307,6 +316,7 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x + 1)/8].visible = 0;
                 points++;
                 dropPowerUp((ball.x + 1)/8, ball.y - 8);
+                checkEmptyRow(ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x + 1)/8].toughness]);
             bricksHit++;
@@ -324,6 +334,7 @@ void checkBrickHit() {
                     bricks[ball.y - 1 - 8][(ball.x + 1)/8].visible = 0;
                     points++;
                     dropPowerUp((ball.x + 1)/8, ball.y - 1 - 8);
+                    checkEmptyRow(ball.y - 1 - 8);
                 }
                 Displ_FillArea(bricks[ball.y - 1 - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 1 - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 1 - 8][(ball.x + 1)/8].toughness]);
                 ball.dir = SW;
@@ -337,6 +348,7 @@ void checkBrickHit() {
                 bricks[ball.y + 1 - 8][ball.x/8].visible = 0;
                 points++;
                 dropPowerUp(ball.x/8, ball.y + 1 - 8);
+                checkEmptyRow(ball.y + 1 - 8);
             }
             Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][ball.x/8].toughness]);
             bricksHit++;
@@ -348,6 +360,7 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x + 1)/8].visible = 0;
                 points++;
                 dropPowerUp((ball.x + 1)/8, ball.y - 8);
+                checkEmptyRow(ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x + 1)/8].x*4, bricks[ball.y - 8][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x + 1)/8].toughness]);
             bricksHit++;
@@ -366,6 +379,7 @@ void checkBrickHit() {
                     points++;
 
                     dropPowerUp((ball.x + 1)/8, ball.y - 8 + 1);
+                    checkEmptyRow(ball.y + 1 - 8);
                 }
                 Displ_FillArea(bricks[ball.y - 8 + 1][(ball.x + 1)/8].x*4, bricks[ball.y - 8 + 1][(ball.x + 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8 + 1][(ball.x + 1)/8].toughness]);
                 ball.dir = NW;
@@ -379,6 +393,7 @@ void checkBrickHit() {
                 bricks[ball.y + 1 - 8][ball.x/8].visible = 0;
                 points++;
                 dropPowerUp(ball.x/8, ball.y + 1 - 8);
+                checkEmptyRow(ball.y + 1 - 8);
             }
             Displ_FillArea(bricks[ball.y + 1 - 8][ball.x/8].x*4, bricks[ball.y + 1 - 8][ball.x/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][ball.x/8].toughness]);
             bricksHit++;
@@ -390,6 +405,7 @@ void checkBrickHit() {
                 bricks[ball.y - 8][(ball.x - 1)/8].visible = 0;
                 points++;
                 dropPowerUp((ball.x - 1)/8, ball.y - 8);
+                checkEmptyRow(ball.y - 8);
             }
             Displ_FillArea(bricks[ball.y - 8][(ball.x - 1)/8].x*4, bricks[ball.y - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y - 8][(ball.x - 1)/8].toughness]);
             bricksHit++;
@@ -407,6 +423,7 @@ void checkBrickHit() {
                     bricks[ball.y + 1 - 8][(ball.x - 1)/8].visible = 0;
                     points++;
                     dropPowerUp((ball.x - 1)/8, ball.y + 1 - 8);
+                    checkEmptyRow(ball.y + 1 - 8);
                 }
                 ball.dir = NE;
                 Displ_FillArea(bricks[ball.y + 1 - 8][(ball.x - 1)/8].x*4, bricks[ball.y + 1 - 8][(ball.x - 1)/8].y*4, 32, 4, toughnessColor[bricks[ball.y + 1 - 8][(ball.x - 1)/8].toughness]);
@@ -424,7 +441,7 @@ void dropPowerUp(int x, int y) {
     uint8_t dropChance = 0;
     if (guardian == 0) {
         srand(HAL_GetTick());
-        dropChance = rand() % 100;
+        dropChance = RANDOM(0, 100);
     }
 
     if (dropChance <= 10 && dropChance > 0) {
@@ -493,6 +510,9 @@ void explodeBricks(int x, int y) {
                 bricks[i][j].toughness = 0;
                 bricks[i][j].visible = 0;
                 points++;
+
+                Displ_FillArea(bricks[i][j].x*4, bricks[i][j].y*4, 32, 4, D_GREEN);
+                checkEmptyRow(i);
             }
         }
     }
@@ -502,7 +522,7 @@ int setBrickToughness(void) {
     int toughnessPercent;
     int toughness = 1;
 
-    toughnessPercent = rand() % (100) + 1;
+    toughnessPercent = RANDOM(0, 100);
 
     if(toughnessPercent > 0 && toughnessPercent <= 60) {
         toughness = 1;
@@ -531,4 +551,18 @@ void drawBricks() {
             }
         }
     }
+}
+
+void checkEmptyRow(uint8_t row) {
+    uint8_t empty = 0;
+
+    for(int i = 0; i < 10; i++) {
+        if(bricks[row][i].visible > 0) {
+            empty = 1;
+        }
+    }
+    if(empty == 0) {
+        HAL_UART_Transmit(&huart2, (uint8_t *)"O", strlen("O"), 300);
+    }
+
 }
