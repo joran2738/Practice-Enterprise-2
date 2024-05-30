@@ -50,6 +50,7 @@ void initBrickbreaker() {
     }
     points = 0;
     Displ_CLS(D_GREEN);
+    setBgColor(D_GREEN);
     drawBricks();
 }
 

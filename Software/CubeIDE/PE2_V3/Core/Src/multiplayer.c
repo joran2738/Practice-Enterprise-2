@@ -21,7 +21,7 @@ uint8_t inSignal = 0;
 uint8_t mpGameChoice = 0;
 GameState mpGameState = 0;
 uint8_t mpMenuState;
-uint8_t x_coord = 0;
+int8_t x_coord = -1;
 
 
 void check_availability(){
@@ -64,7 +64,9 @@ void addCharacterToArray(char c) {
         setMPGameChoice();
         printArray();
     }else if(c == 'B') {
+    	inSignal = 1;
         setCoord();
+        printArray();
     }else if(c == 'S'){
         inSignal = 1;
     	mpMenuState = 1;
@@ -126,10 +128,14 @@ uint8_t returnCoord() {
 
 void setCoord() {
     char buffer[100];
-    strncpy(buffer, characterArray, strlen(characterArray) - 2);
+    strncpy(buffer, characterArray, strlen(characterArray) - 1);
     buffer[strlen(characterArray) - 1] = '\0';
 
     x_coord = (uint8_t)atoi(buffer);
+}
+
+void clearCoord(){
+	x_coord = -1;
 }
 
 void closeConnection() {

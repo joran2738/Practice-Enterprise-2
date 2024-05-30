@@ -214,14 +214,14 @@ typedef enum {
 /*******************************
  * Color names
  *******************************/
-#define RED         0xF800          // this is 1
-#define GREEN       0x07E0          // this is 2
-#define BLUE        0x001F          // this is 3
-#define LIGHT_BLUE  0xF7DB      // this is 4
-#define DARK_GREY   0x2C2C      // this is 6
-#define YELLOW      0xFFE0          // this is 7
-#define GREY        0x9696      // this is 8
-#define LIGHT_GREEN 0xFA3C      // this is 9
+#define RED         0xF800
+#define GREEN       0x07E0
+#define BLUE        0x001F
+#define LIGHT_BLUE  0xF7DB
+#define DARK_GREY   0x2C2C
+#define YELLOW      0xFFE0
+#define GREY        0x9696
+#define LIGHT_GREEN 0xFA3C
 #define MAGENTA     0xF81F
 #define ORANGE      0xFD00
 #define CYAN        0x07FF

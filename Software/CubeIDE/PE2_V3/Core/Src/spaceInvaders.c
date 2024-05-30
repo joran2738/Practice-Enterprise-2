@@ -10,6 +10,9 @@
 #include "spaceInvaders.h"
 #include "displayText.h"
 #include "debug.h"
+#include "multiplayer.h"
+
+extern UART_HandleTypeDef huart2;
 
 // Defines
 #define COMET_SIZE(index) (Comet.comet_ar[index].size)					  // Macro to get the size of the comet at a certain index of the comet array
@@ -130,7 +133,7 @@ void displayPowerup(uint16_t);
 void initSpaceInvaders(){
     money = 0;
     lives = 3;
-
+    setBgColor(DARK_GREY);
     Displ_CLS(DARK_GREY);
 
     srand(HAL_GetTick());		   // Seed the random number generator
@@ -224,31 +227,51 @@ void spawnComet(){
 }
 
 /**
- * @fn void spawnBullet(int)
+ * @fn void spawnBullet()
  * @brief spawns a bullet at the x-cord of the spaceship
  * reloads the bullet_delay variable, so the user can't spam bullets
  *
- * @param[in] enemy uint8_t: if 1, it spawns an enemy bullet instead of your own bullet
  */
-void spawnBullet(int enemy){
+void spawnBullet(){
     int x_val = SpaceShip.x;
     int y_val = SpaceShip.y - 3;
-    bullets_t *am_p;
-    if (enemy){
-        am_p = &enemy_ammo;
-    }else{
-        am_p = &ammo;
-    }
-    if(am_p->in_play < MAX_BULLETS && bullet_delay == 0){
-        if(am_p->enemy){
+
+    if(ammo.in_play < MAX_BULLETS && bullet_delay == 0){
+        if(ammo.enemy){
             //x_val = read the input from multiplayer;
             y_val = 3;
         }
-        am_p->bullet_ar[am_p->in_play].x = x_val;
-        am_p->bullet_ar[am_p->in_play].y = y_val;
-        am_p->in_play++;
+        ammo.bullet_ar[ammo.in_play].x = x_val;
+        ammo.bullet_ar[ammo.in_play].y = y_val;
+        ammo.in_play++;
         bullet_delay = MAX_DELAY_BULLETS;
     }
+}
+
+/**
+ * @fn void spawnEnemyBullet()
+ * @brief spawns an enemy bullet
+ *
+ */
+void spawnEnemyBullet(){
+	uint8_t x_val;
+	int8_t y_val;
+
+	if(enemy_ammo.in_play < MAX_BULLETS){
+		if(enemy_ammo.enemy){
+			x_val = returnCoord();
+			printf("%d\r\n",x_val);
+			if(x_val > 80 && x_val < 0){
+				printf("return\r\n");
+				return;
+			}
+			y_val = 3;
+		}
+		enemy_ammo.bullet_ar[enemy_ammo.in_play].x = x_val;
+		enemy_ammo.bullet_ar[enemy_ammo.in_play].y = y_val;
+		enemy_ammo.in_play++;
+		clearCoord();
+	}
 }
 
 /**
@@ -551,8 +574,10 @@ void moveEnemyBullets(void){
  * @param[in] bullet so the x cord can be send to the other console
  */
 void send_Bullet(point bullet){
+	char *coord = "45B";
     if(connected && bullet.y != -2){
-        //QD << "a bullet has been send to the other player at x:" << bullet.x;  // change to uart debug
+    	HAL_UART_Transmit(&huart2, (uint8_t *)coord, strlen(coord), 300);
+    	/*
         if(enemy_ammo.in_play < MAX_BULLETS){
         	E_AMMO_X(enemy_ammo.in_play) = RANDOM(PLAYABLE_OFFSET, PLAYABLE_MAX);
         	E_AMMO_Y(enemy_ammo.in_play) = 3;
@@ -560,6 +585,7 @@ void send_Bullet(point bullet){
         }else{
             star_delay--;
         }
+        */
     }
 }
 
@@ -601,8 +627,9 @@ void beenHit(){
     if(lives <= 0){
         play = 0;
         hit = 0;
+        HAL_UART_Transmit(&huart2, (uint8_t *)"L", strlen("L"), 300);
+        setGameState(loss);
         initSpaceInvaders();
-
     }
 }
 

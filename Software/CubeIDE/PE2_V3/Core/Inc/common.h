@@ -12,12 +12,17 @@
 
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 60
+#define RANDOM(MIN, MAX) (rand() % ((MAX) - (MIN) + 1) + (MIN))
+
 
 typedef struct {
     int8_t x;
     int8_t y;
 } point;
 
-#define RANDOM(MIN, MAX) (rand() % ((MAX) - (MIN) + 1) + (MIN))
+void setBgColor(uint16_t);
+
+uint16_t getBgColor(void);
+
 
 #endif /* INC_COMMON_H_ */
