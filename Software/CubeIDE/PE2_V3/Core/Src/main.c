@@ -164,7 +164,7 @@ void init_MPU(){
 	write_MPU_mem(REG_GYRO_CONF, 0);
 	write_MPU_mem(REG_ACCEL_CONF, 0);
 }
-extern bullets ammo;
+extern bullets_t ammo;
 /* USER CODE END 0 */
 
 /**

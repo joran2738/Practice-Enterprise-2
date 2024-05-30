@@ -14,8 +14,8 @@
 #define SCREEN_HEIGHT 60
 
 typedef struct {
-    uint8_t x;
-    uint8_t y;
+    int8_t x;
+    int8_t y;
 } point;
 
 #define RANDOM(MIN, MAX) (rand() % ((MAX) - (MIN) + 1) + (MIN))
