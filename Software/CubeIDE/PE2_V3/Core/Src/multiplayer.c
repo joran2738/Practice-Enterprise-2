@@ -95,6 +95,10 @@ void printArray() {
     memset(characterArray, '\0', sizeof(characterArray));
 }
 
+void clearArray() {
+    memset(characterArray, '\0', sizeof(characterArray));
+}
+
 int getSignal() {
     return inSignal;
 }
