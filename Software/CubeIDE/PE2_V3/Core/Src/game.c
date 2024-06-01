@@ -84,7 +84,7 @@ int loop (int key) {
 
         key = 0;
     }
-    if(key == right) {
+    else if(key == right) {
     	if(play < paused){
     		if(gamechoice == 1){
     			moveSpaceship(1);
@@ -106,7 +106,7 @@ int loop (int key) {
     	}
     	key = 0;
     }
-    if(key == down){
+    else if(key == down){
         if (play == notPlay){
         	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, getBgColor());
             play = inPlay;
@@ -176,7 +176,7 @@ int loop (int key) {
         }
         key = 0;
     }
-    if(key == up && play < 2){
+    else if(key == up && play < 2){
     	last_state = play;
         play = paused;
         choice = 1;
@@ -291,9 +291,3 @@ void updateScreen()
     	displayPauseMenu(0);
     }
 }
-
-
-
-
-
-
