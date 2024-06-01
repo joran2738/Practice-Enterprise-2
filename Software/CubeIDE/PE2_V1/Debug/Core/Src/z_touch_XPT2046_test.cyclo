@@ -1,0 +1,5 @@
+z_touch_XPT2046_test.c:44:6:DrawCross	1
+z_touch_XPT2046_test.c:60:6:MoveCross	5
+z_touch_XPT2046_test.c:92:6:Touch_ShowData	5
+z_touch_XPT2046_test.c:144:6:Touch_TestDrawing	8
+z_touch_XPT2046_test.c:190:6:Touch_TestCalibration	23

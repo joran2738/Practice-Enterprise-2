@@ -1,0 +1,3 @@
+game.c:38:6:init	3
+game.c:54:5:loop	22
+game.c:151:6:updateScreen	10

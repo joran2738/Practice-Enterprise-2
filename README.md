@@ -1,1 +1,4 @@
 # Practice-Enterprise-2
+Wij zijn Robin Van den Bergh en Joran Van Nieuwenhoven, twee studenten Embedded Software aan Thomas More.
+
+Als project voor Practice Enterprise 2 hebben wij het maken van twee game consoles die zowel afzonderlijk als samen (tegen elkaar) konden spelen. De twee games die wij hebben ontworpen zijn ‘Space Invaders’ en ‘Brickbreakers’. De consoles bevatten naast een TFT-display en de mogelijkheid tot multiplayer ook een acceleratie sensor. Dit maakt het mogelijk om de spelletjes te spelen door de consoles te kantelen. Er is een micro-USB aansluiting voorzien om de console te voeden waardoor er gebruikt gemaakt kan worden van zowel een wall-adapter alsook bijvoorbeeld een powerbank.

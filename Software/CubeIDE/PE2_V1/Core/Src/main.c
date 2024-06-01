@@ -26,6 +26,9 @@
 #include <sys/stat.h>
 #include <sys/times.h>
 #include <sys/unistd.h>
+#include <string.h>
+#include <stdarg.h>
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +56,40 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
+char i2cdata[2];
+int16_t gx = 0;
+int16_t ax = 0;
+int16_t gy = 0;
+int16_t ay = 0;
+int16_t gz = 0;
+int16_t az = 0;
+
+float angleX = 0.0;
+float angleY = 0.0;
+float angleZ = 0.0;
+
+#define ADDR_R 0xD0
+#define ADDR_W 0xD1
+#define REG_WHOAMI 0x75
+
+#define REG_PWR_MGMT 0x6B
+#define REG_SMPLRT_DIV 0x19
+#define REG_GYRO_CONF 0x1B
+#define REG_ACCEL_CONF 0x1C
+
+#define REG_GYRO_XOUT158 0x43
+#define REG_GYRO_XOUT70 0x44
+#define REG_GYRO_YOUT158 0x45
+#define REG_GYRO_YOUT70 0x46
+#define REG_GYRO_ZOUT158 0x47
+#define REG_GYRO_ZOUT70 0x48
+
+#define REG_ACCEL_XOUT158 0x3B
+#define REG_ACCEL_XOUT70 0x3C
+#define REG_ACCEL_YOUT158 0x3D
+#define REG_ACCEL_YOUT70 0x3E
+#define REG_ACCEL_ZOUT158 0x3F
+#define REG_ACCEL_ZOUT70 0x40
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,6 +106,9 @@ static void MX_USART3_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t key = 0;
+int16_t angle = 90;
+uint32_t millis = 0;
+uint32_t premillis = 0;
 
 int _write(int file, char *ptr, int len) {
     HAL_StatusTypeDef xStatus;
@@ -93,6 +133,86 @@ int _write(int file, char *ptr, int len) {
     }
     return len;
 }
+
+uint8_t read_MPU_mem(uint8_t reg_addr){
+	uint8_t data;
+	if(HAL_I2C_Mem_Read(&hi2c2, ADDR_R, reg_addr, 1, &data, 1, 100) == HAL_OK){
+		return data;
+	}
+	else{
+		printf("mem not read\r\n");
+	}
+}
+
+void write_MPU_mem(uint8_t reg_addr, uint8_t data){
+    if(HAL_I2C_Mem_Write(&hi2c2, ADDR_W, reg_addr, 1, &data, 1, 100) != HAL_OK){
+        printf("mem not written\r\n");
+    }
+}
+
+void read_MPU(){
+	uint8_t LSByte = 1;
+	uint8_t MSByte = 1;
+
+	MSByte = read_MPU_mem(REG_GYRO_XOUT158);
+	LSByte = read_MPU_mem(REG_GYRO_XOUT70);
+
+	gx = ((int16_t)((MSByte << 8) | LSByte)) / 131 + 2;
+
+	MSByte = read_MPU_mem(REG_GYRO_YOUT158);
+	LSByte = read_MPU_mem(REG_GYRO_YOUT70);
+
+	gy = ((int16_t)((MSByte << 8) | LSByte)) / 131;
+
+	MSByte = read_MPU_mem(REG_GYRO_ZOUT158);
+	LSByte = read_MPU_mem(REG_GYRO_ZOUT70);
+
+	gz = ((int16_t)((MSByte << 8) | LSByte)) / 131 + 1;
+
+	MSByte = read_MPU_mem(REG_ACCEL_XOUT158);
+	LSByte = read_MPU_mem(REG_ACCEL_XOUT70);
+
+	ax = ((int16_t)((MSByte << 8) | LSByte)) / 16384;
+
+	MSByte = read_MPU_mem(REG_ACCEL_YOUT158);
+	LSByte = read_MPU_mem(REG_ACCEL_YOUT70);
+
+	ay = ((int16_t)((MSByte << 8) | LSByte)) / 16384;
+
+	MSByte = read_MPU_mem(REG_ACCEL_ZOUT158);
+	LSByte = read_MPU_mem(REG_ACCEL_ZOUT70);
+
+	az = ((int16_t)((MSByte << 8) | LSByte)) / 16384;
+}
+
+static float wrap(float angle,float limit){
+  while (angle >  limit) angle -= 2*limit;
+  while (angle < -limit) angle += 2*limit;
+  return angle;
+}
+
+void update_MPU_vars(){
+	read_MPU();
+
+	float sgZ = az<0 ? -1 : 1; // allow one angle to go from -180 to +180 degrees
+	float angleAccX =   atan2(ay, sgZ*sqrt(az*az + ax*ax)) * 57.29578 ; // [-180,+180] deg
+	float angleAccY = - atan2(ax,     sqrt(az*az + ax*ay)) * 57.29578 ; // [- 90,+ 90] deg
+
+	uint32_t mil = millis = HAL_GetTick();;
+	float dt = (mil - premillis) * 1e-3;
+	premillis = mil;
+
+	angleX = wrap(0.98*(angleAccX + wrap(angleX + gx*dt - angleAccX,180)) + (1.0 - 0.98)*angleAccX,180);
+	angleY = wrap(0.98*(angleAccY + wrap(angleY + sgZ*gy*dt - angleAccY, 90)) + (1.0 - 0.98)*angleAccY, 90);
+	angleZ += gz*dt;
+}
+void init_MPU(){
+	write_MPU_mem(REG_PWR_MGMT, 0);
+	write_MPU_mem(REG_SMPLRT_DIV,0x07);
+	write_MPU_mem(REG_GYRO_CONF, 0);
+	write_MPU_mem(REG_ACCEL_CONF, 0);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -102,7 +222,6 @@ int _write(int file, char *ptr, int len) {
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -129,6 +248,41 @@ int main(void)
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  if(HAL_I2C_IsDeviceReady(&hi2c2, ADDR_R, 1, 100) == HAL_OK){
+	  printf("succesfully communicated\n\r");
+	  init_MPU();
+  }
+  else{
+	  printf("i2C not found\n\r");
+  }
+  float factor = 1;
+
+  Displ_Init(Displ_Orientat_90);       // initialize the display and set the initial display orientation (here is orientaton: 0°) - THIS FUNCTION MUST PRECEED ANY OTHER DISPLAY FUNCTION CALL.
+  Displ_CLS(BLACK);           // after initialization (above) and before turning on backlight (below), you can draw the initial display appearance. (here I'm just clearing display with a black background)
+
+
+
+  for (int y = 0; y < 10; y++) {
+      for (int x = 0; x < 10; x++) {
+          for (int j = 0; j < 10; j++) {
+              for (int i = 0; i < 32; i++) {
+                  if (i < 2 || j < 2) {
+                      Displ_Pixel((x*32) + i, (y*10) + j, D_GREEN);
+                  } else {
+                      Displ_Pixel((x*32) + i, (y*10) + j, GREEN);
+                  }
+
+              }
+          }
+      }
+
+  }
+
+  for (int j = 0; j < 3; j++) {
+      for (int i = 0; i < 90; i++) {
+          Displ_Pixel((320/2) - 45 + i, 240 - 5 + j, RED);
+      }
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -138,9 +292,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //key = loop(key);
-	  HAL_Delay(1000);
-	  printf("doing code\r\n");
+//      HAL_Delay(100);
+//      update_MPU_vars();
+//      printf("angleX:%d, angleY:%d, angleZ:%d\n\r",(int16_t)angleX,(int16_t)angleY,(int16_t)angleZ);
+//      if ((int16_t)angleX > 20){
+//          printf("going right\r\n");
+//      }
+//      else if ((int16_t)angleX < -20){
+//          printf("going left\r\n");
+//      }
+//      else{
+//          printf("level\r\n");
+//      }
+
   }
   /* USER CODE END 3 */
 }
@@ -161,7 +325,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL16;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -171,12 +337,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -255,11 +421,11 @@ static void MX_SPI2_Init(void)
   hspi2.Instance = SPI2;
   hspi2.Init.Mode = SPI_MODE_MASTER;
   hspi2.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi2.Init.DataSize = SPI_DATASIZE_4BIT;
+  hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -364,10 +530,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(SPI2_T_CS_GPIO_Port, SPI2_T_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(TOUCH_CS_GPIO_Port, TOUCH_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, SPI2_CS_Pin|SPI2_RESET_Pin|SPI2_DC_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DISPL_CS_Pin|DISPL_RST_Pin|DISPL_DC_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : TOP_Pin RIGHT_Pin LEFT_Pin */
   GPIO_InitStruct.Pin = TOP_Pin|RIGHT_Pin|LEFT_Pin;
@@ -381,15 +547,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(MIDDLE_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : SPI2_T_CS_Pin */
-  GPIO_InitStruct.Pin = SPI2_T_CS_Pin;
+  /*Configure GPIO pin : TOUCH_CS_Pin */
+  GPIO_InitStruct.Pin = TOUCH_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(SPI2_T_CS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(TOUCH_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SPI2_CS_Pin SPI2_RESET_Pin SPI2_DC_Pin */
-  GPIO_InitStruct.Pin = SPI2_CS_Pin|SPI2_RESET_Pin|SPI2_DC_Pin;
+  /*Configure GPIO pins : DISPL_CS_Pin DISPL_RST_Pin DISPL_DC_Pin */
+  GPIO_InitStruct.Pin = DISPL_CS_Pin|DISPL_RST_Pin|DISPL_DC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
