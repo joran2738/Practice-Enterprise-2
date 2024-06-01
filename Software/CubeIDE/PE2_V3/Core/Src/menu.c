@@ -9,6 +9,7 @@
 #include "displayText.h"
 #include <stdint.h>
 #include "debug.h"
+#include "common.h"
 
 int total_games = 2;
 extern uint8_t connected;
@@ -18,6 +19,10 @@ uint8_t last_choice_menu = 40;
 void displayMultiplayerIcon(void);
 void displayBricksIcon(void);
 void displaySpaceIcon(void);
+
+void resetLastChoiceMenu(void){
+	last_choice_menu = 40;
+}
 
 void displayPauseMenu(uint8_t clear){
 	uint16_t back_color = GREY;
@@ -30,9 +35,9 @@ void displayPauseMenu(uint8_t clear){
 			continue_color = GREY;
 		}
 		else if(clear){
-			back_color = DARK_GREY;
-			continue_color = DARK_GREY;
-			triangle_color = DARK_GREY;
+			back_color = getBgColor();
+			continue_color = getBgColor();
+			triangle_color = getBgColor();
 		}
 		Displ_FillArea(SCREEN_WIDTH * 2 - BUTTON_SIZE - 12, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2, BUTTON_SIZE, BUTTON_SIZE, back_color);
 		Displ_FillArea(SCREEN_WIDTH * 2 + 12, SCREEN_HEIGHT * 2 - BUTTON_SIZE / 2, BUTTON_SIZE, BUTTON_SIZE, continue_color);
@@ -93,6 +98,7 @@ void displayMenuIcons(){
 }
 
 void displayMultiplayerIcon(){
+	uint16_t color = LIGHT_GREEN;
 	if(connected){
 		Displ_FillArea(20, 20, BUTTON_SIZE - 16, 4, LIGHT_GREEN);
 		Displ_FillArea(20, 12, 4, 8, LIGHT_GREEN);

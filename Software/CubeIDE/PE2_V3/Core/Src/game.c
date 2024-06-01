@@ -84,7 +84,7 @@ int loop (int key) {
 
         key = 0;
     }
-    if(key == right) {
+    else if(key == right) {
     	if(play < paused){
     		if(gamechoice == 1){
     			moveSpaceship(1);
@@ -106,9 +106,9 @@ int loop (int key) {
     	}
     	key = 0;
     }
-    if(key == down){
+    else if(key == down){
         if (play == notPlay){
-        	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, DARK_GREY);
+        	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, getBgColor());
             play = inPlay;
             if(getConnection() == 1) {
                 HAL_UART_Transmit(&huart2, (uint8_t *)"S", strlen("S"), 300);
@@ -120,7 +120,7 @@ int loop (int key) {
                 playBall();
             }
             if(!hit){
-                spawnBullet(0);
+                spawnBullet();
             }
         }else if(play == paused){
             if(choice == 0){
@@ -129,7 +129,7 @@ int loop (int key) {
                 }
                 play = menu;
                 gamechoice = 0;
-                init();
+                Displ_CLS(BLACK);
             }
             else if(choice == 1){
             	displayPauseMenu(1);
@@ -171,11 +171,11 @@ int loop (int key) {
 
         }
         else if(!hit){
-            spawnBullet(0);
+            spawnBullet();
         }
         key = 0;
     }
-    if(key == up && play < 2){
+    else if(key == up && play < 2){
     	last_state = play;
         play = paused;
         choice = 1;
@@ -228,7 +228,8 @@ int loop (int key) {
         }else if(play == notPlay && getMPMenuState() == inPlay){
         	play = inPlay;
         	turnOffSignal();
-        }else if (play < 2 && getMPMenuState() == paused) {
+        	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, getBgColor());
+        }else if (play < 2 && returnMPMenuState() == paused) {
             last_state = play;
             play = paused;
             choice = 1;
@@ -243,9 +244,12 @@ int loop (int key) {
             turnOffSignal();
             play = menu;
             gamechoice = 0;
+            Displ_CLS(BLACK);
+            resetLastChoiceMenu();
             init();
         }else if(gamechoice == 1) {
-            //your code
+        	spawnEnemyBullet();
+        	turnOffSignal();
         }else if (gamechoice == 2) {
             lowerBricks();
             printArray();
@@ -282,15 +286,9 @@ void updateScreen()
 
     //start
     if(!play){
-    	Displ_WString(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, "START", Font20, 2, WHITE, DARK_GREY);
+    	Displ_WString(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, "START", Font20, 2, WHITE, getBgColor());
     }
     else if(play == paused){
     	displayPauseMenu(0);
     }
 }
-
-
-
-
-
-

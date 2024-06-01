@@ -24,6 +24,7 @@ uint8_t getMPGameChoice(void);
 void clearArray(void);
 uint8_t getCoord(void);
 void setCoord(void);
+void clearCoord(void);
 void closeConnection(void);
 uint8_t getMPMenuState(void);
 void setGameState(GameState);

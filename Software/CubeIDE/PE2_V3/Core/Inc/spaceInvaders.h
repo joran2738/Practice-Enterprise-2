@@ -96,14 +96,19 @@ void initSpaceInvaders(void);
 void spawnComet(void);
 
 /**
- * @fn void spawnBullet(int)
+ * @fn void spawnBullet()
  * @brief spawns a bullet at the x-cord of the spaceship
  * reloads the bullet_delay variable, so the user can't spam bullets
  *
- * @param[in] enemy uint8_t: if 1, it spawns an enemy bullet instead of your own bullet
  */
-void spawnBullet(int);
+void spawnBullet(void);
 
+/**
+ * @fn void spawnEnemyBullet()
+ * @brief spawns an enemy bullet
+ *
+ */
+void spawnEnemyBullet(void);
 /**
  * @fn void spawnStar()
  * @brief spawns a star at a random x-cord

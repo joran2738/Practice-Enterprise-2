@@ -19,7 +19,7 @@ uint8_t inSignal = 0;   //0 if no new data has been received, 1 if there is new 
 uint8_t mpGameChoice = 0;   //holds the number of the game chosen in multiplayer
 GameState mpGameState = 0;  //holds the state of the game when multiplayer is enabled
 uint8_t mpMenuState;    //holds the state of the game
-uint8_t x_coord = 0;    //holds the received x coordinate for multiplayer games
+uint8_t x_coord = -1;    //holds the received x coordinate for multiplayer games
 
 /**
  * @fn void check_availability()
@@ -65,7 +65,9 @@ void addCharacterToArray(char c) {
         printArray();
         clearArray();
     }else if(c == 'B') {
+    	inSignal = 1;
         setCoord();
+        printArray();
     }else if(c == 'S'){
         inSignal = 1;
     	mpMenuState = 1;
@@ -180,12 +182,15 @@ uint8_t getCoord() {
  */
 void setCoord() {
     char buffer[100];
-    strncpy(buffer, characterArray, strlen(characterArray) - 2);
+    strncpy(buffer, characterArray, strlen(characterArray) - 1);
     buffer[strlen(characterArray) - 1] = '\0';
 
     x_coord = (uint8_t)atoi(buffer);
 }
 
+void clearCoord(){
+	x_coord = -1;
+}
 /**
  * @fn void closeConnection()
  * @brief Closes the connection for multiplayer

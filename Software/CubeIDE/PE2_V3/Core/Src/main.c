@@ -60,7 +60,6 @@ UART_HandleTypeDef huart3;
 
 char i2cdata[2];
 int16_t ay = 0;
-uint16_t x = 116;
 
 #define ADDR_R 0xD0
 #define ADDR_W 0xD1
@@ -104,34 +103,6 @@ volatile uint32_t debounce_time = 0;
 #define DEBOUNCE_DELAY 30 // doesn't work that well
 
 uint8_t key = 0;
-int16_t angle = 90;
-uint32_t millis = 0;
-uint32_t premillis = 0;
-extern uint8_t game_screen[SCREEN_WIDTH][SCREEN_HEIGHT];
-
-//int _write(int file, char *ptr, int len) {
-//    HAL_StatusTypeDef xStatus;
-//    switch (file) {
-//    case STDOUT_FILENO: /*stdout*/
-//		xStatus = HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-//		if (xStatus != HAL_OK) {
-//			errno = EIO;
-//			return -1;
-//		}
-//        break;
-//    case STDERR_FILENO: /* stderr */
-//		xStatus = HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-//		if (xStatus != HAL_OK) {
-//			errno = EIO;
-//			return -1;
-//		}
-//        break;
-//    default:
-//        errno = EBADF;
-//        return -1;
-//    }
-//    return len;
-//}
 
 uint8_t read_MPU_mem(uint8_t reg_addr){
 	uint8_t data;
@@ -206,7 +177,7 @@ int main(void)
 	  init_MPU();
   }
   else{
-	  printf("i2C not found\r\n");
+	  printf("I2C device not found\r\n");
   }
 
   Displ_Init(Displ_Orientat_90);       // initialize the display and set the initial display orientation (here is orientaton: 0°) - THIS FUNCTION MUST PRECEED ANY OTHER DISPLAY FUNCTION CALL.
@@ -223,26 +194,16 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
       HAL_Delay(100);
-
-      read_y_accel();
-      if (ay > 2000){
-          if(x < 320 - 88){
-        	  key = right;
-          }
-      }
-      else if (ay < -2000){
-          if(x > 0){
-        	  key = left;
-          }
-      }
-      else{
+      if(HAL_I2C_IsDeviceReady(&hi2c2, ADDR_R, 1, 100) == HAL_OK){
+		  read_y_accel();
+		  if (ay > 2000){
+			  key = right;
+		  }
+		  else if (ay < -2000){
+			  key = left;
+		  }
       }
       key = loop(key);
-      for (int i = 0; i < ammo.in_play; i++){
-    	  //printf("hello?\r\n");
-    	  //printf("ammo %d: x:%d, y:%d\r\n",i,ammo.bullet_ar[i].x,ammo.bullet_ar[i].y);
-
-      }
   }
   /* USER CODE END 3 */
 }
@@ -531,11 +492,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     // Get the current time
     uint32_t current_time = HAL_GetTick();
 
-    // Check if it's been long enough since the last debounce
+    // Check if it's been long enough since the last interrupt
     if (current_time - debounce_time > DEBOUNCE_DELAY) {
-        // Update debounce time
         debounce_time = current_time;
-        // Your button handling code here
         printf("interrupt!\r\n");
         if (GPIO_Pin == LEFT_Pin && HAL_GPIO_ReadPin(LEFT_GPIO_Port, GPIO_Pin) == 0) {
             key = left;
