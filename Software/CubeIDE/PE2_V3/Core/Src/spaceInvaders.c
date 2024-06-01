@@ -259,7 +259,7 @@ void spawnEnemyBullet(){
 
 	if(enemy_ammo.in_play < MAX_BULLETS){
 		if(enemy_ammo.enemy){
-			x_val = returnCoord();
+			x_val = getCoord();
 			printf("%d\r\n",x_val);
 			if(x_val > 80 && x_val < 0){
 				printf("return\r\n");

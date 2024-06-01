@@ -188,6 +188,11 @@ void setCoord() {
     x_coord = (uint8_t)atoi(buffer);
 }
 
+/**
+ * @fn void clearCoord()
+ * @brief clears the coordinate
+ *
+ */
 void clearCoord(){
 	x_coord = -1;
 }

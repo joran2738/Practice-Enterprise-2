@@ -1,0 +1,2 @@
+../Core/Src/common.c:12:6:setBgColor	16	static
+../Core/Src/common.c:16:10:getBgColor	4	static

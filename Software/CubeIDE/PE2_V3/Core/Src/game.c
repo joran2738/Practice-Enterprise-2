@@ -229,7 +229,7 @@ int loop (int key) {
         	play = inPlay;
         	turnOffSignal();
         	Displ_FillArea(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, 140, 20, getBgColor());
-        }else if (play < 2 && returnMPMenuState() == paused) {
+        }else if (play < 2 && getMPMenuState() == paused) {
             last_state = play;
             play = paused;
             choice = 1;
