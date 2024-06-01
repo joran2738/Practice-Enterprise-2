@@ -1,8 +1,7 @@
 /*
  * multiplayer.h
  *
- *  Created on: Apr 17, 2024
- *      Author: joran
+ *      Author: Joran & Robin
  */
 
 #ifndef INC_MULTIPLAYER_H_
@@ -15,13 +14,11 @@ typedef enum  {disabled = 0, enabled} Multiplayer;
 typedef enum {ongoing = 0, win, loss} GameState;
 
 void check_availability(void);
-void toggle_multiplayer(void);
 void addCharacterToArray(char);
-
 void printArray(void);
-int getSignal(void);
+uint8_t getSignal(void);
 void turnOffSignal(void);
-int getConnection(void);
+uint8_t getConnection(void);
 void setMPGameChoice(void);
 uint8_t getMPGameChoice(void);
 void clearArray(void);

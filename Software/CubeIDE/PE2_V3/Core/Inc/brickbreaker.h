@@ -27,11 +27,6 @@ typedef enum {N, NE, E, SE, S, SW, W, NW, still} directions;
 
 //typedefs
 
-//typedef struct {
-//    int x;
-//    int y;
-//} point;
-
 typedef struct {
     int x;
     int y;

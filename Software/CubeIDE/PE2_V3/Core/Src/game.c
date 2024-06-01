@@ -143,7 +143,6 @@ int loop (int key) {
 
         }else if(play == menu){
             if(choice == 0){
-                //toggle_multiplayer();
                 if(getConnection() == 0) {
                     HAL_UART_Transmit(&huart2, (uint8_t *)"?", strlen("?"), 300);
                 } else if(getConnection() == 1) {
@@ -222,6 +221,7 @@ int loop (int key) {
         if(gamechoice == 0) {
             gamechoice = getMPGameChoice();
             printArray();
+            clearArray();
             turnOffSignal();
             play = notPlay;
             init();
@@ -249,6 +249,7 @@ int loop (int key) {
         }else if (gamechoice == 2) {
             lowerBricks();
             printArray();
+            clearArray();
             turnOffSignal();
         }
     }
