@@ -8,7 +8,7 @@
 #define EVENTSIZE 100
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 60
-#define BAR_SIZE 49
+#define BAR_SIZE 79
 #define BRICK_LINES 10
 #define MAX_BRICK_LINES 48
 #define BRICK_SPEED 140
@@ -52,5 +52,6 @@ void checkBrickHit(void);
 void dropPowerUp(int, int);
 void checkGuardianTimer(void);
 void explodeBricks(int, int);
+int setBrickToughness(void);
 
 #endif // BRICKBREAKER_H
