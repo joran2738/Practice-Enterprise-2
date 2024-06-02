@@ -258,6 +258,21 @@ int loop (int key) {
         }
     }
 
+    if(getConnection() == 1) {
+        closeConnection();
+        HAL_UART_Transmit(&huart2, (uint8_t *)"?", strlen("?"), 300);
+
+        HAL_Delay(1);
+
+        if(getConnection() == 0) {
+            play = menu;
+            gamechoice = 0;
+            Displ_CLS(BLACK);
+            resetLastChoiceMenu();
+        }
+    }
+
+
     return key;
 }
 
