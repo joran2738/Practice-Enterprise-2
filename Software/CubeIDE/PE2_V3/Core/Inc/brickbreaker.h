@@ -16,7 +16,7 @@
 #include "multiplayer.h"
 
 #define EVENTSIZE 100
-#define BAR_SIZE 50
+#define BAR_SIZE 34
 #define BRICK_LINES 10
 #define MAX_BRICK_LINES 48
 #define BRICK_SPEED 140

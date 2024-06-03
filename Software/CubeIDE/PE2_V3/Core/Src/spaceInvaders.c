@@ -32,6 +32,8 @@ extern UART_HandleTypeDef huart2;
 #define SPACESHIP_X_BOUND(sign) (SpaceShip.x sign SPACESHIP_WIDTH / 2)    // Macro to get the x-cord boundaries of the spaceship
 #define SPACESHIP_Y_BOUND (SpaceShip.y - SPACESHIP_HEIGHT / 2)			  // Macro to get the y-cord boundaries of the spaceship
 
+#define HEARTS_OFFSET 12
+#define HEARTS_X (SCREEN_WIDTH * 4 - (3*HEARTS_OFFSET) - 8 )
 // Vars
 bullets_t ammo;				  // Spaceship's ammo
 bullets_t enemy_ammo;		  // Enemy ammo
@@ -498,7 +500,7 @@ void displayLives(){
     }
     if(lives < 3){
     	for(int i = 0; i < 3 - lives; i++){
-    		Displ_FillArea(HEARTS_X+HEARTS_OFFSET*(3-i), HEARTS_Y, 4, 4, DARK_GREY);
+    		Displ_FillArea(HEARTS_X+HEARTS_OFFSET*(2-i), HEARTS_Y, 4, 4, DARK_GREY);
     	}
     }
 }

@@ -91,14 +91,16 @@ int loop (int key) {
     		}else if (gamechoice == 2) {
     			Displ_FillArea(person.x*4 - BAR_SIZE*2, person.y*4, BAR_SIZE*4, 4, D_GREEN);
     			person.x++;
-    			if(person.x > SCREEN_WIDTH - (BAR_SIZE/2) - 1) {
-    				person.x = SCREEN_WIDTH - (BAR_SIZE/2) - 1;
+    			if(person.x > SCREEN_WIDTH - (BAR_SIZE/2)) {
+    				person.x = SCREEN_WIDTH - (BAR_SIZE/2);
+    			} else {
+                    if (ball.dir == still) {
+                        Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
+                        ball.x++;
+                        ballDirection = NE;
+                    }
     			}
-    			if (ball.dir == still) {
-    				Displ_FillArea(ball.x*4, ball.y*4, 4, 4, D_GREEN);
-    				ball.x++;
-    				ballDirection = NE;
-    			}
+
     		}
     	}
     	if (choice != max_choice){
@@ -264,8 +266,9 @@ int loop (int key) {
 
 void updateScreen()
 {
+    char str[12];
     if (play == menu){
-    	displayMenu();
+        displayMenu();
         return;
     }
 
@@ -280,15 +283,18 @@ void updateScreen()
 
         //lives
         displayLives();
+        // score
+        snprintf(str, 12, "%u", money);
+        Displ_WString(4, 9, str, Font16, 1, WHITE, DARK_GREY);
     }else if(gamechoice == 2) {
         printScreen();
     }
 
     //start
     if(!play){
-    	Displ_WString(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, "START", Font20, 2, WHITE, getBgColor());
+        Displ_WString(SCREEN_WIDTH + 10, SCREEN_HEIGHT * 2, "START", Font20, 2, WHITE, getBgColor());
     }
     else if(play == paused){
-    	displayPauseMenu(0);
+        displayPauseMenu(0);
     }
 }
